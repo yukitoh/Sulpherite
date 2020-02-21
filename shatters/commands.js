@@ -16,12 +16,12 @@ async function main(spt, data){
 				require("./commands/headCount.js")(spt, data);
 				break;
 			case 'clean': case 'clear':
-				require("./commands/clearChannel.js")(spt, data, args);
+				require("./helpers/clearChannel.js")(spt, data, args, true);
 				break;
 			case 'unlock':
 				unlockChannel(spt, data, args[1], true);
 				break;
-			case 'reset': case 'resetChannel':
+			case 'reset': case 'resetChannel': case 'lock'
 				lockChannel(spt, data, args[1], true);
 				break;
 			case 'parsemembers': case 'parse': case 'pm':

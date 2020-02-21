@@ -1,10 +1,10 @@
 const config = require("../../config.json");
 
-async function main(spt, data, args){
+async function main(spt, data, args, log){
 	const lounge = spt.channels.get(config.fungal.vcs.lounge);
 
 	if (args[1] == undefined){
-		data.channel.send(`Invalid channel number (available: 1-5).`);
+		if (log) data.channel.send(`Invalid channel number (available: 1-5).`);
 	} else {
 		switch(args[1]){
 			case '1':
@@ -27,14 +27,14 @@ async function main(spt, data, args){
 				break;
 		}
 
-		data.channel.send(`Clearing raiding`+args[1]+`.`)
+		if (log) data.channel.send(`Clearing raiding`+args[1]+`.`)
 		.then((msg)=> {
 			raidingChannel.members.forEach(async function(raiders){
 				await raiders.setVoiceChannel(lounge);
 			})
 			msg.delete();
 		})
-		data.channel.send(`Finished clearing raiding`+args[1]+`.`);
+		if (log) data.channel.send(`Finished clearing raiding`+args[1]+`.`);
 	}
 }
 
