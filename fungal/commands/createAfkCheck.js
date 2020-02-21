@@ -47,7 +47,7 @@ async function main(spt, data, args){
 
 	if (raidingChannel != undefined){
 		if (args[2] == "fc" || args[2] == "fungal"){
-			const shattersReact = spt.emojis.find(emoji => emoji.name === "fungal");
+			const fungalReact = spt.emojis.find(emoji => emoji.name === "fungal");
 			var location = data.content.substr((args[2].length+8));
 			if (location.length < 3){
 				data.channel.send(`Please specify a location for raiders.`)
@@ -72,9 +72,9 @@ async function main(spt, data, args){
 					ended: false,
 					aborted: false
 				};
-				afkCheckChannel.send("@here Fungal Cavern ("+shattersReact+") started by <@!"+afkCheckObj['host']+"> in `"+raidingChannelObj.name+"`").then(async function (sent) {
+				afkCheckChannel.send("@here Fungal Cavern ("+fungalReact+") started by <@!"+afkCheckObj['host']+"> in `"+raidingChannelObj.name+"`").then(async function (sent) {
 					afkCheckObj['afkcheck'] = sent.id;
-					sent.edit("@here Fungal Cavern ("+shattersReact+") started by <@!"+afkCheckObj['host']+"> in `"+raidingChannelObj.name+"`", { embed: (updateEmbedAFK(spt, afkCheckObj)) });
+					sent.edit("@here Fungal Cavern ("+fungalReact+") started by <@!"+afkCheckObj['host']+"> in `"+raidingChannelObj.name+"`", { embed: (updateEmbedAFK(spt, afkCheckObj)) });
 					await reactAFK(spt, sent);
 					});	
 				commandsChannel.send(`AFK Check control panel for `+raidingChannelObj.name).then(async function (sent) {
