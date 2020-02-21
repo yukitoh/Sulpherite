@@ -3,10 +3,8 @@ const afkChecks = require("../commands.js").afkChecks;
 const forceUpdate = require("../commands.js").updateAfkObjs;
 const isRaidleader = require('../../isRL.js');
 var isRLPromise = [];
-var multiClassPromise = [];
 
 async function handleReacts(spt, reaction, user){
-	multiClassPromise.length = 0;
 	isRLPromise.length = 0;
 	// locate afk check
 	var currAfkCheckObj;
@@ -118,83 +116,94 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'warrior':
-						var multipleClass = multipleClasses(spt, user, 'warrior', currAfkCheckObj);
-						if (multiClassPromise[0] == undefined) {
-							currAfkCheckObj['warriors'].push(user);
-						} else {
-							var reactDelete = reaction.message.reactions.get('679186994190090270');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multiClassPromise[0])}).`);
-						}
+						multipleClasses(spt, user, 'warrior', currAfkCheckObj)
+						.then(async function(multipleClass){
+							if (multipleClass == undefined) {
+								currAfkCheckObj['warriors'].push(user);
+							} else {
+								var reactDelete = reaction.message.reactions.get('679186994190090270');
+								try {
+									if (user.bot) return;
+									await reactDelete.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+							}
+						})
 						break;
 					case 'paladin':
-						var multipleClass = multipleClasses(spt, user, 'paladin', currAfkCheckObj);
-						if (multiClassPromise[0] == undefined) {
-							currAfkCheckObj['paladins'].push(user);
-						} else {
-							var reactDelete = reaction.message.reactions.get('679187006403903509');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multiClassPromise[0])}).`);
-						}
+						multipleClasses(spt, user, 'paladin', currAfkCheckObj)
+						.then(async function(multipleClass){
+							if (multipleClass == undefined) {
+								currAfkCheckObj['paladins'].push(user);
+							} else {
+								var reactDelete = reaction.message.reactions.get('679187006403903509');
+								try {
+									if (user.bot) return;
+									await reactDelete.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+							}
+						})
 						break;
 					case 'knight':
-						var multipleClass = multipleClasses(spt, user, 'knight', currAfkCheckObj);
-						console.log(multipleClass);
-						if (multiClassPromise[0] == undefined) {
-							currAfkCheckObj['warriors'].push(user);
-						} else {
-							var reactDelete = reaction.message.reactions.get('679187016071512067');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multiClassPromise[0])}).`);
-						}
+						multipleClasses(spt, user, 'knight', currAfkCheckObj)
+						.then(async function(multipleClass){
+							if (multipleClass == undefined) {
+								currAfkCheckObj['warriors'].push(user);
+							} else {
+								var reactDelete = reaction.message.reactions.get('679187016071512067');
+								try {
+									if (user.bot) return;
+									await reactDelete.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+							}
+						})
 						break;
 					case 'priest':
-						var multipleClass = multipleClasses(spt, user, 'priest', currAfkCheckObj);
-						if (multiClassPromise[0] == undefined) {
-							currAfkCheckObj['warriors'].push(user);
-						} else {
-							var reactDelete = reaction.message.reactions.get('679187025303437312');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multiClassPromise[0])}).`);
-						}
+						multipleClasses(spt, user, 'priest', currAfkCheckObj)
+						.then(async function(multipleClass){
+							if (multipleClass == undefined) {
+								currAfkCheckObj['warriors'].push(user);
+							} else {
+								var reactDelete = reaction.message.reactions.get('679187025303437312');
+								try {
+									if (user.bot) return;
+									await reactDelete.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+							}
+						})
 						break;
 					case 'mystic':
-						var multipleClass = multipleClasses(spt, user, 'mystic', currAfkCheckObj);
-						if (multiClassPromise[0] == undefined) {
-							currAfkCheckObj['warriors'].push(user);
-						} else {
-							var reactDelete = reaction.message.reactions.get('679187052813746186');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multiClassPromise[0])}).`);
-						}
+						multipleClasses(spt, user, 'mystic', currAfkCheckObj)
+						.then(async function(multipleClass){
+							if (multipleClass == undefined) {
+								currAfkCheckObj['warriors'].push(user);
+							} else {
+								var reactDelete = reaction.message.reactions.get('679187052813746186');
+								try {
+									if (user.bot) return;
+									await reactDelete.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+							}
+						})
 						break;
 					case 'assassin':
-						var multipleClass = multipleClasses(spt, user, 'assassin', currAfkCheckObj);
-						if (multiClassPromise[0] == undefined) {
-							currAfkCheckObj['assassins'].push(user);
-						} else {
-							var reactDelete = reaction.message.reactions.get('679187076406575107');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multiClassPromise[0])}).`);
-						}
+						multipleClasses(spt, user, 'assassin', currAfkCheckObj)
+						.then(async function(multipleClass){
+							if (multipleClass == undefined) {
+								currAfkCheckObj['assassins'].push(user);
+							} else {
+								var reactDelete = reaction.message.reactions.get('679187076406575107');
+								try {
+									if (user.bot) return;
+									await reactDelete.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+							}
+						})
 						break;
 					case 'first':
 						if (reaction.count == 3){
@@ -242,7 +251,6 @@ async function handleReacts(spt, reaction, user){
 }
 
 async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
-	multiClassPromise.length = 0;
 	var isMultipleClass = undefined;
 	switch (currentClass){
 		case 'warrior':
@@ -251,7 +259,7 @@ async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
 			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfkCheckObj['mystics'] != [] && currAfkCheckObj['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfkCheckObj['assassins'] != [] && currAfkCheckObj['assassins'].includes(user)) isMultipleClass = 'assassin';
-			isMultipleClass.then(async function(value){ multiClassPromise.push(value) });
+			return Promise.resolve(isMultipleClass);
 			break;
 		case 'paladin':
 			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
@@ -259,7 +267,7 @@ async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
 			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfkCheckObj['mystics'] != [] && currAfkCheckObj['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfkCheckObj['assassins'] != [] && currAfkCheckObj['assassins'].includes(user)) isMultipleClass = 'assassin';
-			isMultipleClass.then(async function(value){ multiClassPromise.push(value) });
+			return Promise.resolve(isMultipleClass);
 			break;
 		case 'knight':
 			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -267,7 +275,7 @@ async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
 			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfkCheckObj['mystics'] != [] && currAfkCheckObj['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfkCheckObj['assassins'] != [] && currAfkCheckObj['assassins'].includes(user)) isMultipleClass = 'assassin';
-			isMultipleClass.then(async function(value){ multiClassPromise.push(value) });
+			return Promise.resolve(isMultipleClass);
 			break;
 		case 'priest':
 			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -275,7 +283,7 @@ async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
 			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
 			if (currAfkCheckObj['mystics'] != [] && currAfkCheckObj['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfkCheckObj['assassins'] != [] && currAfkCheckObj['assassins'].includes(user)) isMultipleClass = 'assassin';
-			isMultipleClass.then(async function(value){ multiClassPromise.push(value) });
+			return Promise.resolve(isMultipleClass);
 			break;
 		case 'mystic':
 			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -283,7 +291,7 @@ async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
 			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
 			if (currAfkCheckObj['assassins'] != [] && currAfkCheckObj['assassins'].includes(user)) isMultipleClass = 'assassin';
-			isMultipleClass.then(async function(value){ multiClassPromise.push(value) });
+			return Promise.resolve(isMultipleClass);
 			break;
 		case 'assassin':
 			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -291,7 +299,7 @@ async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
 			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfkCheckObj['mystics'] != [] && currAfkCheckObj['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
-			isMultipleClass.then(async function(value){ multiClassPromise.push(value) });
+			return Promise.resolve(isMultipleClass);
 			break;
 	}
 }
