@@ -1,0 +1,44 @@
+{
+	"token":"token",
+	"status":"with your lives!",
+	"prefix":"*",
+	
+	"shatters":{
+		"id":"679160544066011156",
+		"rlBotChannelID":"679160544560676868",
+		"afkcheckID":"680148116359479473",
+		"vcs":{
+			"lounge":"679160544560676870",
+			"one":"679160966189023235",
+			"two":"679161076117536790",
+			"three":"679161089555955712",
+			"four":"679161099584798733",
+			"five":"679161108170407948"
+		},
+		"raiderRole":"Raider",
+		"arlRole":"testers",
+		"rlRole":"testers",
+		"vrlRole":"testers",
+		"hrlRole":"testers"
+	},
+	
+	"fungal":{
+		"id":"680164841021112444",
+		"rlBotChannelID":"680165561858261161",
+		"afkcheckID":"680165634335703059",
+		"vcs":{
+			"lounge":"680164841654321221",
+			"one":"680166195885899778",
+			"two":"680166312625963010",
+			"three":"680166325766717447",
+			"four":"680166335065489473",
+			"five":"680166349661536332"
+		},
+		"raiderRole":"Raider",
+		"arlRole":"testers",
+		"rlRole":"testers",
+		"vrlRole":"testers",
+		"hrlRole":"testers"
+	}
+
+}
