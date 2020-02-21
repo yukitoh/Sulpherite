@@ -1,6 +1,11 @@
 const config = require("../../config.json");
 
 function updateEndedCP(spt, afkCheckObj){
+	if ( afkCheckObj['supremepriest'] == []){
+		var supremePriestMessage = 'None';
+	} else {
+		supremePriestMessage = afkCheckObj['supremepriest'].join(', ');
+	}
 	const channelName = spt.channels.get(afkCheckObj['channel']).name;
 	const embed = {
 		color: 31247,
@@ -21,7 +26,7 @@ function updateEndedCP(spt, afkCheckObj){
 		},
 		{
 			name: "Our supreme priests are:",
-			value: `${spt.emojis.find(emoji => emoji.name === "priest")} ${afkCheckObj['supremepriest']}`
+			value: `${spt.emojis.find(emoji => emoji.name === "priest")} ${supremePriestMessage}`
 		},
 		{
 			name: "Nitro boosters with location:",

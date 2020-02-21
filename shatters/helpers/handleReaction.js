@@ -149,7 +149,7 @@ async function handleReacts(spt, reaction, user){
 						multipleClasses(spt, user, 'knight', currAfkCheckObj)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['warriors'].push(user);
+								currAfkCheckObj['knights'].push(user);
 							} else {
 								var reactDelete = reaction.message.reactions.get('679187016071512067');
 								try {
@@ -164,7 +164,7 @@ async function handleReacts(spt, reaction, user){
 						multipleClasses(spt, user, 'priest', currAfkCheckObj)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['warriors'].push(user);
+								currAfkCheckObj['priests'].push(user);
 							} else {
 								var reactDelete = reaction.message.reactions.get('679187025303437312');
 								try {
@@ -179,7 +179,7 @@ async function handleReacts(spt, reaction, user){
 						multipleClasses(spt, user, 'mystic', currAfkCheckObj)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['warriors'].push(user);
+								currAfkCheckObj['mystics'].push(user);
 							} else {
 								var reactDelete = reaction.message.reactions.get('679187052813746186');
 								try {
