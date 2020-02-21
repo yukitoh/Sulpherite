@@ -66,5 +66,19 @@ spt.on('message', async (data) => {
 	}
 })
 
+spt.on('messageReactionAdd', (reaction, user) => {
+	if (user.bot) return;
+	if (reaction.message.channel.type == 'dm') return;
+	
+	switch(reaction.message.guild.id){
+		case config.shatters.id:
+			require('./shatters/helpers/handleReaction.js')(spt, reaction, user);
+			break;
+		case config.fungal.id:
+			require('./fungal/helpers/handleReaction.js')(spt, reaction, user);
+			break;
+	}
+})
+
 // Login with token
 spt.login(config.token);

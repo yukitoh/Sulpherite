@@ -83,21 +83,23 @@ async function resolveAfks(afkChecksPromises){
 	}
 }
 
-async function updateAfkObjs(spt, doUpdate){
+async function updateAfkObjs(spt){
 	// pass promises to objects
 	resolveAfks(afkChecksPromises);
 	// update every afk check object
-	for (x in afkChecks) {
+	for (x in afkChecks) {	
 		// handle aborts
 		if (afkChecks[x]['aborted'] == false) {
 			if (afkChecks[x]['ended'] == false){
 				// not ended -> update
-				if (doUpdate == true) afkChecks[x]['timeleft'] -= 5;
+				afkChecks[x]['timeleft'] -= 5;
 				if (afkChecks[x]['timeleft'] <= 0){
 					// Endings:
 					if (afkChecks[x]['postafk'] == false){
 						afkChecks[x]['postafk'] = true;
-						afkChecks[x]['timeleft'] = 35;
+						afkChecks[x]['timeleft'] = 30;
+						await spt.channels.get(afkChecks[x]['channel']).setName(`raiding`+afkChecks[x]['channelNumber']);
+						await spt.channels.get(afkChecks[x]['channel']).overwritePermissions(spt.guilds.get(config.fungal.id).roles.find(role => role.name == config.fungal.raiderRole), { 'CONNECT': false, 'SPEAK': false });
 						// TODO: Move out everyone who didn't react with fungal portal
 					} else {
 						afkChecks[x]['ended'] = true;
@@ -111,7 +113,12 @@ async function updateAfkObjs(spt, doUpdate){
 								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afkChecks[x]);
 								await cpmsg.edit({ embed: embed });
 								//TODO: fix, doesn't remove reaction
-								await cpmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
+								const reactX = cpmsg.reactions.get('❌');
+								try {
+									for (const user of reactX.users.values()) {
+									await reactX.remove(user);
+									}
+								} catch (error) {/*no users reaction left*/}
 							})
 						spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
 							.then(async function (afkmsg) {
@@ -142,10 +149,16 @@ async function updateAfkObjs(spt, doUpdate){
 				spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
 					.then(async function (afkmsg) {
 						let embed = require("./helpers/updateEndedAfkEmbed.js")(spt, afkChecks[x]);
-						await lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
+						// safety
+						lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
 						await afkmsg.edit({ embed: embed });
 						//TODO: fix, doesn't remove reaction
-						await afkmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
+						const reactX = afkmsg.reactions.get('❌');
+						try {
+							for (const user of reactX.users.values()) {
+							await reactX.remove(user);
+							}
+						} catch (error) {/*no users reaction left*/}
 						// remove afkObj from array
 						const index = afkChecks.indexOf(afkChecks[x]);
 						if (index > -1) {
@@ -160,15 +173,25 @@ async function updateAfkObjs(spt, doUpdate){
 					let embed = require("./helpers/updateAbortedCPEmbed.js")(spt, afkChecks[x]);
 					await cpmsg.edit({ embed: embed });
 					//TODO: fix, doesn't remove reaction
-					await cpmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
+					const reactX = cpmsg.reactions.get('❌');
+					try {
+						for (const user of reactX.users.values()) {
+						await reactX.remove(user);
+						}
+					} catch (error) {/*no users reaction left*/}
 				})
 			spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
 				.then(async function (afkmsg) {
 					let embed = require("./helpers/updateAbortedAfkEmbed.js")(spt, afkChecks[x]);
-					await lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
+					lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
 					await afkmsg.edit({ embed: embed });
 					//TODO: fix, doesn't remove reaction
-					await afkmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
+					const reactX = afkmsg.reactions.get('❌');
+					try {
+						for (const user of reactX.users.values()) {
+						await reactX.remove(user);
+						}
+					} catch (error) {/*no users reaction left*/}
 					// remove afkObj from array
 					const index = afkChecks.indexOf(afkChecks[x]);
 					if (index > -1) {
