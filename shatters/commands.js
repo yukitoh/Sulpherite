@@ -21,7 +21,7 @@ async function main(spt, data){
 			case 'unlock':
 				unlockChannel(spt, data, args[1], true);
 				break;
-			case 'reset': case 'resetChannel': case 'lock'
+			case 'reset': case 'resetChannel': case 'lock':
 				lockChannel(spt, data, args[1], true);
 				break;
 			case 'parsemembers': case 'parse': case 'pm':

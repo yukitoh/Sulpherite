@@ -111,7 +111,7 @@ async function updateAfkObjs(spt, doUpdate){
 								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afkChecks[x]);
 								await cpmsg.edit({ embed: embed });
 								//TODO: fix, doesn't remove reaction
-								await afkmsg.reactions.filter(react => react.name == '❌').deleteAll();
+								await cpmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
 							})
 						spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
 							.then(async function (afkmsg) {
@@ -145,7 +145,7 @@ async function updateAfkObjs(spt, doUpdate){
 						await lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
 						await afkmsg.edit({ embed: embed });
 						//TODO: fix, doesn't remove reaction
-						await afkmsg.reactions.filter(react => react.name == '❌').deleteAll();
+						await afkmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
 						// remove afkObj from array
 						const index = afkChecks.indexOf(afkChecks[x]);
 						if (index > -1) {
@@ -160,7 +160,7 @@ async function updateAfkObjs(spt, doUpdate){
 					let embed = require("./helpers/updateAbortedCPEmbed.js")(spt, afkChecks[x]);
 					await cpmsg.edit({ embed: embed });
 					//TODO: fix, doesn't remove reaction
-					await cpmsg.reactions.filter(react => react.name == '❌').deleteAll();
+					await cpmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
 				})
 			spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
 				.then(async function (afkmsg) {
@@ -168,7 +168,7 @@ async function updateAfkObjs(spt, doUpdate){
 					await lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
 					await afkmsg.edit({ embed: embed });
 					//TODO: fix, doesn't remove reaction
-					await afkmsg.reactions.filter(react => react.name == '❌').deleteAll();
+					await afkmsg.reactions.find(reaction => reaction.emoji.name == "❌").deleteAll();
 					// remove afkObj from array
 					const index = afkChecks.indexOf(afkChecks[x]);
 					if (index > -1) {
