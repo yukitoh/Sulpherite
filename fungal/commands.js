@@ -2,6 +2,8 @@ const ping = require('node-http-ping')
 const unlockChannel = require("./helpers/unlockChannel.js");
 const lockChannel = require("./helpers/lockChannel.js");
 const config = require("../config.json");
+const isRaidleader = require('../isRL.js');
+var skipPromise = [];
 
 const afkChecksPromises = [];
 const afkChecks = [];
@@ -227,9 +229,13 @@ async function updateAfkObjs(spt){
 }
 
 async function checkDeafen(spt){
+	skipPromise.length = 0;
 	if (spt.channels.get(config.fungal.vcs.one).members.size > 0){
 		spt.channels.get(config.fungal.vcs.one).members.forEach(async function(raiders){
-			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+				await skipPromise.push(value);
+			})
+			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromise[0]){
 				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
 				spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
 				warnedDeafs.push(raiders);
@@ -238,7 +244,10 @@ async function checkDeafen(spt){
 	}
 	if (spt.channels.get(config.fungal.vcs.two).members.size > 0){
 		spt.channels.get(config.fungal.vcs.two).members.forEach(async function(raiders){
-			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+				await skipPromise.push(value);
+			})
+			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromise[0]){
 				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
 				spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
 				warnedDeafs.push(raiders);
@@ -247,7 +256,10 @@ async function checkDeafen(spt){
 	}
 	if (spt.channels.get(config.fungal.vcs.three).members.size > 0){
 		spt.channels.get(config.fungal.vcs.three).members.forEach(async function(raiders){
-			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+				await skipPromise.push(value);
+			})
+			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromise[0]){
 				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
 				spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
 				warnedDeafs.push(raiders);
