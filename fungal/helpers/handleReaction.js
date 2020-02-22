@@ -65,11 +65,11 @@ async function handleReacts(spt, reaction, user){
 							// warn for pressing x without being rl
 							spt.channels.get(config.fungal.rlBotChannelID).send(`<@!${user.id}> tried to react with \`❌\`but isn't allowed to.`);
 							// remove x reaction
-								const reactX = reaction.message.reactions.get('❌');
-								try {
-									if (user.bot) return;
-									await reactX.remove(user);
-								} catch (error) {/*user reaction not found*/}
+							const reactX = reaction.message.reactions.get('❌');
+							try {
+								if (user.bot) return;
+								await reactX.remove(user);
+							} catch (error) {/*user reaction not found*/}
 						}
 						break;
 					case 'fungal':
@@ -121,10 +121,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['warriors'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('680172933888344109');
+								const reactWarr = reaction.message.reactions.get('680172933888344109');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactWarr.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -136,10 +136,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['paladins'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('680172933184094230');
+								const reactPala = reaction.message.reactions.get('680172933184094230');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactPala.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -151,10 +151,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['knights'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('680172932579852338');
+								const reactKnig = reaction.message.reactions.get('680172932579852338');
 								try {
 								if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactKnig.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -166,10 +166,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['priests'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('680172933355798541');
+								const reactPrie = reaction.message.reactions.get('680172933355798541');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactPrie.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -181,10 +181,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['tricksters'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('680172933892931584');
+								const reactTrix = reaction.message.reactions.get('680172933892931584');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactTrix.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -200,9 +200,13 @@ async function handleReacts(spt, reaction, user){
         								.then(collected => {
            									// confirmed key
            									if (collected.get('✅').count == 2){
-           										currAfkCheckObj['rusher'] = user;
-           										forceUpdate(spt, false);
-           										user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+           										if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.rusherRole)) {
+           											currAfkCheckObj['rusher'] = user;
+           											forceUpdate(spt, false);
+           											user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+           										} else {
+           											user.send(`Sorry you are not an official rusher.`)
+           										}
            									}
         							})
 								})

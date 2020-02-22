@@ -7,6 +7,7 @@
 		"id":"679160544066011156",
 		"rlBotChannelID":"679160544560676868",
 		"afkcheckID":"680148116359479473",
+		"parse":"679160818427756564",
 		"vcs":{
 			"lounge":"679160544560676870",
 			"one":"679160966189023235",
@@ -16,6 +17,8 @@
 			"five":"679161108170407948"
 		},
 		"raiderRole":"Raider",
+		"nitroRole":"Nitro Booster",
+		"supremepriestRole":"Supreme Priest",
 		"arlRole":"testers",
 		"rlRole":"testers",
 		"vrlRole":"testers",
@@ -26,6 +29,7 @@
 		"id":"680164841021112444",
 		"rlBotChannelID":"680165561858261161",
 		"afkcheckID":"680165634335703059",
+		"parse":"680166156887261184",
 		"vcs":{
 			"lounge":"680164841654321221",
 			"one":"680166195885899778",
@@ -35,6 +39,8 @@
 			"five":"680166349661536332"
 		},
 		"raiderRole":"Raider",
+		"rusherRole":"Official Rusher",
+		"nitroRole":"Nitro Booster",
 		"arlRole":"testers",
 		"rlRole":"testers",
 		"vrlRole":"testers",

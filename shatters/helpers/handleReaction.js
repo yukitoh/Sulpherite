@@ -121,10 +121,11 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['warriors'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('679186994190090270');
+								var reactWarr = reaction.message.reactions.get('679186994190090270');
+								console.log(reactWarr);
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactWarr.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -136,10 +137,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['paladins'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('679187006403903509');
+								const reactPala = reaction.message.reactions.get('679187006403903509');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactPala.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -151,10 +152,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['knights'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('679187016071512067');
+								const reactKnig = reaction.message.reactions.get('679187016071512067');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactKnig.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -166,17 +167,17 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['priests'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('679187025303437312');
+								const reactPrie = reaction.message.reactions.get('679187025303437312');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactPrie.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
 						})
-						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.nitroRole)) {
-							currAfkCheckObj['nitro'].push(user);
-							user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.supremepriestRole)) {
+							currAfkCheckObj['supremepriest'].push(user);
+							forceUpdate(spt, false);
 						}
 						break;
 					case 'mystic':
@@ -185,10 +186,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['mystics'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('679187052813746186');
+								const reactMyst = reaction.message.reactions.get('679187052813746186');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactMyst.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -200,10 +201,10 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['assassins'].push(user);
 							} else {
-								var reactDelete = reaction.message.reactions.get('679187076406575107');
+								const reactAssa = reaction.message.reactions.get('679187076406575107');
 								try {
 									if (user.bot) return;
-									await reactDelete.remove(user);
+									await reactAssa.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -211,7 +212,7 @@ async function handleReacts(spt, reaction, user){
 						break;
 					case 'first':
 						if (reaction.count == 3){
-							// add checking if not reacting to multiple switches
+							//TODO: add checking if not reacting to multiple switches
 							var reactDelete = reaction.message.reactions.get('679187076406575107');
 							try {
 								if (user.bot) return;
@@ -221,7 +222,7 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'second':
-						// add checking if not reacting to multiple switches
+						//TODO: add checking if not reacting to multiple switches
 						if (reaction.count == 3){
 							var reactDelete = reaction.message.reactions.get('679187097621495820');
 							try {
@@ -232,7 +233,7 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'secret':
-						// add checking if not reacting to multiple switches
+						//TODO: add checking if not reacting to multiple switches
 						if (reaction.count == 3){
 							var reactDelete = reaction.message.reactions.get('679187105817296934');
 							try {

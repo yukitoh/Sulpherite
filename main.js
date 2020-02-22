@@ -80,5 +80,19 @@ spt.on('messageReactionAdd', (reaction, user) => {
 	}
 })
 
+spt.on('messageReactionRemove', (reaction, user) => {
+	if (user.bot) return;
+	if (reaction.message.channel.type == 'dm') return;
+	
+	switch(reaction.message.guild.id){
+		case config.shatters.id:
+			require('./shatters/helpers/handleDelReaction.js')(spt, reaction, user);
+			break;
+		case config.fungal.id:
+			require('./fungal/helpers/handleDelReaction.js')(spt, reaction, user);
+			break;
+	}
+})
+
 // Login with token
 spt.login(config.token);
