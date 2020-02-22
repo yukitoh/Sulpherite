@@ -1,5 +1,4 @@
 {
-	"token":"token",
 	"status":"with your lives!",
 	"prefix":"*",
 	
@@ -26,25 +25,25 @@
 	},
 	
 	"fungal":{
-		"id":"680164841021112444",
-		"rlBotChannelID":"680165561858261161",
-		"afkcheckID":"680165634335703059",
-		"parse":"680166156887261184",
+		"id":"635413437647683596",
+		"rlBotChannelID":"635535417936183307",
+		"afkcheckID":"635536518601113601",
+		"parse":"638051246359576577",
 		"vcs":{
-			"lounge":"680164841654321221",
-			"one":"680166195885899778",
-			"two":"680166312625963010",
-			"three":"680166325766717447",
-			"four":"680166335065489473",
-			"five":"680166349661536332"
+			"lounge":"635413437647683602",
+			"one":"635542462525472809",
+			"two":"635542647788011521",
+			"three":"635547598668955709",
+			"four":"",
+			"five":""
 		},
-		"raiderRole":"Raider",
+		"raiderRole":"Verified Raider",
 		"rusherRole":"Official Rusher",
 		"nitroRole":"Nitro Booster",
-		"arlRole":"testers",
-		"rlRole":"testers",
-		"vrlRole":"testers",
-		"hrlRole":"testers"
+		"arlRole":"Almost Raid Leader",
+		"rlRole":"Raid Leader",
+		"vrlRole":"Veteran Raid Leader",
+		"hrlRole":"Head Raid Leader"
 	}
 
 }
