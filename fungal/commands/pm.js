@@ -48,7 +48,8 @@ async function pm(spt, data, args){
 
 					var igRaiders = [];
 					preParse = text.split(':')[1];
-					console.dir(preParse);
+					console.dir(text);
+					console.dir(data.text);
 					fullParse = preParse.replace(/\\n/g, '').trim();
 					fixedParse = ((((fullParse.replace(';', ',')).replace(';', ',')).replace(';', ',')).replace(';', ',')).replace(';', ',');
 					ingameRaiders = fixedParse.split(',');
