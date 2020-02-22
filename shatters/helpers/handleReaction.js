@@ -174,6 +174,10 @@ async function handleReacts(spt, reaction, user){
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
 						})
+						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.nitroRole)) {
+							currAfkCheckObj['nitro'].push(user);
+							user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+						}
 						break;
 					case 'mystic':
 						multipleClasses(spt, user, 'mystic', currAfkCheckObj)
@@ -239,7 +243,10 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'nitro':
-						// TODO
+						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.nitroRole)) {
+							currAfkCheckObj['nitro'].push(user);
+							user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+						}
 						break;
 					default:
 						// wrong reaction, skip

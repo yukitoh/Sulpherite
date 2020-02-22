@@ -211,7 +211,10 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'nitro':
-						// TODO
+						if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.nitroRole)) {
+							currAfkCheckObj['nitro'].push(user);
+							user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+						}
 						break;
 					default:
 						// wrong reaction, skip
