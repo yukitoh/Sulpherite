@@ -9,7 +9,6 @@ async function main(spt, data){
 	.then(async function (mentionHere) {
 		await mentionHere.delete();
 	})
-	afkCheckChannel.send(`this is a hc?`);
 	afkCheckChannel.send({ embed })
 	.then(async function (headcount) {
 		await reactHC(spt, headcount);
