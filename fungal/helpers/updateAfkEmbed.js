@@ -9,7 +9,7 @@ function updateEmbed(spt, afkCheckObj){
 		color: 1122214,
 		timestamp: afkCheckObj['started'],
 		footer: {
-		text: "Raiders accounted for: "+afkCheckObj['raiders']
+		text: "Raiders accounted for: "+afkCheckObj['raiders'].length
 		},
 		author: {
 		name: "Fungal Cavern started by "+hostUser.displayName+" in "+channelName,

@@ -56,6 +56,30 @@ async function handleReacts(spt, reaction, user){
 									if (user.bot) return;
 									await reactX.remove(user);
 								} catch (error) {/*user reaction not found*/}
+								// move to lounge people who didn't react with portal
+								var vcRaiders = [];
+								var reactedPortal = [];
+								spt.channels.get(afkChecks[x]['channel']).members.forEach(async function(raiders){
+									await vcRaiders.push(raiders);
+								})
+								spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+									.then(async function (afkmsg) {
+										const reactPortal = afkmsg.reactions.get('fungal:680172932382720007');
+										try {
+											for (const user of reactPortal.users.values()) {
+												reactedPortal.push(user.id);
+											}
+										} catch (error) {/*no users reaction left*/}
+										vcRaiders.forEach(async function(vcr){
+											// if rl, do not move out
+											await isRaidleader(spt, 'fungal', vcr.user.id).then(async function(value){
+												await isRLPromise.push(value);
+											})
+											if (!reactedPortal.includes(vcr.user.id) && !isRLPromise[0]){
+												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vcs.lounge));
+											}
+										})
+									})
 							} else {
 								// afk check react (x) -> end
 								currAfkCheckObj['ended'] = true;
@@ -92,7 +116,7 @@ async function handleReacts(spt, reaction, user){
 								break;
 						}
 						if (spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel.id == config.fungal.vcs.lounge) spt.guilds.get(config.fungal.id).members.get(user.id).setVoiceChannel(channelID);
-						currAfkCheckObj['raiders'] += 1;
+						currAfkCheckObj['raiders'].push(user.id);
 						forceUpdate(spt, false);
 						break;
 					case 'fungalkey':

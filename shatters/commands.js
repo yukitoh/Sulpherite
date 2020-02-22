@@ -37,7 +37,14 @@ async function main(spt, data){
 			// Miscellanious
 			case 'ping':
 				ping('https://google.com')
-					.then(time => data.channel.send(`Bot Latency: ${time}ms`))
+					.then(async function(time){
+						var start = new Date()
+						await data.channel.send(`Checking..`)
+							.then(async function(msg){
+								var end = new Date() - start;
+								msg.edit(`Bot Latency: ${end}ms, API Latency: ${time}ms`);
+							})
+					})
 				break;
 			case 'avatar':
 				require("./commands/avatar.js")(spt, data);
@@ -100,8 +107,31 @@ async function updateAfkObjs(spt, log){
 						afkChecks[x]['timeleft'] = 30;
 						await spt.channels.get(afkChecks[x]['channel']).setName(`raiding`+afkChecks[x]['channelNumber']);
 						await spt.channels.get(afkChecks[x]['channel']).overwritePermissions(spt.guilds.get(config.shatters.id).roles.find(role => role.name == config.shatters.raiderRole), { 'CONNECT': false, 'SPEAK': false });
-						// TODO: Move out everyone who didn't react with shatters portal
 						
+						// move to lounge people who didn't react with portal
+						var vcRaiders = [];
+						var reactedPortal = [];
+						spt.channels.get(afkChecks[x]['channel']).members.forEach(async function(raiders){
+							await vcRaiders.push(raiders);
+						})
+						spt.channels.get(config.shatters.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+							.then(async function (afkmsg) {
+								const reactPortal = afkmsg.reactions.get('shatters:679186863264628736');
+								try {
+									for (const user of reactPortal.users.values()) {
+										reactedPortal.push(user.id);
+									}
+								} catch (error) {/*no users reaction left*/}
+								vcRaiders.forEach(async function(vcr){
+									// if rl, do not move out
+									await isRaidleader(spt, 'shatters', vcr.user.id).then(async function(value){
+										await isRLPromise.push(value);
+									})
+									if (!reactedPortal.includes(vcr.user.id) && !isRLPromise[0]){
+										await vcr.setVoiceChannel(spt.channels.get(config.shatters.vcs.lounge));
+									}
+								})
+							})
 					} else {
 						afkChecks[x]['ended'] = true;
 					}

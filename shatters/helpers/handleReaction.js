@@ -49,6 +49,9 @@ async function handleReacts(spt, reaction, user){
 								// afk check react (x) -> post
 								currAfkCheckObj['postafk'] = true;
 								currAfkCheckObj['timeleft'] = 30;
+								// lock channel & force update
+								await spt.channels.get(afkChecks[x]['channel']).setName(`raiding`+afkChecks[x]['channelNumber']);
+								await spt.channels.get(afkChecks[x]['channel']).overwritePermissions(spt.guilds.get(config.shatters.id).roles.find(role => role.name == config.shatters.raiderRole), { 'CONNECT': false, 'SPEAK': false });
 								forceUpdate(spt, false);
 								// remove x reaction
 								const reactX = reaction.message.reactions.get('❌');
@@ -56,6 +59,31 @@ async function handleReacts(spt, reaction, user){
 									if (user.bot) return;
 									await reactX.remove(user);
 								} catch (error) {/*user reaction not found*/}
+
+								// move to lounge people who didn't react with portal
+								var vcRaiders = [];
+								var reactedPortal = [];
+								spt.channels.get(afkChecks[x]['channel']).members.forEach(async function(raiders){
+									await vcRaiders.push(raiders);
+								})
+								spt.channels.get(config.shatters.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+									.then(async function (afkmsg) {
+										const reactPortal = afkmsg.reactions.get('shatters:679186863264628736');
+										try {
+											for (const user of reactPortal.users.values()) {
+												reactedPortal.push(user.id);
+											}
+										} catch (error) {/*no users reaction left*/}
+										vcRaiders.forEach(async function(vcr){
+											// if rl, do not move out
+											await isRaidleader(spt, 'shatters', vcr.user.id).then(async function(value){
+												await isRLPromise.push(value);
+											})
+											if (!reactedPortal.includes(vcr.user.id) && !isRLPromise[0]){
+												await vcr.setVoiceChannel(spt.channels.get(config.shatters.vcs.lounge));
+											}
+										})
+									})
 							} else {
 								// afk check react (x) -> end
 								currAfkCheckObj['ended'] = true;
@@ -92,7 +120,7 @@ async function handleReacts(spt, reaction, user){
 								break;
 						}
 						if (spt.guilds.get(config.shatters.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.shatters.id).members.get(user.id).voiceChannel.id == config.shatters.vcs.lounge) spt.guilds.get(config.shatters.id).members.get(user.id).setVoiceChannel(channelID);
-						currAfkCheckObj['raiders'] += 1;
+						currAfkCheckObj['raiders'].push(user.id);
 						forceUpdate(spt, false);
 						break;
 					case 'shatterskey':

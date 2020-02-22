@@ -61,7 +61,7 @@ async function main(spt, data, args){
 					channelNumber: raidingChannel,
 					location: location,
 					timeleft: 360,
-					raiders: 0,
+					raiders: [],
 					started: new Date(data.createdTimestamp).toISOString(),
 					key: 'None',
 					nitro: [],

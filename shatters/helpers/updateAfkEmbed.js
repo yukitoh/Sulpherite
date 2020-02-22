@@ -9,7 +9,7 @@ function updateEmbed(spt, afkCheckObj){
 		color: 31247,
 		timestamp: afkCheckObj['started'],
 		footer: {
-		text: "Raiders accounted for: "+afkCheckObj['raiders']
+		text: "Raiders accounted for: "+afkCheckObj['raiders'].length
 		},
 		author: {
 		name: "Shatters started by "+hostUser.displayName+" in "+channelName,

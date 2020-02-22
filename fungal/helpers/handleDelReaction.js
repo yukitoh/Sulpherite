@@ -15,7 +15,12 @@ async function handleReacts(spt, reaction, user){
 				// afk check unreact
 				switch (reaction.emoji.name){
 					case 'fungal':
-						currAfkCheckObj['raiders'] -= 1;
+						if(afkChecks[x]['raiders'].includes(user.id)){
+							var index = afkChecks[x]['raiders'].indexOf(user.id);
+							if (index > -1) {
+								afkChecks[x]['raiders'].splice(index, 1);
+							}
+						}
 						forceUpdate(spt, false);
 						break;
 					case 'fungalkey':

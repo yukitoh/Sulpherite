@@ -14,7 +14,7 @@ function updateEndedAFK(spt, afkCheckObj){
 		footer: {
 		text: "The afk check has been ended by "+spt.guilds.get(config.fungal.id).members.get(afkCheckObj['host']).displayName
 		},
-		description: `The AFK Check is now finished.\nWe are currently running with ${rlAmount} Raid leaders and ${afkCheckObj['raiders']} Raiders.`,
+		description: `The AFK Check is now finished.\nWe are currently running with ${rlAmount} Raid leaders and ${afkCheckObj['raiders'].length} Raiders.`,
 		author: {
 		name: "Fungal Cavern started by "+spt.guilds.get(config.fungal.id).members.get(afkCheckObj['host']).displayName+" in "+channelName,
 		icon_url: spt.users.get(afkCheckObj['host']).avatarURL
