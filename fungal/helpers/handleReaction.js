@@ -123,7 +123,7 @@ async function handleReacts(spt, reaction, user){
 							} else {
 								try {
 									if (user.bot) return;
-									await reaction.remove(user);
+									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -137,7 +137,7 @@ async function handleReacts(spt, reaction, user){
 							} else {
 								try {
 									if (user.bot) return;
-									await reaction.remove(user);
+									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -151,7 +151,7 @@ async function handleReacts(spt, reaction, user){
 							} else {
 								try {
 									if (user.bot) return;
-									await reaction.remove(user);
+									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -165,7 +165,7 @@ async function handleReacts(spt, reaction, user){
 							} else {
 								try {
 									if (user.bot) return;
-									await reaction.remove(user);
+									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -179,7 +179,7 @@ async function handleReacts(spt, reaction, user){
 							} else {
 								try {
 									if (user.bot) return;
-									await reaction.remove(user);
+									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -203,7 +203,7 @@ async function handleReacts(spt, reaction, user){
            											user.send(`Sorry you are not an official rusher.`)
            											try {
 														if (user.bot) return;
-														await reaction.remove(user);
+														reaction.remove(user);
 													} catch (error) {/*user reaction not found*/}
            										}
            									}
@@ -216,11 +216,11 @@ async function handleReacts(spt, reaction, user){
 					case 'nitro':
 						if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.nitroRole)) {
 							currAfkCheckObj['nitro'].push(user);
-							user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+							user.send(`As a nitro booster, you have access to location: ${currAfkCheckObj['location']}.`);
 						} else {
 							try {
 								if (user.bot) return;
-								await reaction.remove(user);
+								reaction.remove(user);
 							} catch (error) {/*user reaction not found*/}
 						}
 						break;
