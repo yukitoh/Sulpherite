@@ -2,7 +2,7 @@ const config = require("../../config.json");
 
 async function main(spt, data, event, log){
 	if (event == undefined){
-		data.channel.send(`Invalid channel number (available: 1-5).`);
+		data.channel.send(`Invalid channel number (available: 1-4).`);
 	} else {
 		switch(event){
 			case '1':
@@ -18,12 +18,12 @@ async function main(spt, data, event, log){
 				var eventChannel = spt.channels.get(config.fungal.event.four);
 				break;
 			default:
-				data.channel.send(`Invalid channel number (available: 1-5).`);
+				data.channel.send(`Invalid channel number (available: 1-4).`);
 				break;
 		}
 		
 		if (eventChannel != undefined){
-			await eventChannel.overwritePermissions(data.guild.roles.find(role => role.name == config.fungal.raiderRole), { 'CONNECT': true, 'SPEAK': false });
+			await eventChannel.overwritePermissions(data.guild.roles.find(role => role.name == config.fungal.eventRole), { 'CONNECT': true, 'SPEAK': false });
 			switch(event){
 				case '1':
 					await eventChannel.setName(`event `+event+` <-- Join!`);

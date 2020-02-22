@@ -20,7 +20,7 @@ async function main(spt, data, args){
 				var raidingChannel = spt.channels.get(config.fungal.event.four);
 				break;
 			default:
-				data.channel.send(`Invalid channel number (available: 1-5).`);
+				data.channel.send(`Invalid channel number (available: 1-4).`);
 				break;
 		}
 
