@@ -32,10 +32,10 @@ async function main(spt, data, event, log){
 					await eventChannel.setName(`event `+event+` <-- Join!`);
 					break;
 				case '3':
-					await eventChannel.setName(`realm clearing `+event+` <-- Join!`);
+					await eventChannel.setName(`realm clearing 1 <-- Join!`);
 					break;
 				case '4':
-					await eventChannel.setName(`realm clearing `+event+` <-- Join!`);
+					await eventChannel.setName(`realm clearing 2 <-- Join!`);
 					break;
 			}
 			if (log && event != undefined) data.channel.send(`Unlocked channel event`+event);

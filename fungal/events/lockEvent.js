@@ -32,10 +32,10 @@ async function main(spt, data, event, log){
 					await eventChannel.setName(`event `+event);
 					break;
 				case '3':
-					await eventChannel.setName(`realm clearing `+event);
+					await eventChannel.setName(`realm clearing 1`);
 					break;
 				case '4':
-					await eventChannel.setName(`realm clearing `+event);
+					await eventChannel.setName(`realm clearing 2`);
 					break;
 			}
 			if (log && event != undefined) data.channel.send(`Locked channel event`+event);
