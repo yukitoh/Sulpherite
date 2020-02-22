@@ -1,6 +1,11 @@
 const config = require("../../config.json");
 
 function updateEndedCP(spt, afkCheckObj){
+	if (afkCheckObj['nitro'] == []){
+		var nitroMessage = 'None';
+	} else {
+		var nitroMessage = afkCheckObj['nitro'].join(', ');
+	}
 	const channelName = spt.channels.get(afkCheckObj['channel']).name;
 	const embed = {
 		color: 1122214,
@@ -25,7 +30,7 @@ function updateEndedCP(spt, afkCheckObj){
 		},
 		{
 			name: "Nitro boosters with location:",
-			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${afkCheckObj['nitro']}`
+			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${nitroMessage}`
 		}
 		]
 	};

@@ -64,7 +64,7 @@ async function main(spt, data, args){
 					raiders: 0,
 					started: new Date(data.createdTimestamp).toISOString(),
 					key: 'None',
-					nitro: 'None',
+					nitro: [],
 					rusher: 'None',
 					warriors: [],
 					paladins: [],
