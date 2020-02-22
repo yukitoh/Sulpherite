@@ -1,7 +1,7 @@
 const config = require("../../config.json");
 
 function updateControlPanel(spt, afkCheckObj){
-	if (afkCheckObj['nitro'] == []){
+	if (afkCheckObj['nitro'].length == 0){
 		var nitroMessage = 'None';
 	} else {
 		var nitroMessage = afkCheckObj['nitro'].join(', ');

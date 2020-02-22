@@ -1,12 +1,12 @@
 const config = require("../../config.json");
 
 function updateControlPanel(spt, afkCheckObj){
-	if (afkCheckObj['supremepriest'] == []){
+	if (afkCheckObj['supremepriest'].length == 0){
 		var supremePriestMessage = 'None';
 	} else {
 		var supremePriestMessage = afkCheckObj['supremepriest'].join(', ');
 	}
-	if (afkCheckObj['nitro'] == []){
+	if (afkCheckObj['nitro'].length == 0){
 		var nitroMessage = 'None';
 	} else {
 		var nitroMessage = afkCheckObj['nitro'].join(', ');
