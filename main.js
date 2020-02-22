@@ -11,6 +11,8 @@ spt.on('ready', () => {
 		// Handling afk checks update
         require("./shatters/commands.js").updateAfkObjs(spt, true);
 		require("./fungal/commands.js").updateAfkObjs(spt, true);
+		require("./shatters/commands.js").checkDeafen(spt);
+		require("./fungal/commands.js").checkDeafen(spt);
     }, 5000);
 })
 

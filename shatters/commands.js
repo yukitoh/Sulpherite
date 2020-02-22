@@ -5,6 +5,7 @@ const config = require("../config.json");
 
 const afkChecksPromises = [];
 const afkChecks = [];
+const warnedDeafs = [];
 
 async function main(spt, data){
 	let lowerData = data.content.toLowerCase();
@@ -62,11 +63,6 @@ async function main(spt, data){
 		}
 	}
 }
-
-module.exports.main = main;
-module.exports.afkChecksPromises = afkChecksPromises;
-module.exports.afkChecks = afkChecks;
-module.exports.updateAfkObjs = updateAfkObjs;
 
 async function isCommand(data){
 	if(data.content.split(' ')[0].startsWith('*')){
@@ -229,3 +225,66 @@ async function updateAfkObjs(spt, log){
 		}
 	}
 }
+
+async function checkDeafen(spt){
+	if (spt.channels.get(config.shatters.vcs.one).members.size > 0){
+		spt.channels.get(config.shatters.vcs.one).members.forEach(async function(raiders){
+			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+				warnedDeafs.push(raiders);
+			}
+		})
+	}
+	if (spt.channels.get(config.shatters.vcs.two).members.size > 0){
+		spt.channels.get(config.shatters.vcs.two).members.forEach(async function(raiders){
+			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+				warnedDeafs.push(raiders);
+			}
+		})
+	}
+	if (spt.channels.get(config.shatters.vcs.three).members.size > 0){
+		spt.channels.get(config.shatters.vcs.three).members.forEach(async function(raiders){
+			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+				warnedDeafs.push(raiders);
+			}
+		})
+	}
+	if (spt.channels.get(config.shatters.vcs.four).members.size > 0){
+		spt.channels.get(config.shatters.vcs.four).members.forEach(async function(raiders){
+			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+				warnedDeafs.push(raiders);
+			}
+		})
+	}
+	if (spt.channels.get(config.shatters.vcs.five).members.size > 0){
+		spt.channels.get(config.shatters.vcs.five).members.forEach(async function(raiders){
+			if (raiders.deaf && !warnedDeafs.includes(raiders)){
+				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+				warnedDeafs.push(raiders);
+			}
+		})
+	}
+
+	warnedDeafs.forEach(async function(warnedraider){
+		if (!warnedraider.deaf){
+			const index = warnedDeafs.indexOf(warnedraider);
+			if (index > -1) {
+				warnedDeafs.splice(index, 1);
+			}
+		}
+	})
+}
+
+module.exports.main = main;
+module.exports.afkChecksPromises = afkChecksPromises;
+module.exports.afkChecks = afkChecks;
+module.exports.updateAfkObjs = updateAfkObjs;
+module.exports.checkDeafen = checkDeafen;
