@@ -27,7 +27,7 @@ async function main(spt, data, raiding, log){
 		
 		if (raidingChannel != undefined){
 			await raidingChannel.overwritePermissions(data.guild.roles.find(role => role.name == config.fungal.raiderRole), { 'CONNECT': true, 'SPEAK': false });
-			await raidingChannel.setName(`raiding`+raiding+` <-- Join!`);
+			await raidingChannel.setName(`raiding `+raiding+` <-- Join!`);
 			if (log && raiding != undefined) data.channel.send(`Unlocked channel raiding`+raiding);
 		}
 	}

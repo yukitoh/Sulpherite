@@ -27,7 +27,7 @@ async function main(spt, data, raiding, log){
 
 		if (raidingChannel != undefined){
 			await raidingChannel.overwritePermissions(data.guild.roles.find(role => role.name == config.fungal.raiderRole), { 'CONNECT': false, 'SPEAK': false });
-			await raidingChannel.setName(`raiding`+raiding);
+			await raidingChannel.setName(`raiding `+raiding);
 			if (log && raiding != undefined) data.channel.send(`Locked channel raiding`+raiding);
 		}
 	}
