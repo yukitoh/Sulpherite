@@ -28,7 +28,8 @@ async function main(spt, data){
 				lockChannel(spt, data, args[1], true);
 				break;
 			case 'parsemembers': case 'parse': case 'pm':
-				require("./commands/pm.js")(spt, data, args);
+				//require("./commands/pm.js")(spt, data, args);
+				data.channel.send(`Deactivated, takes too much memory, looking for an alternative.`);
 				break;
 			case 'afk':
 			// CREATES AFK CHECK
