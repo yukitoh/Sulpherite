@@ -27,19 +27,27 @@
 	"fungal":{
 		"id":"635413437647683596",
 		"rlBotChannelID":"635535417936183307",
+		"eventBotChannelID":"659857457383997449",
+		"eventafkcheckID":"659857390379991040",
 		"afkcheckID":"635536518601113601",
 		"parse":"638051246359576577",
 		"vcs":{
 			"lounge":"635413437647683602",
 			"one":"635542462525472809",
 			"two":"635542647788011521",
-			"three":"635547598668955709",
-			"four":"",
-			"five":""
+			"three":"635547598668955709"
+		},
+		"event":{
+			"lounge":"659857838046314537",
+			"one":"659857560588910602",
+			"two":"659857614292647956",
+			"three":"659857679254159371",
+			"four":"659857747487227905"
 		},
 		"raiderRole":"Verified Raider",
 		"rusherRole":"Official Rusher",
 		"nitroRole":"Nitro Booster",
+		"erlRole":"Event Master",
 		"arlRole":"Almost Raid Leader",
 		"rlRole":"Raid Leader",
 		"vrlRole":"Veteran Raid Leader",

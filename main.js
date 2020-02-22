@@ -2,7 +2,9 @@ const Discord = require('discord.js');
 const spt = new Discord.Client();
 const config = require('./config.json');
 const isRaidleader = require('./isRL.js');
+const isEventRaidleader = require('./isERL.js');
 var skipPromise = [];
+var skipPromiseERL = [];
 
 // heroku part (host)
 const express = require('express');
@@ -73,6 +75,9 @@ spt.on('message', async (data) => {
 				await isRaidleader(spt, 'fungal', data.author.id).then(async function(value){
 					await skipPromise.push(value);
 				})
+				await isEventRaidleader(spt, 'fungal', data.author.id).then(async function(value){
+					await skipPromiseERL.push(value);
+				})
 				if (data.channel.id == config.fungal.rlBotChannelID && skipPromise[0]){
 					// clear skipPromise array for next message
 					skipPromise.length = 0;
@@ -81,9 +86,18 @@ spt.on('message', async (data) => {
 						data.channel.send('Slurpie Slurp Slurp')
 					}
 					require("./fungal/commands.js").main(spt, data);
+				} else if(data.channel.id == config.fungal.eventBotChannelID && skipPromiseERL[0] || data.channel.id == config.fungal.eventBotChannelID && skipPromise[0]){
+					// clear skipPromise array for next message
+					skipPromiseERL.length = 0;
+					// check if bot is alive (highest priority)
+					if (data.content == '*slurp'){
+						data.channel.send('Slurpie Slurp Slurp')
+					}
+					require("./fungal/events.js").main(spt, data);
 				}
 				// clear skipPromise array for next message
 				skipPromise.length = 0;
+				skipPromiseERL.length = 0;
 			}
 			break;
 	}
