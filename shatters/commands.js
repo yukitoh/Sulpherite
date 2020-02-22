@@ -93,6 +93,7 @@ async function updateAfkObjs(spt, log){
 	// pass promises to objects
 	resolveAfks(afkChecksPromises);
 	// update every afk check object
+	console.dir(afkChecks);
 	for (x in afkChecks) {
 		// handle aborts
 		if (afkChecks[x]['aborted'] == false) {
