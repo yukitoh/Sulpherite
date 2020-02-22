@@ -12,7 +12,7 @@ function updateEmbed(spt, afkCheckObj){
 		text: "The afk check has been ended by "+hostUser.displayName
 		},
 		author: {
-		name: "Shatters started by "+hostUser.displayName+" in "+channelName,
+		name: "Fungal Cavern started by "+hostUser.displayName+" in "+channelName,
 		icon_url: spt.users.get(afkCheckObj['host']).avatarURL
 		}
 	};
