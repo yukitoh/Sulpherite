@@ -72,6 +72,7 @@ async function main(spt, data, args){
 					priests: [],
 					mystics: [],
 					assassins: [],
+					rushers: [],
 					postafk: false,
 					afkcheck: undefined,
 					controlpanel: undefined,

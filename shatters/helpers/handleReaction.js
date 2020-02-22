@@ -203,43 +203,29 @@ async function handleReacts(spt, reaction, user){
 							}
 						})
 						break;
-					case 'first':
+					case 'first': case 'second': case 'secret':
 						if (reaction.count == 3){
-							//TODO: add checking if not reacting to multiple switches
-							var reactDelete = reaction.message.reactions.get('679187076406575107');
 							try {
 								if (user.bot) return;
-								await reactDelete.remove(user);
+								await reaction.remove(user);
 							} catch (error) {/*user reaction not found*/}
 							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
-						}
-						break;
-					case 'second':
-						//TODO: add checking if not reacting to multiple switches
-						if (reaction.count == 3){
-							var reactDelete = reaction.message.reactions.get('679187097621495820');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
-						}
-						break;
-					case 'secret':
-						//TODO: add checking if not reacting to multiple switches
-						if (reaction.count == 3){
-							var reactDelete = reaction.message.reactions.get('679187105817296934');
-							try {
-								if (user.bot) return;
-								await reactDelete.remove(user);
-							} catch (error) {/*user reaction not found*/}
-							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
+						} else {
+							if (currAfkCheckObj['rushers'] != [] && currAfkCheckObj['rushers'].includes(user)){
+								try {
+									if (user.bot) return;
+									await reaction.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
+							} else {
+								currAfkCheckObj['rushers'].push(user);
+							}
 						}
 						break;
 					case 'nitro':
 						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.nitroRole)) {
 							currAfkCheckObj['nitro'].push(user);
-							user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+							user.send(`As a nitro booster, you have access to location: ${currAfkCheckObj['location']}.`);
 						}
 						break;
 					default:

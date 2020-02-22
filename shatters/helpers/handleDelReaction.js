@@ -72,6 +72,14 @@ async function handleReacts(spt, reaction, user){
 							}
 						}
 						break;
+					case 'first': case 'second': case 'secret':
+						if (currAfkCheckObj['rushers'].includes(user)){
+							var index = currAfkCheckObj['rushers'].indexOf(user);
+							if (index > -1) {
+								currAfkCheckObj['rushers'].splice(index, 1);
+							}
+						}
+						break;
 					default:
 						// wrong reaction, skip
 						break;
