@@ -118,4 +118,4 @@ spt.on('messageReactionRemove', (reaction, user) => {
 })
 
 // Login with token
-spt.login(config.token);
+spt.login(process.env.TOKEN);
