@@ -121,10 +121,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['warriors'].push(user);
 							} else {
-								const reactWarr = reaction.message.reactions.get('680172933888344109');
 								try {
 									if (user.bot) return;
-									await reactWarr.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -136,10 +135,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['paladins'].push(user);
 							} else {
-								const reactPala = reaction.message.reactions.get('680172933184094230');
 								try {
 									if (user.bot) return;
-									await reactPala.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -151,10 +149,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['knights'].push(user);
 							} else {
-								const reactKnig = reaction.message.reactions.get('680172932579852338');
 								try {
-								if (user.bot) return;
-									await reactKnig.remove(user);
+									if (user.bot) return;
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -166,10 +163,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['priests'].push(user);
 							} else {
-								const reactPrie = reaction.message.reactions.get('680172933355798541');
 								try {
 									if (user.bot) return;
-									await reactPrie.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -181,10 +177,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['tricksters'].push(user);
 							} else {
-								const reactTrix = reaction.message.reactions.get('680172933892931584');
 								try {
 									if (user.bot) return;
-									await reactTrix.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -206,6 +201,10 @@ async function handleReacts(spt, reaction, user){
            											user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
            										} else {
            											user.send(`Sorry you are not an official rusher.`)
+           											try {
+														if (user.bot) return;
+														await reaction.remove(user);
+													} catch (error) {/*user reaction not found*/}
            										}
            									}
         							})
@@ -218,6 +217,11 @@ async function handleReacts(spt, reaction, user){
 						if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.nitroRole)) {
 							currAfkCheckObj['nitro'].push(user);
 							user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+						} else {
+							try {
+								if (user.bot) return;
+								await reaction.remove(user);
+							} catch (error) {/*user reaction not found*/}
 						}
 						break;
 					default:

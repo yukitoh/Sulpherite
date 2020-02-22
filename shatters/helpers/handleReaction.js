@@ -121,11 +121,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['warriors'].push(user);
 							} else {
-								var reactWarr = reaction.message.reactions.get('679186994190090270');
-								console.log(reactWarr);
 								try {
 									if (user.bot) return;
-									await reactWarr.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -137,10 +135,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['paladins'].push(user);
 							} else {
-								const reactPala = reaction.message.reactions.get('679187006403903509');
 								try {
 									if (user.bot) return;
-									await reactPala.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -152,10 +149,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['knights'].push(user);
 							} else {
-								const reactKnig = reaction.message.reactions.get('679187016071512067');
 								try {
 									if (user.bot) return;
-									await reactKnig.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -167,10 +163,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['priests'].push(user);
 							} else {
-								const reactPrie = reaction.message.reactions.get('679187025303437312');
 								try {
 									if (user.bot) return;
-									await reactPrie.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -186,10 +181,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['mystics'].push(user);
 							} else {
-								const reactMyst = reaction.message.reactions.get('679187052813746186');
 								try {
 									if (user.bot) return;
-									await reactMyst.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
@@ -201,10 +195,9 @@ async function handleReacts(spt, reaction, user){
 							if (multipleClass == undefined) {
 								currAfkCheckObj['assassins'].push(user);
 							} else {
-								const reactAssa = reaction.message.reactions.get('679187076406575107');
 								try {
 									if (user.bot) return;
-									await reactAssa.remove(user);
+									await reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
