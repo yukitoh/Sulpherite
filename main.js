@@ -38,7 +38,7 @@ spt.on('ready', () => {
 })
 
 
-// Main handle
+// Main handle..
 spt.on('message', async (data) => {
 	if (data.author.bot) return;
 	switch (data.guild.id){
