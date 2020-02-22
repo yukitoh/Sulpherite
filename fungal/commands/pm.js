@@ -1,10 +1,10 @@
-const { createWorker } = require('tesseract.js'),
-request = require('request'),
-fs = require('fs'),
-path = require('path'),
-config = require("../../config.json");
+const { createWorker } = require('tesseract.js');
+const request = require('request');
+const fs = require('fs');
+const path = require('path');
+const config = require("../../config.json");
 
-async function main(spt, data, args){
+async function pm(spt, data, args){
 	if (args[1] == undefined){
 		data.channel.send(`Invalid channel number (available: 1-5).`);
 	} else {
@@ -117,4 +117,4 @@ async function main(spt, data, args){
 	}
 }
 
-module.exports = main;
+module.exports = pm;
