@@ -4,7 +4,28 @@ const config = require('./config.json');
 const isRaidleader = require('./isRL.js');
 var skipPromise = [];
 
+// heroku part (host)
+const express = require('express');
+const http = require("http");
+const path = require('path');
+const app = express()
+
+app.use(express.static('public'));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname+'/static/index.html'));
+})
+
+app.listen(process.env.PORT, function () {
+	console.log('heroku is on')
+})
+//
 spt.on('ready', () => {
+	// ping every 5m (host)
+	setInterval(function() {
+    http.get("http://sulpherite.herokuapp.com");
+	}, 300000); // every 5 minutes (300000
+
 	console.log('Sulpherite is running!')
 	spt.user.setActivity(config.status, { type: ``})
 	setInterval(function() {
