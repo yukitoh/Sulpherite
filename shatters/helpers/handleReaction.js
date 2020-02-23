@@ -232,7 +232,6 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'first':
-						console.dir(currAfkCheckObj['rushers']);
 						if (reaction.count == 3){
 							try {
 								if (user.bot) return;
@@ -240,19 +239,18 @@ async function handleReacts(spt, reaction, user){
 							} catch (error) {/*user reaction not found*/}
 							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
 						} else {
-							if (currAfkCheckObj['rushers'] != [] && currAfkCheckObj['rushers'].includes(user.id)){
+							if (currAfkCheckObj['rushers']['second'] != [] && currAfkCheckObj['rushers']['second'].includes(user.id) || currAfkCheckObj['rushers']['secret'] != [] && currAfkCheckObj['rushers']['secret'].includes(user.id)){
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
-							} else if (!currAfkCheckObj['rushers'].includes(user.id)) {
-								await currAfkCheckObj['rushers'].push(user.id);
+							} else if (!currAfkCheckObj['rushers']['second'].includes(user.id) && !currAfkCheckObj['rushers']['secret'].includes(user.id)) {
+								await currAfkCheckObj['rushers']['first'].push(user.id);
 							}
 						}
 						break;
 					case 'second':
-						console.dir(currAfkCheckObj['rushers']);
 						if (reaction.count == 3){
 							try {
 								if (user.bot) return;
@@ -260,19 +258,18 @@ async function handleReacts(spt, reaction, user){
 							} catch (error) {/*user reaction not found*/}
 							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
 						} else {
-							if (currAfkCheckObj['rushers'] != [] && currAfkCheckObj['rushers'].includes(user.id)){
+							if (currAfkCheckObj['rushers']['first'] != [] && currAfkCheckObj['rushers']['first'].includes(user.id) || currAfkCheckObj['rushers']['secret'] != [] && currAfkCheckObj['rushers']['secret'].includes(user.id)){
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
-							} else if (!currAfkCheckObj['rushers'].includes(user.id)) {
-								await currAfkCheckObj['rushers'].push(user.id);
+							} else if (!currAfkCheckObj['rushers']['first'].includes(user.id) && !currAfkCheckObj['rushers']['secret'].includes(user.id)) {
+								await currAfkCheckObj['rushers']['second'].push(user.id);
 							}
 						}
 						break;
 					case 'secret':
-						console.dir(currAfkCheckObj['rushers']);
 						if (reaction.count == 3){
 							try {
 								if (user.bot) return;
@@ -280,14 +277,14 @@ async function handleReacts(spt, reaction, user){
 							} catch (error) {/*user reaction not found*/}
 							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
 						} else {
-							if (currAfkCheckObj['rushers'] != [] && currAfkCheckObj['rushers'].includes(user.id)){
+							if (currAfkCheckObj['rushers']['first'] != [] && currAfkCheckObj['rushers']['first'].includes(user.id) || currAfkCheckObj['rushers']['second'] != [] && currAfkCheckObj['rushers']['second'].includes(user.id)){
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
-							} else if (!currAfkCheckObj['rushers'].includes(user.id)) {
-								await currAfkCheckObj['rushers'].push(user.id);
+							} else if (!currAfkCheckObj['rushers']['first'].includes(user.id) && !currAfkCheckObj['rushers']['second'].includes(user.id)) {
+								await currAfkCheckObj['rushers']['secret'].push(user.id);
 							}
 						}
 						break;

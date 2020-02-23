@@ -84,29 +84,26 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'first':
-						console.dir(currAfkCheckObj['rushers']);
-						if (currAfkCheckObj['rushers'].includes(user.id)){
-							var index = currAfkCheckObj['rushers'].indexOf(user.id);
+						if (currAfkCheckObj['rushers']['first'].includes(user.id)){
+							var index = currAfkCheckObj['rushers']['first'].indexOf(user.id);
 							if (index > -1) {
-								await currAfkCheckObj['rushers'].splice(index, 1);
+								await currAfkCheckObj['rushers']['first'].splice(index, 1);
 							}
 						}
 						break;
 					case 'second':
-						console.dir(currAfkCheckObj['rushers']);
-						if (currAfkCheckObj['rushers'].includes(user.id)){
-							var index = currAfkCheckObj['rushers'].indexOf(user.id);
+						if (currAfkCheckObj['rushers']['second'].includes(user.id)){
+							var index = currAfkCheckObj['rushers']['second'].indexOf(user.id);
 							if (index > -1) {
-								await currAfkCheckObj['rushers'].splice(index, 1);
+								await currAfkCheckObj['rushers']['second'].splice(index, 1);
 							}
 						}
 						break;
 					case 'secret':
-						console.dir(currAfkCheckObj['rushers']);
-						if (currAfkCheckObj['rushers'].includes(user.id)){
-							var index = currAfkCheckObj['rushers'].indexOf(user.id);
+						if (currAfkCheckObj['rushers']['secret'].includes(user.id)){
+							var index = currAfkCheckObj['rushers']['secret'].indexOf(user.id);
 							if (index > -1) {
-								await currAfkCheckObj['rushers'].splice(index, 1);
+								await currAfkCheckObj['rushers']['secret'].splice(index, 1);
 							}
 						}
 						break;
