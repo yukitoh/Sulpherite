@@ -231,7 +231,7 @@ async function handleReacts(spt, reaction, user){
 							}
 						})
 						break;
-					case 'first': case 'second': case 'secret':
+					case 'first':
 						if (reaction.count == 3){
 							try {
 								if (user.bot) return;
@@ -246,7 +246,45 @@ async function handleReacts(spt, reaction, user){
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
 							} else if (!currAfkCheckObj['rushers'].includes(user)) {
-								currAfkCheckObj['rushers'].push(user);
+								await currAfkCheckObj['rushers'].push(user);
+							}
+						}
+						break;
+					case 'second':
+						if (reaction.count == 3){
+							try {
+								if (user.bot) return;
+								reaction.remove(user);
+							} catch (error) {/*user reaction not found*/}
+							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
+						} else {
+							if (currAfkCheckObj['rushers'] != [] && currAfkCheckObj['rushers'].includes(user)){
+								try {
+									if (user.bot) return;
+									reaction.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
+							} else if (!currAfkCheckObj['rushers'].includes(user)) {
+								await currAfkCheckObj['rushers'].push(user);
+							}
+						}
+						break;
+					case 'secret':
+						if (reaction.count == 3){
+							try {
+								if (user.bot) return;
+								reaction.remove(user);
+							} catch (error) {/*user reaction not found*/}
+							spt.channels.get(config.shatters.rlBotChannelID).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
+						} else {
+							if (currAfkCheckObj['rushers'] != [] && currAfkCheckObj['rushers'].includes(user)){
+								try {
+									if (user.bot) return;
+									reaction.remove(user);
+								} catch (error) {/*user reaction not found*/}
+								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
+							} else if (!currAfkCheckObj['rushers'].includes(user)) {
+								await currAfkCheckObj['rushers'].push(user);
 							}
 						}
 						break;
