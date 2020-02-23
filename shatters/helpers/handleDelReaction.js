@@ -83,7 +83,8 @@ async function handleReacts(spt, reaction, user){
 							}
 						}
 						break;
-					case 'first': case 'second': case 'secret':
+					case 'first':
+						console.dir(currAfkCheckObj['rushers']);
 						if (currAfkCheckObj['rushers'].includes(user)){
 							var index = currAfkCheckObj['rushers'].indexOf(user);
 							if (index > -1) {
@@ -92,6 +93,7 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'second':
+						console.dir(currAfkCheckObj['rushers']);
 						if (currAfkCheckObj['rushers'].includes(user)){
 							var index = currAfkCheckObj['rushers'].indexOf(user);
 							if (index > -1) {
@@ -100,6 +102,7 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'secret':
+						console.dir(currAfkCheckObj['rushers']);
 						if (currAfkCheckObj['rushers'].includes(user)){
 							var index = currAfkCheckObj['rushers'].indexOf(user);
 							if (index > -1) {

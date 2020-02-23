@@ -232,6 +232,7 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'first':
+						console.dir(currAfkCheckObj['rushers']);
 						if (reaction.count == 3){
 							try {
 								if (user.bot) return;
@@ -251,6 +252,7 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'second':
+						console.dir(currAfkCheckObj['rushers']);
 						if (reaction.count == 3){
 							try {
 								if (user.bot) return;
@@ -270,6 +272,7 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'secret':
+						console.dir(currAfkCheckObj['rushers']);
 						if (reaction.count == 3){
 							try {
 								if (user.bot) return;
