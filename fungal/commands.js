@@ -92,7 +92,7 @@ async function resolveAfks(afkChecksPromises){
 	}
 }
 
-async function updateAfkObjs(spt){
+async function updateAfkObjs(spt, log){
 	// pass promises to objects
 	resolveAfks(afkChecksPromises);
 	// update every afk check object
@@ -101,7 +101,7 @@ async function updateAfkObjs(spt){
 		if (afkChecks[x]['aborted'] == false) {
 			if (afkChecks[x]['ended'] == false){
 				// not ended -> update
-				afkChecks[x]['timeleft'] -= 5;
+				if (log) afkChecks[x]['timeleft'] -= 5;
 				if (afkChecks[x]['timeleft'] <= 0){
 					// Endings:
 					if (afkChecks[x]['postafk'] == false){
