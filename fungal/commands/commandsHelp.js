@@ -32,6 +32,10 @@ async function main(spt, channel, command){
 			var embed = await createEmbed(command, '*resetChannel', 'Locks the selected channel for raiders.', 'reset, lock');
 			channel.send({ embed })
 			break;
+		case 'location': case 'loc':
+			var embed = await createEmbed(command, '*location [new location]', 'Changes the location of the run to the location provided.', 'loc');
+			channel.send({ embed })
+			break;
 		case 'parsemembers': case 'parse': case 'pm':
 			var embed = await createEmbed(command, '*parseMembers [channel number] [image]', 'Checks the list of users in the voice channel versus the in game image.', 'parse, pm');
 			channel.send({ embed })

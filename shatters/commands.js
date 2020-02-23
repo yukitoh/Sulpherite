@@ -27,6 +27,9 @@ async function main(spt, data){
 			case 'reset': case 'resetChannel': case 'lock':
 				lockChannel(spt, data, args[1], true);
 				break;
+			case 'loc': case 'location':
+				require("./commands/location.js")(spt, data, args);
+				break;
 			case 'parsemembers': case 'parse': case 'pm':
 				//require("./commands/parsemembers.js")(spt, data, args)
 				data.channel.send(`Deactivated, takes too much memory, looking for an alternative.`);
@@ -58,7 +61,7 @@ async function main(spt, data){
 					require("./commands/commandsHelp.js")(spt, data.channel, args[1]);
 					break;
 				} else {
-					const embed = { "title": "***All the commands you can use on your server!***", "color": 2672880, "footer": { "text": "Capitalization does not matter when using the commands." }, "fields": [ { "name": "**__Raiding:__**", "value": "```fix\nafk; clean; headcount; resetChannel; unlock; parsemembers```"}, { "name": "**__Miscellaneous:__**", "value": "```fix\navatar; commands; slurp; ping```\n-> dm skrillergg if you need a new command.\nTo learn more about a command, use the command *commands <command name>" } ] };
+					const embed = { "title": "***All the commands you can use on your server!***", "color": 2672880, "footer": { "text": "Capitalization does not matter when using the commands." }, "fields": [ { "name": "**__Raiding:__**", "value": "```fix\nafk; clean; headcount; resetChannel; unlock; location; parsemembers```"}, { "name": "**__Miscellaneous:__**", "value": "```fix\navatar; commands; slurp; ping```\n-> dm skrillergg if you need a new command.\nTo learn more about a command, use the command *commands <command name>" } ] };
 					data.channel.send({ embed });
 					break;
 				}
