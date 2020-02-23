@@ -5,7 +5,6 @@ const config = require("../config.json");
 const isRaidleader = require('../isRL.js');
 
 var skipPromise = [];
-var skipPromiseDeaf = [];
 const afkChecksPromises = [];
 const afkChecks = [];
 const warnedDeafs = [];
@@ -234,71 +233,56 @@ async function checkDeafen(spt){
 	if (spt.channels.get(config.shatters.vcs.one).members.size > 0){
 		spt.channels.get(config.shatters.vcs.one).members.forEach(async function(raiders){
 			await isRaidleader(spt, 'shatters', raiders.id).then(async function(value){
-				await skipPromiseDeaf.push(value);
+				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
+					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+					spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					warnedDeafs.push(raiders);
+				}
 			})
-			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromiseDeaf[0]){
-				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
-				warnedDeafs.push(raiders);
-			}
-
-			skipPromiseDeaf.length = 0;
 		})
 	}
 	if (spt.channels.get(config.shatters.vcs.two).members.size > 0){
 		spt.channels.get(config.shatters.vcs.two).members.forEach(async function(raiders){
 			await isRaidleader(spt, 'shatters', raiders.id).then(async function(value){
-				await skipPromiseDeaf.push(value);
+				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
+					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+					spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					warnedDeafs.push(raiders);
+				}
 			})
-			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromiseDeaf[0]){
-				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
-				warnedDeafs.push(raiders);
-			}
-
-			skipPromiseDeaf.length = 0;
 		})
 	}
 	if (spt.channels.get(config.shatters.vcs.three).members.size > 0){
 		spt.channels.get(config.shatters.vcs.three).members.forEach(async function(raiders){
 			await isRaidleader(spt, 'shatters', raiders.id).then(async function(value){
-				await skipPromiseDeaf.push(value);
+				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
+					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+					spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					warnedDeafs.push(raiders);
+				}
 			})
-			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromiseDeaf[0]){
-				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
-				warnedDeafs.push(raiders);
-			}
-
-			skipPromiseDeaf.length = 0;
 		})
 	}
 	if (spt.channels.get(config.shatters.vcs.four).members.size > 0){
 		spt.channels.get(config.shatters.vcs.four).members.forEach(async function(raiders){
 			await isRaidleader(spt, 'shatters', raiders.id).then(async function(value){
-				await skipPromiseDeaf.push(value);
+				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
+					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+					spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					warnedDeafs.push(raiders);
+				}
 			})
-			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromiseDeaf[0]){
-				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
-				warnedDeafs.push(raiders);
-			}
-
-			skipPromiseDeaf.length = 0;
 		})
 	}
 	if (spt.channels.get(config.shatters.vcs.five).members.size > 0){
 		spt.channels.get(config.shatters.vcs.five).members.forEach(async function(raiders){
 			await isRaidleader(spt, 'shatters', raiders.id).then(async function(value){
-				await skipPromiseDeaf.push(value);
+				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
+					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
+					spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					warnedDeafs.push(raiders);
+				}
 			})
-			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromiseDeaf[0]){
-				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-				spt.channels.get(config.shatters.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
-				warnedDeafs.push(raiders);
-			}
-
-			skipPromiseDeaf.length = 0;
 		})
 	}
 
