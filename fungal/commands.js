@@ -236,6 +236,7 @@ async function checkDeafen(spt){
 			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
 				await skipPromise.push(value);
 			})
+			console.log(skipPromise[0]);
 			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromise[0]){
 				raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
 				spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
