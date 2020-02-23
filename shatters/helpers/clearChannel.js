@@ -1,4 +1,5 @@
 const config = require("../../config.json");
+const isRaidleader = require('../../isRL.js');
 
 async function main(spt, data, args){
 	const lounge = spt.channels.get(config.shatters.vcs.lounge);
@@ -30,7 +31,9 @@ async function main(spt, data, args){
 		data.channel.send(`Clearing raiding`+args[1]+`.`)
 		.then((msg)=> {
 			raidingChannel.members.forEach(async function(raiders){
-				await raiders.setVoiceChannel(lounge);
+				await isRaidleader(spt, 'shatters', raiders.id).then(async function(value){
+					if (!value) await raiders.setVoiceChannel(lounge);
+				}
 			})
 			msg.delete();
 		})

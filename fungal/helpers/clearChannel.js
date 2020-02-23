@@ -24,7 +24,9 @@ async function main(spt, data, args){
 		data.channel.send(`Clearing raiding`+args[1]+`.`)
 		.then((msg)=> {
 			raidingChannel.members.forEach(async function(raiders){
-				await raiders.setVoiceChannel(lounge);
+				await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+					if (!value) await raiders.setVoiceChannel(lounge);
+				}
 			})
 			msg.delete();
 		})

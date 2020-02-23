@@ -1,4 +1,5 @@
 const config = require("../../config.json");
+const isEventRaidleader = require('../../isERL.js');
 
 async function main(spt, data, args){
 	const lounge = spt.channels.get(config.fungal.event.lounge);
@@ -27,7 +28,9 @@ async function main(spt, data, args){
 		data.channel.send(`Clearing event `+args[1]+`.`)
 		.then((msg)=> {
 			raidingChannel.members.forEach(async function(raiders){
-				await raiders.setVoiceChannel(lounge);
+				await isEventRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+					if (!value) await raiders.setVoiceChannel(lounge);
+				}
 			})
 			msg.delete();
 		})
