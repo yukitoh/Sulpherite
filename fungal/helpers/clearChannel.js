@@ -1,4 +1,5 @@
 const config = require("../../config.json");
+const isRaidleader = require('../../isRL.js');
 
 async function main(spt, data, args){
 	const lounge = spt.channels.get(config.fungal.vcs.lounge);
