@@ -245,7 +245,7 @@ async function handleReacts(spt, reaction, user){
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
-							} else {
+							} else if (!currAfkCheckObj['rushers'].includes(user)) {
 								currAfkCheckObj['rushers'].push(user);
 							}
 						}

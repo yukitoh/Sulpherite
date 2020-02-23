@@ -55,6 +55,12 @@ async function handleReacts(spt, reaction, user){
 							currAfkCheckObj['tricksters'].splice(index, 1);
 						}
 						break;
+					case 'mystic':
+						var index = currAfkCheckObj['mystics'].indexOf(user);
+						if (index > -1) {
+							currAfkCheckObj['mystics'].splice(index, 1);
+						}
+						break;
 					case 'priest':
 						if (currAfkCheckObj['supremepriest'].includes(user)){
            					spt.channels.get(config.shatters.rlBotChannelID).send(`${user} unreacted from supreme ${spt.emojis.find(emoji => emoji.name === "priest")}.`);
