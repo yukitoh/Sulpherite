@@ -241,7 +241,7 @@ async function checkDeafen(spt){
 				spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
 				warnedDeafs.push(raiders);
 			}
-			console.log(`is ${reaiders.displayName} rl? `+skipPromiseDeaf[0]);
+			console.log(`is ${raiders.displayName} rl? `+skipPromiseDeaf[0]);
 			skipPromiseDeaf.length = 0;
 		})
 	}
