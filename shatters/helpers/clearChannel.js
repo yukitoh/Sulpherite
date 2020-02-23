@@ -33,7 +33,7 @@ async function main(spt, data, args){
 			raidingChannel.members.forEach(async function(raiders){
 				await isRaidleader(spt, 'shatters', raiders.id).then(async function(value){
 					if (!value) await raiders.setVoiceChannel(lounge);
-				}
+				})
 			})
 			msg.delete();
 		})
