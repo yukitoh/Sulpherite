@@ -231,7 +231,6 @@ async function updateAfkObjs(spt){
 }
 
 async function checkDeafen(spt){
-	skipPromiseDeaf.length = 0;
 	if (spt.channels.get(config.fungal.vcs.one).members.size > 0){
 		spt.channels.get(config.fungal.vcs.one).members.forEach(async function(raiders){
 			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
@@ -278,6 +277,8 @@ async function checkDeafen(spt){
 			}
 		}
 	})
+
+	skipPromiseDeaf.length = 0;
 }
 
 module.exports.main = main;
