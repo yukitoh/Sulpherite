@@ -3,6 +3,7 @@ const config = require("./config.json");
 async function main(spt, server, user){
 	if (server == 'fungal'){
 		var guildmb = spt.guilds.get(config.fungal.id).members.get(user);
+		console.log(guildmb.roles.some(r => [config.fungal.arlRole, config.fungal.rlRole, config.fungal.vrlRole, config.fungal.hrlRole].includes(r.name)));
 		if (guildmb.roles.some(r => [config.fungal.arlRole, config.fungal.rlRole, config.fungal.vrlRole, config.fungal.hrlRole].includes(r.name))){
 			return true;
 		} else {

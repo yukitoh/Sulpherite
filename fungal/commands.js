@@ -234,7 +234,6 @@ async function checkDeafen(spt){
 	if (spt.channels.get(config.fungal.vcs.one).members.size > 0){
 		spt.channels.get(config.fungal.vcs.one).members.forEach(async function(raiders){
 			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
-				console.log(`is ${raiders.displayName} rl? `+value);
 				await skipPromiseDeaf.push(value);
 			})
 			if (raiders.deaf && !warnedDeafs.includes(raiders) && !skipPromiseDeaf[0]){
