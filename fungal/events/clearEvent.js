@@ -30,7 +30,7 @@ async function main(spt, data, args){
 			raidingChannel.members.forEach(async function(raiders){
 				await isEventRaidleader(spt, 'fungal', raiders.id).then(async function(value){
 					if (!value) await raiders.setVoiceChannel(lounge);
-				}
+				})
 			})
 			msg.delete();
 		})
