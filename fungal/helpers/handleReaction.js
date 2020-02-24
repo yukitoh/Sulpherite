@@ -238,7 +238,7 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'nitro':
-						if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.nitroRole)) {
+						if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.nitroRole) || spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.donatorRole)) {
 							currAfkCheckObj['nitro'].push(user);
 							user.send(`As a nitro booster, you have access to location: ${currAfkCheckObj['location']}.`);
 						} else {

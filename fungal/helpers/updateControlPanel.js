@@ -29,7 +29,7 @@ function updateControlPanel(spt, afkCheckObj){
 			value: `${spt.emojis.find(emoji => emoji.name === "rusher")} ${afkCheckObj['rusher']}`
 		},
 		{
-			name: "Nitro boosters with location:",
+			name: "Nitro Booster and Godly Key Popper / Donators With Location:",
 			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${nitroMessage}`
 		}
 		]
