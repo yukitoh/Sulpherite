@@ -130,7 +130,7 @@ async function updateAfkObjs(spt, log){
 										await isRLPromise.push(value);
 									})
 									if (!reactedPortal.includes(vcr.user.id) && !isRLPromise[0]){
-										await vcr.setVoiceChannel(spt.channels.get(config.shatters.vcs.lounge));
+										await vcr.setVoiceChannel(spt.channels.get(config.shatters.vcs.afk));
 									}
 								})
 							})

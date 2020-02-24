@@ -76,7 +76,7 @@ async function handleReacts(spt, reaction, user){
 												await isRLPromise.push(value);
 											})
 											if (!reactedPortal.includes(vcr.user.id) && !isRLPromise[0]){
-												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vcs.lounge));
+												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vcs.afk));
 											}
 										})
 									})
