@@ -1,27 +1,27 @@
 const config = require("../../config.json");
-const isRaidleader = require('../../isRL.js');
+const isRL = require('../../isRL.js');
 
 async function main(spt, data, args, log){
-	const lounge = spt.channels.get(config.fungal.vcs.lounge);
+	const lnge = spt.channels.get(config.fungal.vc.lnge);
 
 	if (args[1] == undefined){
 		if (log) data.channel.send(`Invalid channel number (available: 1-5).`);
 	} else {
 		switch(args[1]){
 			case '1':
-				var raidingChannel = spt.channels.get(config.fungal.vcs.one);
+				var rdgChan = spt.channels.get(config.fungal.vc.one);
 				break;
 			case '2':
-				var raidingChannel = spt.channels.get(config.fungal.vcs.two);
+				var rdgChan = spt.channels.get(config.fungal.vc.two);
 				break;
 			case '3':
-				var raidingChannel = spt.channels.get(config.fungal.vcs.three);
+				var rdgChan = spt.channels.get(config.fungal.vc.three);
 				break;
 			case '4':
-				var raidingChannel = spt.channels.get(config.fungal.vcs.four);
+				var rdgChan = spt.channels.get(config.fungal.vc.four);
 				break;
 			case '5':
-				var raidingChannel = spt.channels.get(config.fungal.vcs.five);
+				var rdgChan = spt.channels.get(config.fungal.vc.five);
 				break;
 			default:
 				data.channel.send(`Invalid channel number (available: 1-5).`);
@@ -30,8 +30,8 @@ async function main(spt, data, args, log){
 
 		if (log) data.channel.send(`Clearing raiding`+args[1]+`.`)
 		.then((msg)=> {
-			raidingChannel.members.forEach(async function(raiders){
-				await raiders.setVoiceChannel(lounge);
+			rdgChan.members.forEach(async function(raiders){
+				await raiders.setVoiceChannel(lnge);
 			})
 			msg.delete();
 		})

@@ -1,17 +1,17 @@
 const config = require("../../config.json");
 
-function updateControlPanel(spt, afkCheckObj){
-	if (afkCheckObj['supremepriest'].length == 0){
+function updateControlPanel(spt, afkObj){
+	if (afkObj['supremepriest'].length == 0){
 		var supremePriestMessage = 'None';
 	} else {
-		var supremePriestMessage = afkCheckObj['supremepriest'].join(', ');
+		var supremePriestMessage = afkObj['supremepriest'].join(', ');
 	}
-	if (afkCheckObj['nitro'].length == 0){
-		var nitroMessage = 'None';
+	if (afkObj['nitro'].length == 0){
+		var ntrMsg = 'None';
 	} else {
-		var nitroMessage = afkCheckObj['nitro'].join(', ');
+		var ntrMsg = afkObj['nitro'].join(', ');
 	}
-	const channelName = spt.channels.get(afkCheckObj['channel']).name;
+	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
 		color: 31247,
 		footer: {
@@ -23,11 +23,11 @@ function updateControlPanel(spt, afkCheckObj){
 		fields: [
 		{
 			name: "Our current keys are...",
-			value: `${spt.emojis.find(emoji => emoji.name === "shatterskey")} ${afkCheckObj['key']}`
+			value: `${spt.emojis.find(emoji => emoji.name === "shatterskey")} ${afkObj['key']}`
 		},
 		{
 			name: "Location of the run:",
-			value: `${afkCheckObj['location']}`
+			value: `${afkObj['location']}`
 		},
 		{
 			name: "Our supreme priests are:",
@@ -35,7 +35,7 @@ function updateControlPanel(spt, afkCheckObj){
 		},
 		{
 			name: "Nitro boosters with location:",
-			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${nitroMessage}`
+			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${ntrMsg}`
 		}
 		]
 	};

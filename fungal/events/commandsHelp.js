@@ -15,7 +15,7 @@ async function createEmbed(command, usage, description, aliases){
 
 async function main(spt, channel, command){
 	switch (command){
-		// Raiding commands
+		// Raiding cmds
 		case 'headcount': case 'hc':
 			var embed = await createEmbed(command, '*headcount [type]', 'Starts a headcount for the respective type of raid.', 'hc');
 			channel.send({ embed })
@@ -45,8 +45,8 @@ async function main(spt, channel, command){
 			var embed = await createEmbed(command, '*ping', 'Gets the bots ping.', 'None');
 			channel.send({ embed })
 			break;
-		case 'commands':
-			var embed = await createEmbed(command, '*commands <command>', 'All available commands or information on a specific one.', 'None');
+		case 'cmds':
+			var embed = await createEmbed(command, '*cmds <command>', 'All available cmds or information on a specific one.', 'None');
 			channel.send({ embed })
 			break;
 	}

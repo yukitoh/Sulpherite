@@ -1,14 +1,14 @@
 {
 	"status":"with them cute humans!",
-	"prefix":"*",
+	"pfx":"*",
 	
 	"shatters":{
 		"id":"679160544066011156",
-		"rlBotChannelID":"679160544560676868",
-		"afkcheckID":"680148116359479473",
-		"parse":"679160818427756564",
-		"vcs":{
-			"lounge":"679160544560676870",
+		"rlChan":"679160544560676868",
+		"afkChan":"680148116359479473",
+		"pmChan":"679160818427756564",
+		"vc":{
+			"lnge":"679160544560676870",
 			"one":"679160966189023235",
 			"two":"679161076117536790",
 			"three":"679161089555955712",
@@ -16,9 +16,9 @@
 			"five":"679161108170407948",
 			"afk":"679161208263147550"
 		},
-		"raiderRole":"Raider",
-		"nitroRole":"Nitro Booster",
-		"supremepriestRole":"Supreme Priest",
+		"rdrRole":"Raider",
+		"ntrRole":"Nitro Booster",
+		"sppRole":"Supreme Priest",
 		"arlRole":"testers",
 		"rlRole":"testers",
 		"vrlRole":"testers",
@@ -27,30 +27,30 @@
 	
 	"fungal":{
 		"id":"635413437647683596",
-		"rlBotChannelID":"635535417936183307",
-		"eventBotChannelID":"659857457383997449",
-		"eventafkcheckID":"659857390379991040",
-		"afkcheckID":"635536518601113601",
-		"parse":"638051246359576577",
-		"vcs":{
-			"lounge":"635413437647683602",
+		"rlChan":"635535417936183307",
+		"erlChan":"659857457383997449",
+		"eafkChan":"659857390379991040",
+		"afkChan":"635536518601113601",
+		"pmChan":"638051246359576577",
+		"vc":{
+			"lnge":"635413437647683602",
 			"one":"635542462525472809",
 			"two":"635542647788011521",
 			"three":"635547598668955709",
 			"afk":"635551563443863583"
 		},
-		"event":{
-			"lounge":"659857838046314537",
+		"evt":{
+			"lnge":"659857838046314537",
 			"one":"659857560588910602",
 			"two":"659857614292647956",
 			"three":"659857679254159371",
 			"four":"659857747487227905"
 		},
-		"raiderRole":"Verified Raider",
-		"eventRole":"Event Raider",
-		"rusherRole":"Official Rusher",
-		"nitroRole":"Nitro Booster",
-		"donatorRole":"Godly Key Popper / Donator",
+		"rdrRole":"Verified Raider",
+		"eRole":"Event Raider",
+		"rshRole":"Official Rusher",
+		"ntrRole":"Nitro Booster",
+		"donRole":"Godly Key Popper / Donator",
 		"erlRole":"Event Master",
 		"arlRole":"Almost Raid Leader",
 		"rlRole":"Raid Leader",

@@ -1,32 +1,32 @@
 const config = require("../../config.json");
-const afkChecks = require("../commands.js").afkChecks;
-const forceUpdate = require("../commands.js").updateAfkObjs;
-const isRaidleader = require('../../isRL.js');
-var isRLPromise = [];
+const afks = require("../cmds.js").afks;
+const fceUpd = require("../cmds.js").updAfkObj;
+const isRL = require('../../isRL.js');
+var isRLPro = [];
 
 async function handleReacts(spt, reaction, user){
-	isRLPromise.length = 0;
+	isRLPro.length = 0;
 	// locate afk check
-	var currAfkCheckObj;
-	for (x in afkChecks) {
-		if (reaction.message.id == afkChecks[x]['controlpanel'] || reaction.message.id == afkChecks[x]['afkcheck']) currAfkCheckObj = afkChecks[x];
+	var currAfk;
+	for (x in afks) {
+		if (reaction.message.id == afks[x]['controlpanel'] || reaction.message.id == afks[x]['afkcheck']) currAfk = afks[x];
 	}
 
-	if (currAfkCheckObj != undefined){
+	if (currAfk != undefined){
 		switch(reaction.message.id){
-			case currAfkCheckObj['controlpanel']:
+			case currAfk['controlpanel']:
 				// import isRL for safety
-				await isRaidleader(spt, 'fungal', user.id).then(async function(value){
-					await isRLPromise.push(value);
+				await isRL(spt, 'fungal', user.id).then(async function(value){
+					await isRLPro.push(value);
 				})
 
-				if (reaction.emoji.name == '❌' && isRLPromise[0]){
+				if (reaction.emoji.name == '❌' && isRLPro[0]){
 					// control panel react (end) -> abort
-					currAfkCheckObj['aborted'] = true;
-					forceUpdate(spt, false);
+					currAfk['aborted'] = true;
+					fceUpd(spt, false);
 				} else {
 					// warn for pressing x without being rl
-					spt.channels.get(config.fungal.rlBotChannelID).send(`<@!${user.id}> tried to react with \`❌\`but isn't allowed to.`);
+					spt.channels.get(config.fungal.rlChan).send(`<@!${user.id}> tried to react with \`❌\`but isn't allowed to.`);
 					// remove x reaction
 						const reactX = reaction.message.reactions.get('❌');
 						try {
@@ -35,34 +35,34 @@ async function handleReacts(spt, reaction, user){
 						} catch (error) {/*user reaction not found*/}
 				}
 				break;
-			case currAfkCheckObj['afkcheck']:
+			case currAfk['afkcheck']:
 				// afk check react
 				switch (reaction.emoji.name){
 					case '❌':
 						// import isRL for safety
-						await isRaidleader(spt, 'fungal', user.id).then(async function(value){
-						await isRLPromise.push(value);
+						await isRL(spt, 'fungal', user.id).then(async function(value){
+						await isRLPro.push(value);
 						})
 
-						if (isRLPromise[0]){
-							if (currAfkCheckObj['postafk'] == false){
+						if (isRLPro[0]){
+							if (currAfk['postafk'] == false){
 								// afk check react (x) -> post
-								currAfkCheckObj['postafk'] = true;
-								currAfkCheckObj['timeleft'] = 30;
-								forceUpdate(spt, false);
+								currAfk['postafk'] = true;
+								currAfk['timeleft'] = 30;
+								fceUpd(spt, false);
 								// remove x reaction
 								const reactX = reaction.message.reactions.get('❌');
 								try {
 									if (user.bot) return;
 									await reactX.remove(user);
 								} catch (error) {/*user reaction not found*/}
-								// move to lounge people who didn't react with portal
+								// move to lnge people who didn't react with portal
 								var vcRaiders = [];
 								var reactedPortal = [];
-								spt.channels.get(afkChecks[x]['channel']).members.forEach(async function(raiders){
+								spt.channels.get(afks[x]['channel']).members.forEach(async function(raiders){
 									await vcRaiders.push(raiders);
 								})
-								spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+								spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 									.then(async function (afkmsg) {
 										const reactPortal = afkmsg.reactions.get('fungal:680172932382720007');
 										try {
@@ -72,22 +72,22 @@ async function handleReacts(spt, reaction, user){
 										} catch (error) {/*no users reaction left*/}
 										vcRaiders.forEach(async function(vcr){
 											// if rl, do not move out
-											await isRaidleader(spt, 'fungal', vcr.user.id).then(async function(value){
-												await isRLPromise.push(value);
+											await isRL(spt, 'fungal', vcr.user.id).then(async function(value){
+												await isRLPro.push(value);
 											})
-											if (!reactedPortal.includes(vcr.user.id) && !isRLPromise[0]){
-												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vcs.afk));
+											if (!reactedPortal.includes(vcr.user.id) && !isRLPro[0]){
+												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vc.afk));
 											}
 										})
 									})
 							} else {
 								// afk check react (x) -> end
-								currAfkCheckObj['ended'] = true;
-								forceUpdate(spt, false);
+								currAfk['ended'] = true;
+								fceUpd(spt, false);
 							}
 						} else {
 							// warn for pressing x without being rl
-							spt.channels.get(config.fungal.rlBotChannelID).send(`<@!${user.id}> tried to react with \`❌\`but isn't allowed to.`);
+							spt.channels.get(config.fungal.rlChan).send(`<@!${user.id}> tried to react with \`❌\`but isn't allowed to.`);
 							// remove x reaction
 							const reactX = reaction.message.reactions.get('❌');
 							try {
@@ -97,30 +97,30 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'fungal':
-						// update raiders and move to channel if lounge
-						switch (currAfkCheckObj['channelNumber']){
+						// update raiders and move to channel if lnge
+						switch (currAfk['channelNumber']){
 							case '1':
-								var channelID = config.fungal.vcs.one;
+								var channelID = config.fungal.vc.one;
 								break;
 							case '2':
-								var channelID = config.fungal.vcs.two;
+								var channelID = config.fungal.vc.two;
 								break;
 							case '3':
-								var channelID = config.fungal.vcs.three;
+								var channelID = config.fungal.vc.three;
 								break;
 							case '4':
-								var channelID = config.fungal.vcs.four;
+								var channelID = config.fungal.vc.four;
 								break;
 							case '5':
-								var channelID = config.fungal.vcs.five;
+								var channelID = config.fungal.vc.five;
 								break;
 						}
-						if (spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel.id == config.fungal.vcs.lounge) spt.guilds.get(config.fungal.id).members.get(user.id).setVoiceChannel(channelID);
-						currAfkCheckObj['raiders'].push(user.id);
-						forceUpdate(spt, false);
+						if (spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel.id == config.fungal.vc.lnge) spt.guilds.get(config.fungal.id).members.get(user.id).setVoiceChannel(channelID);
+						currAfk['raiders'].push(user.id);
+						fceUpd(spt, false);
 						break;
 					case 'fungalkey':
-						if (currAfkCheckObj['key'] == 'None'){
+						if (currAfk['key'] == 'None'){
 							user.send(`You have reacted with ${spt.emojis.find(emoji => emoji.name === "fungalkey")}.\nIf you actually have a key, react with ✅ and if you made a mistake, ignore this message.`)
 								.then(async function (msg){
 									await msg.react('✅');
@@ -129,9 +129,9 @@ async function handleReacts(spt, reaction, user){
         								.then(collected => {
            									// confirmed key
            									if (collected.get('✅').count == 2){
-           										currAfkCheckObj['key'] = user;
-           										forceUpdate(spt, false);
-           										user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}. Please get there asap.\nYou are now our key popper. We ask that you check ${spt.channels.get(config.fungal.parse)} for raid leaders instructions.\n Please **ask** the current Raid Leader before kicking players listed in the channel.`);
+           										currAfk['key'] = user;
+           										fceUpd(spt, false);
+           										user.send(`The raid leader has set the location to: ${currAfk['location']}. Please get there asap.\nYou are now our key popper. We ask that you check ${spt.channels.get(config.fungal.pmChan)} for raid leaders instructions.\n Please **ask** the current Raid Leader before kicking players listed in the channel.`);
            									}
         							})
 								})
@@ -140,77 +140,77 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'warrior':
-						var multipleClass = multipleClasses(spt, user, 'warrior', currAfkCheckObj)
+						var multipleClass = multipleClasses(spt, user, 'warrior', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['warriors'].push(user);
+								currAfk['warriors'].push(user);
 							} else {
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
 						})
 						break;
 					case 'paladin':
-						var multipleClass = multipleClasses(spt, user, 'paladin', currAfkCheckObj)
+						var multipleClass = multipleClasses(spt, user, 'paladin', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['paladins'].push(user);
+								currAfk['paladins'].push(user);
 							} else {
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
 						})
 						break;
 					case 'knight':
-						var multipleClass = multipleClasses(spt, user, 'knight', currAfkCheckObj)
+						var multipleClass = multipleClasses(spt, user, 'knight', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['knights'].push(user);
+								currAfk['knights'].push(user);
 							} else {
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
 						})
 						break;
 					case 'priest':
-						var multipleClass = multipleClasses(spt, user, 'priest', currAfkCheckObj)
+						var multipleClass = multipleClasses(spt, user, 'priest', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['priests'].push(user);
+								currAfk['priests'].push(user);
 							} else {
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
 						})
 						break;
 					case 'trickster':
-						var multipleClass = multipleClasses(spt, user, 'trickster', currAfkCheckObj)
+						var multipleClass = multipleClasses(spt, user, 'trickster', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfkCheckObj['tricksters'].push(user);
+								currAfk['tricksters'].push(user);
 							} else {
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.fungal.rlBotChannelID).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
 							}
 						})
 						break;
 					case 'rusher':
-						if (currAfkCheckObj['rusher'] == 'None'){
+						if (currAfk['rusher'] == 'None'){
 							user.send(`You have reacted with ${spt.emojis.find(emoji => emoji.name === "rusher")}.\nIf you actually have the intention to rush, react with ✅ and if you made a mistake, ignore this message.`)
 								.then(async function (msg){
 									await msg.react('✅');
@@ -219,10 +219,10 @@ async function handleReacts(spt, reaction, user){
         								.then(collected => {
            									// confirmed key
            									if (collected.get('✅').count == 2){
-           										if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.rusherRole)) {
-           											currAfkCheckObj['rusher'] = user;
-           											forceUpdate(spt, false);
-           											user.send(`The raid leader has set the location to: ${currAfkCheckObj['location']}.`);
+           										if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.rshRole)) {
+           											currAfk['rusher'] = user;
+           											fceUpd(spt, false);
+           											user.send(`The raid leader has set the location to: ${currAfk['location']}.`);
            										} else {
            											user.send(`Sorry you are not an official rusher.`)
            											try {
@@ -238,9 +238,9 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'nitro':
-						if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.nitroRole) || spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.donatorRole)) {
-							currAfkCheckObj['nitro'].push(user);
-							user.send(`As a nitro booster, you have access to location: ${currAfkCheckObj['location']}.`);
+						if(spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.ntrRole) || spt.guilds.get(config.fungal.id).members.get(user.id).roles.find(x => x.name === config.fungal.donRole)) {
+							currAfk['nitro'].push(user);
+							user.send(`As a nitro booster, you have access to location: ${currAfk['location']}.`);
 						} else {
 							try {
 								if (user.bot) return;
@@ -257,42 +257,42 @@ async function handleReacts(spt, reaction, user){
 	}
 }
 
-async function multipleClasses(spt, user, currentClass, currAfkCheckObj){
+async function multipleClasses(spt, user, currentClass, currAfk){
 	var isMultipleClass = undefined;
 	switch (currentClass){
 		case 'warrior':
-			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfkCheckObj['knights'] != [] && currAfkCheckObj['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfkCheckObj['tricksters'] != [] && currAfkCheckObj['tricksters'].includes(user)) isMultipleClass = 'trickster';
+			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
+			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
+			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
+			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
 			return Promise.resolve(isMultipleClass);
 			break;
 		case 'paladin':
-			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
-			if (currAfkCheckObj['knights'] != [] && currAfkCheckObj['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfkCheckObj['tricksters'] != [] && currAfkCheckObj['tricksters'].includes(user)) isMultipleClass = 'trickster';
+			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
+			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
+			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
+			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
 			return Promise.resolve(isMultipleClass);
 			break;
 		case 'knight':
-			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
-			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfkCheckObj['tricksters'] != [] && currAfkCheckObj['tricksters'].includes(user)) isMultipleClass = 'trickster';
+			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
+			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
+			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
+			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
 			return Promise.resolve(isMultipleClass);
 			break;
 		case 'priest':
-			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfkCheckObj['knights'] != [] && currAfkCheckObj['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
-			if (currAfkCheckObj['tricksters'] != [] && currAfkCheckObj['tricksters'].includes(user)) isMultipleClass = 'trickster';
+			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
+			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
+			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
+			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
 			return Promise.resolve(isMultipleClass);
 			break;
 		case 'trickster':
-			if (currAfkCheckObj['paladins'] != [] && currAfkCheckObj['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfkCheckObj['knights'] != [] && currAfkCheckObj['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfkCheckObj['priests'] != [] && currAfkCheckObj['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfkCheckObj['warriors'] != [] && currAfkCheckObj['warriors'].includes(user)) isMultipleClass = 'warrior';
+			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
+			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
+			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
+			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			return Promise.resolve(isMultipleClass);
 			break;
 	}

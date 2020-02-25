@@ -2,21 +2,21 @@ const ping = require('node-http-ping')
 const unlockChannel = require("./helpers/unlockChannel.js");
 const lockChannel = require("./helpers/lockChannel.js");
 const config = require("../config.json");
-const isRaidleader = require('../isRL.js');
+const isRL = require('../isRL.js');
 
-var skipPromise = [];
+var skpPro = [];
 const afkChecksPromises = [];
-const afkChecks = [];
+const afks = [];
 const warnedDeafs = [];
 
 async function main(spt, data){
-	let lowerData = data.content.toLowerCase();
-	let args = lowerData.split(' ');
-	if(await isCommand(data)){
+	let lwData = data.content.toLowerCase();
+	let args = lwData.split(' ');
+	if(await isCmd(data)){
 		switch ((args[0].replace('*', ''))){
-			// Main commands
+			// Main cmds
 			case 'headcount': case 'hc':
-				require("./commands/headCount.js")(spt, data);
+				require("./cmds/headCount.js")(spt, data);
 				break;
 			case 'clean': case 'clear':
 				require("./helpers/clearChannel.js")(spt, data, args, true);
@@ -28,15 +28,15 @@ async function main(spt, data){
 				lockChannel(spt, data, args[1], true);
 				break;
 			case 'loc': case 'location':
-				require("./commands/location.js")(spt, data, args);
+				require("./cmds/location.js")(spt, data, args);
 				break;
-			case 'parsemembers': case 'parse': case 'pm':
-				//require("./commands/pm.js")(spt, data, args);
+			case 'parsemembers': case 'pmChan': case 'pm':
+				//require("./cmds/pm.js")(spt, data, args);
 				data.channel.send(`Deactivated, takes too much memory, looking for an alternative.`);
 				break;
 			case 'afk':
 			// CREATES AFK CHECK
-				var afkc = require("./commands/createAfkCheck.js")(spt, data, args);
+				var afkc = require("./cmds/createAfkCheck.js")(spt, data, args);
 				if (afkc != undefined){
 					afkChecksPromises.push(afkc);
 				}
@@ -54,11 +54,11 @@ async function main(spt, data){
 					})
 				break;
 			case 'avatar':
-				require("./commands/avatar.js")(spt, data);
+				require("./cmds/avatar.js")(spt, data);
 				break;
-			case 'commands':
+			case 'cmds': case 'commands':
 				if (args[1] != undefined){
-					require("./commands/commandsHelp.js")(spt, data.channel, args[1]);
+					require("./cmds/commandsHelp.js")(spt, data.channel, args[1]);
 					break;
 				} else {
 					const embed = { "title": "***All the commands you can use on your server!***", "color": 2672880, "footer": { "text": "Capitalization does not matter when using the commands." }, "fields": [ { "name": "**__Raiding:__**", "value": "```fix\nafk; clean; headcount; resetChannel; unlock; location; parsemembers```"}, { "name": "**__Events:__**", "value": "```fix\ncleanevent; headcount(not yet); resetevent; unlockevent```"}, { "name": "**__Miscellaneous:__**", "value": "```fix\navatar; commands; slurp; ping```\n-> dm skrillergg if you need a new command.\nTo learn more about a command, use the command *commands <command name>" } ] };
@@ -70,8 +70,8 @@ async function main(spt, data){
 	}
 }
 
-async function isCommand(data){
-	if(data.content.split(' ')[0].startsWith('*')){
+async function isCmd(data){
+	if(data.content.split(' ')[0].startsWith(config.pfx)){
 		return true;
 	} else {
 		return false;
@@ -82,7 +82,7 @@ async function resolveAfks(afkChecksPromises){
 	if (afkChecksPromises.length > 0){
 		afkChecksPromises.forEach(async function (afk){
 			afk.then(async function (resAfK){
-				afkChecks.push(resAfK);
+				afks.push(resAfK);
 			})
 			const index = afkChecksPromises.indexOf(afk);
 			if (index > -1) {
@@ -92,31 +92,31 @@ async function resolveAfks(afkChecksPromises){
 	}
 }
 
-async function updateAfkObjs(spt, log){
+async function updAfkObj(spt, log){
 	// pass promises to objects
 	resolveAfks(afkChecksPromises);
 	// update every afk check object
-	for (x in afkChecks) {	
+	for (x in afks) {	
 		// handle aborts
-		if (afkChecks[x]['aborted'] == false) {
-			if (afkChecks[x]['ended'] == false){
+		if (afks[x]['aborted'] == false) {
+			if (afks[x]['ended'] == false){
 				// not ended -> update
-				if (log) afkChecks[x]['timeleft'] -= 5;
-				if (afkChecks[x]['timeleft'] <= 0){
+				if (log) afks[x]['timeleft'] -= 5;
+				if (afks[x]['timeleft'] <= 0){
 					// Endings:
-					if (afkChecks[x]['postafk'] == false){
-						afkChecks[x]['postafk'] = true;
-						afkChecks[x]['timeleft'] = 30;
-						await spt.channels.get(afkChecks[x]['channel']).setName(`raiding`+afkChecks[x]['channelNumber']);
-						await spt.channels.get(afkChecks[x]['channel']).overwritePermissions(spt.guilds.get(config.fungal.id).roles.find(role => role.name == config.fungal.raiderRole), { 'CONNECT': false, 'SPEAK': false });
+					if (afks[x]['postafk'] == false){
+						afks[x]['postafk'] = true;
+						afks[x]['timeleft'] = 30;
+						await spt.channels.get(afks[x]['channel']).setName(`raiding`+afks[x]['channelNumber']);
+						await spt.channels.get(afks[x]['channel']).overwritePermissions(spt.guilds.get(config.fungal.id).roles.find(role => role.name == config.fungal.rdrRole), { 'CONNECT': false, 'SPEAK': false });
 						
-						// move to lounge people who didn't react with portal
+						// move to lnge people who didn't react with portal
 						var vcRaiders = [];
 						var reactedPortal = [];
-						spt.channels.get(afkChecks[x]['channel']).members.forEach(async function(raiders){
+						spt.channels.get(afks[x]['channel']).members.forEach(async function(raiders){
 							await vcRaiders.push(raiders);
 						})
-						spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+						spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 							.then(async function (afkmsg) {
 								const reactPortal = afkmsg.reactions.get('fungal:680172932382720007');
 								try {
@@ -126,24 +126,24 @@ async function updateAfkObjs(spt, log){
 								} catch (error) {/*no users reaction left*/}
 								vcRaiders.forEach(async function(vcr){
 									// if rl, do not move out
-									await isRaidleader(spt, 'fungal', vcr.user.id).then(async function(value){
-										await isRLPromise.push(value);
+									await isRL(spt, 'fungal', vcr.user.id).then(async function(value){
+										await isRLPro.push(value);
 									})
-									if (!reactedPortal.includes(vcr.user.id) && !isRLPromise[0]){
-										await vcr.setVoiceChannel(spt.channels.get(config.fungal.vcs.afk));
+									if (!reactedPortal.includes(vcr.user.id) && !isRLPro[0]){
+										await vcr.setVoiceChannel(spt.channels.get(config.fungal.vc.afk));
 									}
 								})
 							})
 					} else {
-						afkChecks[x]['ended'] = true;
+						afks[x]['ended'] = true;
 					}
 				} else {
 					// Update cp & afk for normal & post
-					if (afkChecks[x]['postafk'] == true){
+					if (afks[x]['postafk'] == true){
 						// postafk update
-						spt.channels.get(config.fungal.rlBotChannelID).fetchMessage(afkChecks[x]['controlpanel'])
+						spt.channels.get(config.fungal.rlChan).fetchMessage(afks[x]['controlpanel'])
 							.then(async function (cpmsg) {
-								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afkChecks[x]);
+								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afks[x]);
 								await cpmsg.edit({ embed: embed });
 								const reactX = cpmsg.reactions.get('❌');
 								try {
@@ -152,37 +152,37 @@ async function updateAfkObjs(spt, log){
 									}
 								} catch (error) {/*no users reaction left*/}
 							})
-						spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+						spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 							.then(async function (afkmsg) {
-								let embed = require("./helpers/updatePostAfkEmbed.js")(spt, afkChecks[x]);
+								let embed = require("./helpers/updatePostAfkEmbed.js")(spt, afks[x]);
 								await afkmsg.edit({ embed: embed });
 							})
 					} else {
 						// normal update
-						spt.channels.get(config.fungal.rlBotChannelID).fetchMessage(afkChecks[x]['controlpanel'])
+						spt.channels.get(config.fungal.rlChan).fetchMessage(afks[x]['controlpanel'])
 							.then(async function (cpmsg) {
-								let embed = require("./helpers/updateControlPanel.js")(spt, afkChecks[x]);
+								let embed = require("./helpers/updateControlPanel.js")(spt, afks[x]);
 								await cpmsg.edit({ embed: embed })
 							})
-						spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+						spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 							.then(async function (afkmsg) {
-								let embed = require("./helpers/updateAfkEmbed.js")(spt, afkChecks[x]);
-								await afkmsg.edit("@here Fungal Cavern ("+spt.emojis.find(emoji => emoji.name === "fungal")+") started by <@!"+afkChecks[x]['host']+"> in `"+spt.channels.get(afkChecks[x]['channel']).name+"`", { embed: embed });
+								let embed = require("./helpers/updateAfkEmbed.js")(spt, afks[x]);
+								await afkmsg.edit("@here Fungal Cavern ("+spt.emojis.find(emoji => emoji.name === "fungal")+") started by <@!"+afks[x]['host']+"> in `"+spt.channels.get(afks[x]['channel']).name+"`", { embed: embed });
 							})
 					}
 				}
 			} else {
 				// ended final update
-				spt.channels.get(config.fungal.rlBotChannelID).fetchMessage(afkChecks[x]['controlpanel'])
+				spt.channels.get(config.fungal.rlChan).fetchMessage(afks[x]['controlpanel'])
 					.then(async function (cpmsg) {
-						let embed = require("./helpers/updateEndedCPEmbed.js")(spt, afkChecks[x]);
+						let embed = require("./helpers/updateEndedCPEmbed.js")(spt, afks[x]);
 						await cpmsg.edit({ embed: embed });
 					})
-				spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+				spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 					.then(async function (afkmsg) {
-						let embed = require("./helpers/updateEndedAfkEmbed.js")(spt, afkChecks[x]);
+						let embed = require("./helpers/updateEndedAfkEmbed.js")(spt, afks[x]);
 						// safety
-						lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
+						lockChannel(spt, afkmsg, afks[x]['channelNumber'], false);
 						await afkmsg.edit({ embed: embed });
 						const reactX = afkmsg.reactions.get('❌');
 						try {
@@ -191,17 +191,17 @@ async function updateAfkObjs(spt, log){
 							}
 						} catch (error) {/*no users reaction left*/}
 						// remove afkObj from array
-						const index = afkChecks.indexOf(afkChecks[x]);
+						const index = afks.indexOf(afks[x]);
 						if (index > -1) {
-							afkChecks.splice(index, 1);
+							afks.splice(index, 1);
 						}
 					})
 			}
 		} else {
 			// abort control panel & afk check
-			spt.channels.get(config.fungal.rlBotChannelID).fetchMessage(afkChecks[x]['controlpanel'])
+			spt.channels.get(config.fungal.rlChan).fetchMessage(afks[x]['controlpanel'])
 				.then(async function (cpmsg) {
-					let embed = require("./helpers/updateAbortedCPEmbed.js")(spt, afkChecks[x]);
+					let embed = require("./helpers/updateAbortedCPEmbed.js")(spt, afks[x]);
 					await cpmsg.edit({ embed: embed });
 					const reactX = cpmsg.reactions.get('❌');
 					try {
@@ -210,10 +210,10 @@ async function updateAfkObjs(spt, log){
 						}
 					} catch (error) {/*no users reaction left*/}
 				})
-			spt.channels.get(config.fungal.afkcheckID).fetchMessage(afkChecks[x]['afkcheck'])
+			spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 				.then(async function (afkmsg) {
-					let embed = require("./helpers/updateAbortedAfkEmbed.js")(spt, afkChecks[x]);
-					lockChannel(spt, afkmsg, afkChecks[x]['channelNumber'], false);
+					let embed = require("./helpers/updateAbortedAfkEmbed.js")(spt, afks[x]);
+					lockChannel(spt, afkmsg, afks[x]['channelNumber'], false);
 					await afkmsg.edit({ embed: embed });
 					const reactX = afkmsg.reactions.get('❌');
 					try {
@@ -222,9 +222,9 @@ async function updateAfkObjs(spt, log){
 						}
 					} catch (error) {/*no users reaction left*/}
 					// remove afkObj from array
-					const index = afkChecks.indexOf(afkChecks[x]);
+					const index = afks.indexOf(afks[x]);
 					if (index > -1) {
-						afkChecks.splice(index, 1);
+						afks.splice(index, 1);
 					}
 
 				})
@@ -232,35 +232,35 @@ async function updateAfkObjs(spt, log){
 	}
 }
 
-async function checkDeafen(spt){
-	if (spt.channels.get(config.fungal.vcs.one).members.size > 0){
-		spt.channels.get(config.fungal.vcs.one).members.forEach(async function(raiders){
-			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+async function ckDeaf(spt){
+	if (spt.channels.get(config.fungal.vc.one).members.size > 0){
+		spt.channels.get(config.fungal.vc.one).members.forEach(async function(raiders){
+			await isRL(spt, 'fungal', raiders.id).then(async function(value){
 				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
 					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-					spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					spt.channels.get(config.fungal.rlChan).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
 					warnedDeafs.push(raiders);
 				}
 			})
 		})
 	}
-	if (spt.channels.get(config.fungal.vcs.two).members.size > 0){
-		spt.channels.get(config.fungal.vcs.two).members.forEach(async function(raiders){
-			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+	if (spt.channels.get(config.fungal.vc.two).members.size > 0){
+		spt.channels.get(config.fungal.vc.two).members.forEach(async function(raiders){
+			await isRL(spt, 'fungal', raiders.id).then(async function(value){
 				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
 					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-					spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					spt.channels.get(config.fungal.rlChan).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
 					warnedDeafs.push(raiders);
 				}
 			})
 		})
 	}
-	if (spt.channels.get(config.fungal.vcs.three).members.size > 0){
-		spt.channels.get(config.fungal.vcs.three).members.forEach(async function(raiders){
-			await isRaidleader(spt, 'fungal', raiders.id).then(async function(value){
+	if (spt.channels.get(config.fungal.vc.three).members.size > 0){
+		spt.channels.get(config.fungal.vc.three).members.forEach(async function(raiders){
+			await isRL(spt, 'fungal', raiders.id).then(async function(value){
 				if (raiders.deaf && !warnedDeafs.includes(raiders) && !value){
 					raiders.send(`You have deafened yourself in a raiding vc. If you do not undeafen yourself in the next 30 seconds, you will be suspended! If you must deafen yourself, leave the raiding vc and **leave the run** or else you will be suspended for crashing.`)
-					spt.channels.get(config.fungal.rlBotChannelID).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
+					spt.channels.get(config.fungal.rlChan).send(`${raiders} deafened himself, if they do not undeafen in the next 30 seconds, you can suspend them.`);
 					warnedDeafs.push(raiders);
 				}
 			})
@@ -279,6 +279,6 @@ async function checkDeafen(spt){
 
 module.exports.main = main;
 module.exports.afkChecksPromises = afkChecksPromises;
-module.exports.afkChecks = afkChecks;
-module.exports.updateAfkObjs = updateAfkObjs;
-module.exports.checkDeafen = checkDeafen;
+module.exports.afks = afks;
+module.exports.updAfkObj = updAfkObj;
+module.exports.ckDeaf = ckDeaf;

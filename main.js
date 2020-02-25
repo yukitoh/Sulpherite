@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 const spt = new Discord.Client();
 const config = require('./config.json');
-const isRaidleader = require('./isRL.js');
-const isEventRaidleader = require('./isERL.js');
-var skipPromise = [];
-var skipPromiseERL = [];
+const isRL = require('./isRL.js');
+const isERL = require('./isERL.js');
+var skpPro = [];
+var skpProE = [];
 
 // heroku part (host)
 const express = require('express');
@@ -32,10 +32,10 @@ spt.on('ready', () => {
 	spt.user.setActivity(config.status, { type: ``})
 	setInterval(function() {
 		// Handling afk checks update
-        require("./shatters/commands.js").updateAfkObjs(spt, true);
-		require("./fungal/commands.js").updateAfkObjs(spt, true);
-		require("./shatters/commands.js").checkDeafen(spt);
-		require("./fungal/commands.js").checkDeafen(spt);
+        require("./shatters/cmds.js").updAfkObj(spt, true);
+		require("./fungal/cmds.js").updAfkObj(spt, true);
+		require("./shatters/cmds.js").ckDeaf(spt);
+		require("./fungal/cmds.js").ckDeaf(spt);
     }, 5000);
 })
 
@@ -50,20 +50,20 @@ spt.on('message', async (data) => {
 			} else {
 			// Server Commands
 				// obligated to skip promise because annoying
-				await isRaidleader(spt, 'shatters', data.author.id).then(async function(value){
-					await skipPromise.push(value);
+				await isRL(spt, 'shatters', data.author.id).then(async function(value){
+					await skpPro.push(value);
 				})
-				if (data.channel.id == config.shatters.rlBotChannelID && skipPromise[0]){
-					// clear skipPromise array for next message
-					skipPromise.length = 0;
+				if (data.channel.id == config.shatters.rlChan && skpPro[0]){
+					// clear skpPro array for next message
+					skpPro.length = 0;
 					// check if bot is alive (highest priority)
 					if (data.content == '*slurp'){
 						data.channel.send('Slurpie Slurp Slurp')
 					}
-					require("./shatters/commands.js").main(spt, data);
+					require("./shatters/cmds.js").main(spt, data);
 				}
-				// clear skipPromise array for next message
-				skipPromise.length = 0;
+				// clear skpPro array for next message
+				skpPro.length = 0;
 			}
 			break;
 		case config.fungal.id:
@@ -72,32 +72,32 @@ spt.on('message', async (data) => {
 			} else {
 			// Server Commands
 				// obligated to skip promise because annoying
-				await isRaidleader(spt, 'fungal', data.author.id).then(async function(value){
-					await skipPromise.push(value);
+				await isRL(spt, 'fungal', data.author.id).then(async function(value){
+					await skpPro.push(value);
 				})
-				await isEventRaidleader(spt, 'fungal', data.author.id).then(async function(value){
-					await skipPromiseERL.push(value);
+				await isERL(spt, 'fungal', data.author.id).then(async function(value){
+					await skpProE.push(value);
 				})
-				if (data.channel.id == config.fungal.rlBotChannelID && skipPromise[0]){
-					// clear skipPromise array for next message
-					skipPromise.length = 0;
+				if (data.channel.id == config.fungal.rlChan && skpPro[0]){
+					// clear skpPro array for next message
+					skpPro.length = 0;
 					// check if bot is alive (highest priority)
 					if (data.content == '*slurp'){
 						data.channel.send('Slurpie Slurp Slurp')
 					}
-					require("./fungal/commands.js").main(spt, data);
-				} else if(data.channel.id == config.fungal.eventBotChannelID && skipPromiseERL[0] || data.channel.id == config.fungal.eventBotChannelID && skipPromise[0]){
-					// clear skipPromise array for next message
-					skipPromiseERL.length = 0;
+					require("./fungal/cmds.js").main(spt, data);
+				} else if(data.channel.id == config.fungal.erlChan && skpProE[0] || data.channel.id == config.fungal.erlChan && skpPro[0]){
+					// clear skpPro array for next message
+					skpProE.length = 0;
 					// check if bot is alive (highest priority)
 					if (data.content == '*slurp'){
 						data.channel.send('Slurpie Slurp Slurp')
 					}
 					require("./fungal/events.js").main(spt, data);
 				}
-				// clear skipPromise array for next message
-				skipPromise.length = 0;
-				skipPromiseERL.length = 0;
+				// clear skpPro array for next message
+				skpPro.length = 0;
+				skpProE.length = 0;
 			}
 			break;
 	}

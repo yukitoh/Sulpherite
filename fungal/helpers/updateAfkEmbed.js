@@ -1,19 +1,19 @@
 const config = require("../../config.json");
 
-function updateEmbed(spt, afkCheckObj){
+function updateEmbed(spt, afkObj){
 	const fungalReact = spt.emojis.find(emoji => emoji.name === "fungal");
-	const hostUser = spt.guilds.get(config.fungal.id).members.get(afkCheckObj['host']);
-	const channelName = spt.channels.get(afkCheckObj['channel']).name;
+	const hostUser = spt.guilds.get(config.fungal.id).members.get(afkObj['host']);
+	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
-		description: "We are starting an afk check now, join `"+channelName+"` and react with "+fungalReact+" to not get moved out! If you react with keys or classes and do not bring them, you may be suspended.\nStarting in "+((afkCheckObj['timeleft']/60).toString()).charAt(0)+" minutes and "+(afkCheckObj['timeleft']%60)+" seconds! In addition to reacting with "+fungalReact+" also react...",
+		description: "We are starting an afk check now, join `"+channelName+"` and react with "+fungalReact+" to not get moved out! If you react with keys or classes and do not bring them, you may be suspended.\nStarting in "+((afkObj['timeleft']/60).toString()).charAt(0)+" minutes and "+(afkObj['timeleft']%60)+" seconds! In addition to reacting with "+fungalReact+" also react...",
 		color: 1122214,
-		timestamp: afkCheckObj['started'],
+		timestamp: afkObj['started'],
 		footer: {
-		text: "Raiders accounted for: "+afkCheckObj['raiders'].length
+		text: "Raiders accounted for: "+afkObj['raiders'].length
 		},
 		author: {
 		name: "Fungal Cavern started by "+hostUser.displayName+" in "+channelName,
-		icon_url: spt.users.get(afkCheckObj['host']).avatarURL
+		icon_url: spt.users.get(afkObj['host']).avatarURL
 		},
 		fields: [
 		{

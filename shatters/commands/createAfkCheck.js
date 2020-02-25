@@ -2,50 +2,50 @@ const updateEmbedAFK = require("../helpers/updateAfkEmbed.js");
 const updateControlPanel = require("../helpers/updateControlPanel.js");
 const reactAFK = require("../helpers/reactAFK.js");
 const unlockChannel = require("../helpers/unlockChannel.js");
-const afkChecks = require('../commands.js').afkChecks;
+const afks = require('../cmds.js').afks;
 const config = require("../../config.json");
 
 async function main(spt, data, args){
 	switch(args[1]){
 		case '1':
-			var raidingChannel = '1';
+			var rdgChan = '1';
 			break;
 		case '2':
-			var raidingChannel = '2';
+			var rdgChan = '2';
 			break;
 		case '3':
-			var raidingChannel = '3';
+			var rdgChan = '3';
 			break;
 		case '4':
-			var raidingChannel = '4';
+			var rdgChan = '4';
 			break;
 		case '5':
-			var raidingChannel = '5';
+			var rdgChan = '5';
 			break;
 		default:
 			data.channel.send(`Invalid channel number (available: 1-5).`);
 			break;
 	}
 
-	switch(raidingChannel){
+	switch(rdgChan){
 		case '1':
-			var raidingChannelObj = spt.channels.get(config.shatters.vcs.one);
+			var rdgChanObj = spt.channels.get(config.shatters.vc.one);
 			break;
 		case '2':
-			var raidingChannelObj = spt.channels.get(config.shatters.vcs.two);			
+			var rdgChanObj = spt.channels.get(config.shatters.vc.two);			
 			break;
 		case '3':
-			var raidingChannelObj = spt.channels.get(config.shatters.vcs.three);
+			var rdgChanObj = spt.channels.get(config.shatters.vc.three);
 			break;
 		case '4':
-			var raidingChannelObj = spt.channels.get(config.shatters.vcs.four);
+			var rdgChanObj = spt.channels.get(config.shatters.vc.four);
 			break;
 		case '5':
-			var raidingChannelObj = spt.channels.get(config.shatters.vcs.five);
+			var rdgChanObj = spt.channels.get(config.shatters.vc.five);
 			break;
 	}
 
-	if (raidingChannel != undefined){
+	if (rdgChan != undefined){
 		if (args[2] == "s" || args[2] == "shatters"){
 			const shattersReact = spt.emojis.find(emoji => emoji.name === "shatters");
 			var location = data.content.substr((args[2].length+8));
@@ -53,12 +53,12 @@ async function main(spt, data, args){
 				data.channel.send(`Please specify a location for raiders.`)
 			} else {
 				// Make afkCheck Object
-				const commandsChannel = spt.channels.get(config.shatters.rlBotChannelID);
-				const afkCheckChannel = spt.channels.get(config.shatters.afkcheckID);
-				const afkCheckObj = {
+				const rlChan = spt.channels.get(config.shatters.rlChan);
+				const afkChan = spt.channels.get(config.shatters.afkChan);
+				const afkObj = {
 					host: data.author.id,
-					channel: raidingChannelObj.id,
-					channelNumber: raidingChannel,
+					channel: rdgChanObj.id,
+					channelNumber: rdgChan,
 					location: location,
 					timeleft: 360,
 					raiders: [],
@@ -79,19 +79,19 @@ async function main(spt, data, args){
 					ended: false,
 					aborted: false
 				};
-				afkCheckChannel.send("@here Shatters ("+shattersReact+") started by <@!"+afkCheckObj['host']+"> in `"+raidingChannelObj.name+"`").then(async function (sent) {
-					afkCheckObj['afkcheck'] = sent.id;
-					sent.edit("@here Shatters ("+shattersReact+") started by <@!"+afkCheckObj['host']+"> in `"+raidingChannelObj.name+"`", { embed: (updateEmbedAFK(spt, afkCheckObj)) });
+				afkChan.send("@here Shatters ("+shattersReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`").then(async function (sent) {
+					afkObj['afkcheck'] = sent.id;
+					sent.edit("@here Shatters ("+shattersReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`", { embed: (updateEmbedAFK(spt, afkObj)) });
 					await reactAFK(spt, sent);
 					});	
-				commandsChannel.send(`AFK Check control panel for `+raidingChannelObj.name).then(async function (sent) {
-					afkCheckObj['controlpanel'] = sent.id;
-					sent.edit({ embed: (updateControlPanel(spt, afkCheckObj)) })
+				rlChan.send(`AFK Check control panel for `+rdgChanObj.name).then(async function (sent) {
+					afkObj['controlpanel'] = sent.id;
+					sent.edit({ embed: (updateControlPanel(spt, afkObj)) })
 					await sent.react("❌");
 				});
 				// transfer this to unlock
-				unlockChannel(spt, data, raidingChannel, false);
-				return afkCheckObj;
+				unlockChannel(spt, data, rdgChan, false);
+				return afkObj;
 			}
 		} else {
 			data.channel.send(`Invalid raid type, available: shatters (s).`)

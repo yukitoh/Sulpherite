@@ -15,7 +15,7 @@ async function createEmbed(command, usage, description, aliases){
 
 async function main(spt, channel, command){
 	switch (command){
-		// Raiding commands
+		// Raiding cmds
 		case 'afk':
 			var embed = await createEmbed(command, '*afk [channel #] [type of run] <location>', 'Starts an afk check in the channel specified to see how many players are coming to the raid.', 'None');
 			channel.send({ embed })
@@ -36,8 +36,8 @@ async function main(spt, channel, command){
 			var embed = await createEmbed(command, '*location [new location]', 'Changes the location of the run to the location provided.', 'loc');
 			channel.send({ embed })
 			break;
-		case 'parsemembers': case 'parse': case 'pm':
-			var embed = await createEmbed(command, '*parseMembers [channel number] [image]', 'Checks the list of users in the voice channel versus the in game image.', 'parse, pm');
+		case 'parsemembers': case 'pmChan': case 'pm':
+			var embed = await createEmbed(command, '*parseMembers [channel number] [image]', 'Checks the list of users in the voice channel versus the in game image.', 'pmChan, pm');
 			channel.send({ embed })
 			break;
 		// Miscellanious
@@ -53,8 +53,8 @@ async function main(spt, channel, command){
 			var embed = await createEmbed(command, '*ping', 'Gets the bots ping.', 'None');
 			channel.send({ embed })
 			break;
-		case 'commands':
-			var embed = await createEmbed(command, '*commands <command>', 'All available commands or information on a specific one.', 'None');
+		case 'cmds':
+			var embed = await createEmbed(command, '*cmds <command>', 'All available cmds or information on a specific one.', 'None');
 			channel.send({ embed })
 			break;
 	}

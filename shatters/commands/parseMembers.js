@@ -10,26 +10,26 @@ async function main(spt, data, args){
 	} else {
 		switch(args[1]){
 			case '1':
-				var raidingChannel = '1';
+				var rdgChan = '1';
 				break;
 			case '2':
-				var raidingChannel = '2';
+				var rdgChan = '2';
 				break;
 			case '3':
-				var raidingChannel = '3';
+				var rdgChan = '3';
 				break;
 			case '4':
-				var raidingChannel = '4';
+				var rdgChan = '4';
 				break;
 			case '5':
-				var raidingChannel = '5';
+				var rdgChan = '5';
 				break;
 			default:
 				data.channel.send(`Invalid channel number (available: 1-5).`);
 				break;
 		}
 
-		if (raidingChannel != undefined){
+		if (rdgChan != undefined){
 			// Check if there's image
 			var ingamescreen;
 			if (data.attachments[0] != undefined) ingamescreen = data.attachments.first().url;
@@ -56,24 +56,24 @@ async function main(spt, data, args){
 					})
 
 					var vcRaiders = [];
-					switch(raidingChannel){
+					switch(rdgChan){
 						case '1':
-							var raidingChannelObj = spt.channels.get(config.shatters.vcs.one);
+							var rdgChanObj = spt.channels.get(config.shatters.vc.one);
 							break;
 						case '2':
-							var raidingChannelObj = spt.channels.get(config.shatters.vcs.two);
+							var rdgChanObj = spt.channels.get(config.shatters.vc.two);
 							break;
 						case '3':
-							var raidingChannelObj = spt.channels.get(config.shatters.vcs.three);
+							var rdgChanObj = spt.channels.get(config.shatters.vc.three);
 							break;
 						case '4':
-							var raidingChannelObj = spt.channels.get(config.shatters.vcs.four);
+							var rdgChanObj = spt.channels.get(config.shatters.vc.four);
 							break;
 						case '5':
-							var raidingChannelObj = spt.channels.get(config.shatters.vcs.five);
+							var rdgChanObj = spt.channels.get(config.shatters.vc.five);
 							break;
 					}
-					raidingChannelObj.members.forEach(async function(raiders){
+					rdgChanObj.members.forEach(async function(raiders){
 						await vcRaiders.push(((raiders.nickname).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, ''));
 					})
 
@@ -96,7 +96,7 @@ async function main(spt, data, args){
 					//})
 
 					//var parsePossibleAlts = [];
-					//data.channel.send(`**These people are in voice channel #raiding`+raidingChannel+` but not in game, possible alts:**`);
+					//data.channel.send(`**These people are in voice channel #raiding`+rdgChan+` but not in game, possible alts:**`);
 					//if (possibleAlts.length > 0){
 					//	possibleAlts.forEach(async function(raiderPossibleAlt){
 					//		parsePossibleAlts.push(`<@!`+spt.users.find(user => user.username == raiderPossibleAlt)+`>`)
@@ -105,7 +105,7 @@ async function main(spt, data, args){
 					//}
 
 					if (crashers.length > 0){
-						data.channel.send(`**These people are not in voice channel #raiding`+raidingChannel+`, they are crashers:**`);
+						data.channel.send(`**These people are not in voice channel #raiding`+rdgChan+`, they are crashers:**`);
 						data.channel.send(crashers.join(', '));
 
 						data.channel.send("```/kick "+crashers.join('\n/kick ')+"```");

@@ -1,14 +1,14 @@
 const ping = require('node-http-ping')
 const config = require("../config.json");
 const isERaidleader = require('../isERL.js');
-var skipPromiseERL = [];
+var skpProE = [];
 
 async function main(spt, data){
-	let lowerData = data.content.toLowerCase();
-	let args = lowerData.split(' ');
-	if(await isCommand(data)){
+	let lwData = data.content.toLowerCase();
+	let args = lwData.split(' ');
+	if(await isCmd(data)){
 		switch ((args[0].replace('*', ''))){
-			// Main commands
+			// Main cmds
 			case 'headcount': case 'hc':
 				//require("./events/headCount.js")(spt, data);
 				data.channel.send(`not coded yet sorry m8`);
@@ -35,9 +35,9 @@ async function main(spt, data){
 					})
 				break;
 			case 'avatar':
-				require("./commands/avatar.js")(spt, data);
+				require("./cmds/avatar.js")(spt, data);
 				break;
-			case 'commands':
+			case 'cmds': case 'commands':
 				if (args[1] != undefined){
 					require("./events/commandsHelp.js")(spt, data.channel, args[1]);
 					break;
@@ -51,7 +51,7 @@ async function main(spt, data){
 	}
 }
 
-async function isCommand(data){
+async function isCmd(data){
 	if(data.content.split(' ')[0].startsWith('*')){
 		return true;
 	} else {

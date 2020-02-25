@@ -1,16 +1,16 @@
 const config = require("../../config.json");
 
-function updateEndedCP(spt, afkCheckObj){
-	if (afkCheckObj['nitro'].length == 0){
-		var nitroMessage = 'None';
+function updateEndedCP(spt, afkObj){
+	if (afkObj['nitro'].length == 0){
+		var ntrMsg = 'None';
 	} else {
-		var nitroMessage = afkCheckObj['nitro'].join(', ');
+		var ntrMsg = afkObj['nitro'].join(', ');
 	}
-	const channelName = spt.channels.get(afkCheckObj['channel']).name;
+	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
 		color: 1122214,
 		footer: {
-		text: "The afk check has been aborted by "+spt.guilds.get(config.fungal.id).members.get(afkCheckObj['host']).displayName
+		text: "The afk check has been aborted by "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName
 		},
 		author: {
 		name: `AFK Check control panel for `+channelName
@@ -18,19 +18,19 @@ function updateEndedCP(spt, afkCheckObj){
 		fields: [
 		{
 			name: "Our current keys are...",
-			value: `${spt.emojis.find(emoji => emoji.name === "fungalkey")} ${afkCheckObj['key']}`
+			value: `${spt.emojis.find(emoji => emoji.name === "fungalkey")} ${afkObj['key']}`
 		},
 		{
 			name: "Location of the run:",
-			value: `${afkCheckObj['location']}`
+			value: `${afkObj['location']}`
 		},
 		{
 			name: "Our current rushers are:",
-			value: `${spt.emojis.find(emoji => emoji.name === "rusher")} ${afkCheckObj['rusher']}`
+			value: `${spt.emojis.find(emoji => emoji.name === "rusher")} ${afkObj['rusher']}`
 		},
 		{
 			name: "Nitro Booster and Godly Key Popper / Donators With Location:",
-			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${nitroMessage}`
+			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${ntrMsg}`
 		}
 		]
 	};
