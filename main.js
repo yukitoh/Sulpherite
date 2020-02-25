@@ -67,7 +67,6 @@ spt.on('message', async (data) => {
 			}
 			break;
 		case config.fungal.id:
-			console.log('tried to execute command');
 			if (data.channel.type === 'dm') {
 				// DM Commands (Unhandled for now)
 			} else {
@@ -80,7 +79,6 @@ spt.on('message', async (data) => {
 					await skpProE.push(value);
 				})
 				if (data.channel.id == config.fungal.rlChan && skpPro[0]){
-					console.log('tried to execute command2');
 					// clear skpPro array for next message
 					skpPro.length = 0;
 					// check if bot is alive (highest priority)
