@@ -2,7 +2,7 @@ const db = require('../../db.js');
 
 async function logs(spt, data){
 	await db.query(`SELECT * FROM keys`, async function (err, resultkeys, fields){
-		console.dir(result);
+		console.dir(resultkeys);
 		await db.query(`SELECT * FROM keys`, async function (err, resultrls, fields){
 			console.dir(resultrls);
 			var fails = 0;
