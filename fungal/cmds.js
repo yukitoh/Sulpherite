@@ -3,6 +3,7 @@ const unlockChannel = require("./helpers/unlockChannel.js");
 const lockChannel = require("./helpers/lockChannel.js");
 const config = require("../config.json");
 const isRL = require('../isRL.js');
+const db = require('../db.js');
 
 var skpPro = [];
 const afkChecksPromises = [];
@@ -14,6 +15,9 @@ async function main(spt, data){
 	let args = lwData.split(' ');
 	if(await isCmd(data)){
 		switch ((args[0].replace('*', ''))){
+			case 'logs':
+				require('./helpers/logs.js')(spt, data);
+				break;
 			// Main cmds
 			case 'headcount': case 'hc':
 				require("./cmds/headCount.js")(spt, data);
