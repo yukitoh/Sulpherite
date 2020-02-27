@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-const connection = mysqL.createConnection({
+const connection = mysql.createConnection({
 	host: 'sql206.epizy.com',
 	user: 'epiz_25265559',
 	password: process.env.DBPW,
