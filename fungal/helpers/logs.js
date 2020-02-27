@@ -13,7 +13,7 @@ async function logs(spt, data){
 			if (resultrls){
 				resultrls.forEach(rl => {
 					fails += rl.fail;
-					successes += rl.successes;
+					successes += rl.success;
 				})
 			}
 
