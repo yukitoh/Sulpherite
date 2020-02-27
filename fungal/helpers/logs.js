@@ -5,12 +5,12 @@ async function logs(spt, data){
 		console.dir(result);
 		await db.query(`SELECT * FROM keys`, async function (err, resultrls, fields){
 			console.dir(resultrls);
-			let fails = 0;
-			let successes = 0;
-			let fails = resultrls.forEach(rl => {
+			var fails = 0;
+			var successes = 0;
+			fails = resultrls.forEach(rl => {
 				if (rl.fail > 0) fails += rl.fail;
 			})
-			let successes = resultrls.forEach(rl => {
+			successes = resultrls.forEach(rl => {
 				if (rl.success > 0) successes += rl.success;
 			})
 			await data.channel.send(`**Logs I've recorded so far:**\n*${resultkeys.length}* keys, *${successes}* successes and *${fails}* fails.`);
