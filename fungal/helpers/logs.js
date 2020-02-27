@@ -22,7 +22,7 @@ async function logs(spt, data){
 				})
 			}
 
-			if (keys != undefined){
+			if (resultkeys != undefined){
 				keys = resultkeys.forEach(key => {
 					if (key.amount > 0) keys += key.amount;
 				})
