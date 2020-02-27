@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-	host: 'sql206.byetcluster.com',
-	user: 'epiz_25265559',
+	host: '85.10.205.173',
+	user: 'sulpherite',
 	password: process.env.DBPW,
-	database:'epiz_25265559_sulpherite'
+	database:'sulpherite'
 })
 
 connection.connect(function(err) {
