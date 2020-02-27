@@ -1,9 +1,9 @@
 const db = require('../../db.js');
 
 async function logs(spt, data){
-	await db.query('SELECT * FROM keys WHERE 1', async function (err, resultkeys, fields){
+	await db.query('SELECT * FROM keyers', async function (err, resultkeys, fields){
 		console.dir(resultkeys);
-		await db.query('SELECT * FROM rls WHERE 1', async function (err, resultrls, fields){
+		await db.query('SELECT * FROM rls', async function (err, resultrls, fields){
 			console.dir(resultrls);
 
 			var fails = 0;
@@ -12,13 +12,8 @@ async function logs(spt, data){
 
 			if (resultrls){
 				resultrls.forEach(rl => {
-					console.dir(rl);
-				})
-			}
-
-			if (resultrls){
-				resultrls.forEach(rl => {
-					console.dir(rl);
+					fails += rl.fail;
+					successes += rl.successes;
 				})
 			}
 
