@@ -19,7 +19,7 @@ async function logs(spt, data){
 
 			if (resultkeys){
 				resultkeys.forEach(key => {
-					console.dir(key);
+					keys += key.amount;
 				})
 			}
 
