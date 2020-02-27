@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-	host: 'sql206.epizy.com',
+	host: 'sql206.byetcluster.com',
 	user: 'epiz_25265559',
 	password: process.env.DBPW,
 	database:'epiz_25265559_sulpherite'
