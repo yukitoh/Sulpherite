@@ -8,6 +8,7 @@ async function logs(spt, data){
 
 			var fails = 0;
 			var successes = 0;
+			var keys = 0;
 
 			if (resultkeys != undefined){
 				fails = resultrls.forEach(rl => {
@@ -21,7 +22,13 @@ async function logs(spt, data){
 				})
 			}
 
-			await data.channel.send(`**Logs I've recorded so far:**\n*${resultkeys.length}* keys, *${successes}* successes and *${fails}* fails.`);
+			if (keys != undefined){
+				keys = resultkeys.forEach(key => {
+					if (key.amount > 0) keys += key.amount;
+				})
+			}
+			
+			await data.channel.send(`**Logs I've recorded so far:**\n*${keys}* keys, *${successes}* successes and *${fails}* fails.`);
 		})
 	})
 }
