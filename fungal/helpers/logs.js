@@ -1,10 +1,13 @@
 const db = require('../../db.js');
 
 async function logs(spt, data){
-	db.query(`SELECT * FROM keys`, function (err, result, fields){
+	await db.query(`SELECT * FROM keys`, function (err, resultkeys, fields){
 		console.dir(result);
+		await db.query(`SELECT * FROM keys`, function (err, resultrls, fields){
+			console.dir(resultrls);
+			await data.channel.send(`**Logs I've recorded so far:**\n*${resultkeys.length}* keys, *${resultrls.length}* successes and *${resultrls.length}* fails.`);
+		})
 	})
-	data.channel.send(`Logs I've recorded so far: ${result.length} keys`);
 }
 
 module.exports = logs;
