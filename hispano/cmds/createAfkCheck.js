@@ -29,19 +29,13 @@ async function main(spt, data, args){
 
 	switch(rdgChan){
 		case '1':
-			var rdgChanObj = spt.channels.get(config.fungal.vc.one);
+			var rdgChanObj = spt.channels.get(config.hispano.vc.one);
 			break;
 		case '2':
-			var rdgChanObj = spt.channels.get(config.fungal.vc.two);			
+			var rdgChanObj = spt.channels.get(config.hispano.vc.two);			
 			break;
 		case '3':
-			var rdgChanObj = spt.channels.get(config.fungal.vc.three);
-			break;
-		case '4':
-			var rdgChanObj = spt.channels.get(config.fungal.vc.four);
-			break;
-		case '5':
-			var rdgChanObj = spt.channels.get(config.fungal.vc.five);
+			var rdgChanObj = spt.channels.get(config.hispano.vc.three);
 			break;
 	}
 
@@ -53,8 +47,8 @@ async function main(spt, data, args){
 				data.channel.send(`Please specify a location for raiders.`)
 			} else {
 				// Make afkCheck Object
-				const rlChan = spt.channels.get(config.fungal.rlChan);
-				const afkChan = spt.channels.get(config.fungal.afkChan);
+				const rlChan = spt.channels.get(config.hispano.rlChan);
+				const afkChan = spt.channels.get(config.hispano.afkChan);
 				const afkObj = {
 					host: data.author.id,
 					channel: rdgChanObj.id,
