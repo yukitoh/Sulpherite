@@ -1,6 +1,6 @@
 const updateEmbedAFK = require("../helpers/updateAfkEmbed.js");
 const updateControlPanel = require("../helpers/updateControlPanel.js");
-const reactAFK = require("../helpers/reactAFK.js");
+const reactFCAFK = require("../helpers/reactFCAFK.js");
 const unlockChannel = require("../helpers/unlockChannel.js");
 const afks = require('../cmds.js').afks;
 const config = require("../../config.json");
@@ -15,12 +15,6 @@ async function main(spt, data, args){
 			break;
 		case '3':
 			var rdgChan = '3';
-			break;
-		case '4':
-			var rdgChan = '4';
-			break;
-		case '5':
-			var rdgChan = '5';
 			break;
 		default:
 			data.channel.send(`Invalid channel number (available: 1-5).`);
@@ -74,7 +68,7 @@ async function main(spt, data, args){
 				afkChan.send("@here Fungal Cavern ("+fungalReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`").then(async function (sent) {
 					afkObj['afkcheck'] = sent.id;
 					sent.edit("@here Fungal Cavern ("+fungalReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`", { embed: (updateEmbedAFK(spt, afkObj)) });
-					await reactAFK(spt, sent);
+					await reactFCAFK(spt, sent);
 					});	
 				rlChan.send(`AFK Check control panel for `+rdgChanObj.name).then(async function (sent) {
 					afkObj['controlpanel'] = sent.id;

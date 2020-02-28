@@ -1,4 +1,4 @@
-const reactHC = require("../helpers/reactHc.js");
+const reactFCHC = require("../helpers/reactFCHc.js");
 const config = require("../../config.json");
 
 async function main(spt, data){
