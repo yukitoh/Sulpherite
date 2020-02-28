@@ -27,7 +27,7 @@ async function handleReacts(spt, reaction, user){
 						if (currAfk['key'] == user){
 							user.send(`You have unreacted with ${spt.emojis.find(emoji => emoji.name === "fungalkey")}.\nPlease keep in mind that this is suspendable if it is fake react or abused.`)
 							currAfk['key'] = 'None';
-							spt.channels.get(config.fungal.rlChan).send(`${user} unreacted from being the main ${spt.emojis.find(emoji => emoji.name === "fungalkey")}.`);
+							spt.channels.get(config.hispano.rlChan).send(`${user} unreacted from being the main ${spt.emojis.find(emoji => emoji.name === "fungalkey")}.`);
            					fceUpd(spt, false);
 						}
 						break;

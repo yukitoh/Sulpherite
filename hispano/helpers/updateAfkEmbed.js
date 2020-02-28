@@ -2,7 +2,7 @@ const config = require("../../config.json");
 
 function updateEmbed(spt, afkObj){
 	const fungalReact = spt.emojis.find(emoji => emoji.name === "fungal");
-	const hostUser = spt.guilds.get(config.fungal.id).members.get(afkObj['host']);
+	const hostUser = spt.guilds.get(config.hispano.id).members.get(afkObj['host']);
 	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
 		description: "We are starting an afk check now, join `"+channelName+"` and react with "+fungalReact+" to not get moved out! If you react with keys or classes and do not bring them, you may be suspended.\nStarting in "+((afkObj['timeleft']/60).toString()).charAt(0)+" minutes and "+(afkObj['timeleft']%60)+" seconds! In addition to reacting with "+fungalReact+" also react...",

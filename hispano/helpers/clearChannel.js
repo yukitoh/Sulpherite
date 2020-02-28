@@ -2,20 +2,20 @@ const config = require("../../config.json");
 const isRL = require('../../isRL.js');
 
 async function main(spt, data, args){
-	const lnge = spt.channels.get(config.fungal.vc.lnge);
+	const lnge = spt.channels.get(config.hispano.vc.lnge);
 
 	if (args[1] == undefined){
 		data.channel.send(`Numero de canal invalido (disponible 1-3).`);
 	} else {
 		switch(args[1]){
 			case '1':
-				var rdgChan = spt.channels.get(config.fungal.vc.one);
+				var rdgChan = spt.channels.get(config.hispano.vc.one);
 				break;
 			case '2':
-				var rdgChan = spt.channels.get(config.fungal.vc.two);
+				var rdgChan = spt.channels.get(config.hispano.vc.two);
 				break;
 			case '3':
-				var rdgChan = spt.channels.get(config.fungal.vc.three);
+				var rdgChan = spt.channels.get(config.hispano.vc.three);
 				break;
 			default:
 				data.channel.send(`Numero de canal invalido (disponible 1-3).`);
@@ -25,7 +25,7 @@ async function main(spt, data, args){
 		data.channel.send(`Limpiando canal `+args[1]+`.`)
 		.then((msg)=> {
 			rdgChan.members.forEach(async function(raiders){
-				await isRL(spt, 'fungal', raiders.id).then(async function(value){
+				await isRL(spt, 'hispano', raiders.id).then(async function(value){
 					if (!value) await raiders.setVoiceChannel(lnge);
 				})
 			})

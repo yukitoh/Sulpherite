@@ -10,7 +10,7 @@ function updateEndedCP(spt, afkObj){
 	const embed = {
 		color: 1122214,
 		footer: {
-		text: "The afk check has been ended by "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName
+		text: "The afk check has been ended by "+spt.guilds.get(config.hispano.id).members.get(afkObj['host']).displayName
 		},
 		author: {
 		name: `AFK Check control panel for `+channelName

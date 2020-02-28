@@ -4,7 +4,7 @@ function updateEndedAFK(spt, afkObj){
 	const channelName = spt.channels.get(afkObj['channel']).name;
 	var rlAmount = 0;
 	spt.channels.get(afkObj['channel']).members.forEach(async function(raiders){
-		if (raiders.roles.find(r => r.name === config.fungal.arlRole) || raiders.roles.find(r => r.name === config.fungal.rlRole) || raiders.roles.find(r => r.name === config.fungal.vrlRole) || raiders.roles.find(r => r.name === config.fungal.hrlRole)) {
+		if (raiders.roles.find(r => r.name === config.fungal.arlRole)){
 			rlAmount++;
 		}
 	})
