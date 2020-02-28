@@ -25,7 +25,7 @@ async function pop(spt, data){
 		data.channel.send(`Are you sure ${key} popped ${args[3]} fungal keys? (yes or no)`)
 			.then(() => {
 				message.channel.awaitMessages(res => res.content === 'yes' || res.content == 'y' || res.content == 'n' || res.content == 'no', { max: 1, time: 30000, errors: ['time'] })
-  					.then((resp) async => {
+  					.then(async (resp) => {
   						if (resp.first().content == 'yes' || resp.first().content == 'y'){
       						// popped many keys
       						await db.query(`SELECT * FROM keys WHERE id = '${key.user.id}'`, async function (err, reskeys, fields){
@@ -47,7 +47,7 @@ async function pop(spt, data){
 		data.channel.send(`Are you sure ${key} popped 1 fungal key? (yes or no)`)
 			.then(() => {
 				message.channel.awaitMessages(res => res.content === 'yes' || res.content == 'y' || res.content == 'n' || res.content == 'no', { max: 1, time: 30000, errors: ['time'] })
-  					.then((resp) async => {
+  					.then(async (resp) => {
   						if (resp.first().content == 'yes' || resp.first().content == 'y'){
       						// popped one key
       						await db.query(`SELECT * FROM keys WHERE id = '${key.user.id}'`, async function (err, reskeys, fields){
