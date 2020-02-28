@@ -10,13 +10,13 @@ async function pop(spt, data){
 	}
 	if (!args[2]){
 		if (data.mentions.members.first()){
-			key = data.mentions.members.first();
+		  key = data.mentions.members.first();
 		} else {
 			return data.channel.send(`Please mention or write key poppers name.`);
 		}
 	} else {
 		spt.guilds.get(config.fungal.id).members.forEach(member => {
-			if (member.displayName == args[2]) key = member;
+			if (member.displayName.toLowerCase() == args[2].toLowerCase()) key = member;
 		})
 		if (key == undefined) return data.channel.send(`Could not find any user with this name.`);
 	}
