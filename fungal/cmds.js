@@ -15,19 +15,6 @@ async function main(spt, data){
 	let args = lwData.split(' ');
 	if(await isCmd(data)){
 		switch ((args[0].replace('*', ''))){
-			// logging runs
-			case 'logs':
-				require('./helpers/logs.js')(spt, data);
-				break;
-			case 'log':
-				require('./helpers/logrun.js')(spt, data);
-				break;
-			case 'pop':
-				require('./helpers/pop.js')(spt, data);
-				break;
-			case 'printlog':
-				require('./helpers/printlog.js')(spt, data);
-				break;
 			// Main cmds
 			case 'headcount': case 'hc':
 				require("./cmds/headCount.js")(spt, data);
