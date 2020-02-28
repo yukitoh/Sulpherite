@@ -110,7 +110,8 @@ async function updAfkObj(spt, log){
 	// pass promises to objects
 	resolveAfks(afkChecksPromises);
 	// update every afk check object
-	for (x in afks) {	
+	for (x in afks) {
+		if (afks[x] == undefined) return;
 		// handle aborts
 		if (afks[x]['aborted'] == false) {
 			if (afks[x]['ended'] == false){
