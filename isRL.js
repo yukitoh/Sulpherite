@@ -1,7 +1,6 @@
 const config = require("./config.json");
 
 async function main(spt, server, user){
-	console.log(server);
 	switch(server){
 		case 'fungal':
 			var guildmb = spt.guilds.get(config.fungal.id).members.get(user);
@@ -21,7 +20,7 @@ async function main(spt, server, user){
 			break;
 		case 'hispano':
 			var guildmb = spt.guilds.get(config.hispano.id).members.get(user);
-			if (guildmb.roles.some(r => [config.shatters.rlRole].includes(r.name))){
+			if (guildmb.roles.some(r => [config.hispano.rlRole].includes(r.name))){
 				return true;
 			} else {
 				return false;
