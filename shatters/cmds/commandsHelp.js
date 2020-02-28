@@ -28,7 +28,7 @@ async function main(spt, channel, command){
 			var embed = await createEmbed(command, '*clean [channel number]', 'Moves all members from the raiding channel to the queue channel', 'clear');
 			channel.send({ embed })
 			break;
-		case 'resetChannel': case 'reset': case 'lock':
+		case 'resetchannel': case 'reset': case 'lock':
 			var embed = await createEmbed(command, '*resetChannel', 'Locks the selected channel for raiders.', 'reset, lock');
 			channel.send({ embed })
 			break;
