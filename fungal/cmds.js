@@ -15,8 +15,18 @@ async function main(spt, data){
 	let args = lwData.split(' ');
 	if(await isCmd(data)){
 		switch ((args[0].replace('*', ''))){
+			// logging runs
 			case 'logs':
 				require('./helpers/logs.js')(spt, data);
+				break;
+			case 'log':
+				require('./helpers/logrun.js')(spt, data);
+				break;
+			case 'pop':
+				require('./helpers/pop.js')(spt, data);
+				break;
+			case 'printlog':
+				require('./helpers/printlog.js')(spt, data);
 				break;
 			// Main cmds
 			case 'headcount': case 'hc':
@@ -65,7 +75,7 @@ async function main(spt, data){
 					require("./cmds/commandsHelp.js")(spt, data.channel, args[1]);
 					break;
 				} else {
-					const embed = { "title": "***All the commands you can use on your server!***", "color": 2672880, "footer": { "text": "Capitalization does not matter when using the commands." }, "fields": [ { "name": "**__Raiding:__**", "value": "```fix\nafk; clean; headcount; resetChannel; unlock; location; parsemembers```"}, { "name": "**__Events:__**", "value": "```fix\ncleanevent; headcount(not yet); resetevent; unlockevent```"}, { "name": "**__Miscellaneous:__**", "value": "```fix\navatar; commands; slurp; ping```\n-> dm skrillergg if you need a new command.\nTo learn more about a command, use the command *commands <command name>" } ] };
+					const embed = { "title": "***All the commands you can use on your server!***", "color": 2672880, "footer": { "text": "Capitalization does not matter when using the commands." }, "fields": [ { "name": "**__Raiding:__**", "value": "```fix\nafk; clean; headcount; resetChannel; unlock; location; logs; log; pop; printlog; parsemembers```"}, { "name": "**__Events:__**", "value": "```fix\ncleanevent; headcount(not yet); resetevent; unlockevent```"}, { "name": "**__Miscellaneous:__**", "value": "```fix\navatar; commands; slurp; ping```\n-> dm skrillergg if you need a new command.\nTo learn more about a command, use the command *commands <command name>" } ] };
 					data.channel.send({ embed });
 					break;
 				}

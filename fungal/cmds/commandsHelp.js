@@ -15,6 +15,23 @@ async function createEmbed(command, usage, description, aliases){
 
 async function main(spt, channel, command){
 	switch (command){
+		// logging runs
+		case 'logs':
+			var embed = await createEmbed(command, '*logs', 'Lists brievely the quantity of data stored into current printlog.', 'None');
+			channel.send({ embed })
+			break;
+		case 'log':
+			var embed = await createEmbed(command, '*log [type of run (fc/fail)] <amount>', 'Logs one or a specific amount of success or failed runs.', 'None');
+			channel.send({ embed })
+			break;
+		case 'pop':
+			var embed = await createEmbed(command, '*pop [type of run] [keys name] <amount>', 'Logs one or a specific amount of keys for a key popper.', 'None');
+			channel.send({ embed })
+			break;
+		case 'printlog':
+			var embed = await createEmbed(command, '*printlog', 'Lists every runs logged since last printlog and eventually clears the current printlog.', 'None');
+			channel.send({ embed })
+			break;
 		// Raiding cmds
 		case 'afk':
 			var embed = await createEmbed(command, '*afk [channel #] [type of run] <location>', 'Starts an afk check in the channel specified to see how many players are coming to the raid.', 'None');
