@@ -56,6 +56,21 @@
 		"rlRole":"Raid Leader",
 		"vrlRole":"Veteran Raid Leader",
 		"hrlRole":"Head Raid Leader"
+	},
+	
+	"hispano":{
+		"id":"675413173448474646",
+		"rlChan":"682758622882562166",
+		"afkChan":"675785691204026408",
+		"vc":{
+			"lnge":"675504430778548254",
+			"one":"675413173494611975",
+			"two":"675414188478169091",
+			"three":"675414255855468577",
+			"afk":"676578789660295178"
+		},
+		"rdrRole":"Invitado",
+		"rlRole":"Raid Leaders"
 	}
 
 }

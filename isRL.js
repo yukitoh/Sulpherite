@@ -15,6 +15,13 @@ async function main(spt, server, user){
 		} else {
 			return false;
 		}
+	} else if (server == 'hispano'){
+		var guildmb = spt.guilds.get(config.hispano.id).members.get(user);
+		if (guildmb.roles.some(r => [config.shatters.rlRole].includes(r.name))){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 

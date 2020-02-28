@@ -34,8 +34,10 @@ spt.on('ready', () => {
 		// Handling afk checks update
         require("./shatters/cmds.js").updAfkObj(spt, true);
 		require("./fungal/cmds.js").updAfkObj(spt, true);
+		require("./fungal/hispano.js").updAfkObj(spt, true);
 		require("./shatters/cmds.js").ckDeaf(spt);
 		require("./fungal/cmds.js").ckDeaf(spt);
+		require("./hispano/cmds.js").ckDeaf(spt);
     }, 5000);
 })
 
@@ -100,6 +102,28 @@ spt.on('message', async (data) => {
 				skpProE.length = 0;
 			}
 			break;
+		case config.hispano.id:
+			if (data.channel.type === 'dm') {
+				// DM Commands (Unhandled for now)
+			} else {
+			// Server Commands
+				// obligated to skip promise because annoying
+				await isRL(spt, 'hispano', data.author.id).then(async function(value){
+					await skpPro.push(value);
+				})
+				if (data.channel.id == config.shatters.rlChan && skpPro[0]){
+					// clear skpPro array for next message
+					skpPro.length = 0;
+					// check if bot is alive (highest priority)
+					if (data.content == '*slurp'){
+						data.channel.send('Slurpie Slurp Slurp')
+					}
+					require("./hispano/cmds.js").main(spt, data);
+				}
+				// clear skpPro array for next message
+				skpPro.length = 0;
+			}
+			break;
 	}
 })
 
@@ -114,6 +138,9 @@ spt.on('messageReactionAdd', (reaction, user) => {
 		case config.fungal.id:
 			require('./fungal/helpers/handleReaction.js')(spt, reaction, user);
 			break;
+		case config.hispano.id:
+			require('./hispano/helpers/handleReaction.js')(spt, reaction, user);
+			break;
 	}
 })
 
@@ -127,6 +154,9 @@ spt.on('messageReactionRemove', (reaction, user) => {
 			break;
 		case config.fungal.id:
 			require('./fungal/helpers/handleDelReaction.js')(spt, reaction, user);
+			break;
+		case config.hispano.id:
+			require('./hispano/helpers/handleDelReaction.js')(spt, reaction, user);
 			break;
 	}
 })
