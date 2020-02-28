@@ -5,7 +5,7 @@ async function pop(spt, data){
 	var args = data.content.split(' ');
 	var key;
 
-	if (!args[1]){
+	if (!args[1] || args[1] != 'fc'){
 		return data.channel.send('Please specify a type of run (available: fc).');
 	}
 	if (!args[2]){
