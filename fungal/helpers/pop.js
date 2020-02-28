@@ -24,7 +24,7 @@ async function pop(spt, data){
 	if (key && args[3] && !isNaN(args[3])){
 		data.channel.send(`Are you sure ${key} popped ${args[3]} fungal keys? (yes or no)`)
 			.then(() => {
-				message.channel.awaitMessages(res => res.content === 'yes' || res.content == 'y' || res.content == 'n' || res.content == 'no', { max: 1, time: 30000, errors: ['time'] })
+				data.channel.awaitMessages(res => res.content === 'yes' || res.content == 'y' || res.content == 'n' || res.content == 'no', { max: 1, time: 30000, errors: ['time'] })
   					.then(async (resp) => {
   						if (resp.first().content == 'yes' || resp.first().content == 'y'){
       						// popped many keys
