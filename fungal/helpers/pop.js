@@ -46,7 +46,7 @@ async function pop(spt, data){
 	} else if (key){
 		data.channel.send(`Are you sure ${key} popped 1 fungal key? (yes or no)`)
 			.then(() => {
-				message.channel.awaitMessages(res => res.content === 'yes' || res.content == 'y' || res.content == 'n' || res.content == 'no', { max: 1, time: 30000, errors: ['time'] })
+				data.channel.awaitMessages(res => res.content === 'yes' || res.content == 'y' || res.content == 'n' || res.content == 'no', { max: 1, time: 30000, errors: ['time'] })
   					.then(async (resp) => {
   						if (resp.first().content == 'yes' || resp.first().content == 'y'){
       						// popped one key
