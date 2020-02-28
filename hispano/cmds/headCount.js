@@ -11,7 +11,7 @@ async function main(spt, data){
 	})
 	afkChan.send({ embed })
 	.then(async function (headcount) {
-		await reactHC(spt, headcount);
+		await reactFCHC(spt, headcount);
 	});
 }
 
