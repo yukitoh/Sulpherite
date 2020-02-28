@@ -2,7 +2,7 @@ const config = require('../../config.json');
 const db = require('../../db.js');
 
 async function pop(spt, data){
-	var args = data.split(' ');
+	var args = data.content.split(' ');
 	var key;
 
 	if (!args[1]){
