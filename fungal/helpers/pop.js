@@ -29,12 +29,14 @@ async function pop(spt, data){
   						if (resp.first().content == 'yes' || resp.first().content == 'y'){
       						// popped many keys
       						await db.query(`SELECT * FROM keys WHERE id = '${key.user.id}'`, async function (err, reskeys, fields){
-      							if (reskeys){
+      							if (reskeys.length > 0){
       								// update multiple
       								db.query(`UPDATE keyers SET amount = '`+(reskeys[0].amount+args[3])+`' WHERE id = '${key.user.id}'`);
+                      data.channel.send(`Gave ${args[3]} key pops to ${key}, he is now at `+(reskeys[0].amount+args[3])+` keys popped.`);
       							} else {
       								// insert multiple
-      								db.query(`INSERT INTO keyers (id, amount) VALUES ('${key.user.id}', '5')`);
+      								db.query(`INSERT INTO keyers (id, amount) VALUES ('${key.user.id}', '${args[3]}')`);
+                      data.channel.send(`Gave ${args[3]} key pops to ${key}, he is now at ${args[3]} keys popped.`);
       							}
       						})
       					}
@@ -46,17 +48,19 @@ async function pop(spt, data){
 	} else if (key){
 		data.channel.send(`Are you sure ${key} popped 1 fungal key? (yes or no)`)
 			.then(() => {
-				data.channel.awaitMessages({ max: 1, time: 30000, errors: ['time'] })
+				data.channel.awaitMessages(res => res.content === 'yes' || res.content == 'y' || res.content == 'n' || res.content == 'no', { max: 1, time: 30000, errors: ['time'] })
   					.then(async (resp) => {
   						if (resp.first().content == 'yes' || resp.first().content == 'y'){
       						// popped one key
       						await db.query(`SELECT * FROM keys WHERE id = '${key.user.id}'`, async function (err, reskeys, fields){
-      							if (reskeys){
+      							if (reskeys.length > 0){
       								// update one
       								db.query(`UPDATE keyers SET amount = '`+(reskeys[0].amount+1)+`' WHERE id = '${key.user.id}'`);
+                      data.channel.send(`Gave 1 key pops to ${key}, he is now at `+(reskeys[0].amount+1)+` keys popped.`);
       							} else {
       								// insert one
       								db.query(`INSERT INTO keyers (id, amount) VALUES ('${key.user.id}', '1')`);
+                      data.channel.send(`Gave 1 key pops to ${key}, he is now at 1 keys popped.`);
       							}
       						})
       					} else {
