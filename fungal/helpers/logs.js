@@ -3,9 +3,8 @@ const db = require('../../db.js');
 async function logs(spt, data){
 	await db.query(`SELECT * FROM keyers`, async function (err, reskeys, fields){
 		await db.query(`SELECT * FROM rls`, async function (err, resrls, fields){
-			var fails = 0,
-				successes = 0,
-				keys = 0;
+			var [fails,successes,keys] = [0,0,0];
+			
 			if (resrls){
 				resrls.forEach(rl => {
 					fails += rl.fail;
