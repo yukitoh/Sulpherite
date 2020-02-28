@@ -111,7 +111,7 @@ spt.on('message', async (data) => {
 				await isRL(spt, 'hispano', data.author.id).then(async function(value){
 					await skpPro.push(value);
 				})
-				if (data.channel.id == config.shatters.rlChan && skpPro[0]){
+				if (data.channel.id == config.hispano.rlChan && skpPro[0]){
 					// clear skpPro array for next message
 					skpPro.length = 0;
 					// check if bot is alive (highest priority)
