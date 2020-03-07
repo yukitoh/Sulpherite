@@ -3,26 +3,26 @@
 	"pfx":"*",
 	
 	"shatters":{
-		"id":"679160544066011156",
-		"rlChan":"679160544560676868",
-		"afkChan":"680148116359479473",
-		"pmChan":"679160818427756564",
+		"id":"undefined",
+		"rlChan":"undefined",
+		"afkChan":"undefined",
+		"pmChan":"undefined",
 		"vc":{
-			"lnge":"679160544560676870",
-			"one":"679160966189023235",
-			"two":"679161076117536790",
-			"three":"679161089555955712",
-			"four":"679161099584798733",
-			"five":"679161108170407948",
-			"afk":"679161208263147550"
+			"lnge":"undefined",
+			"one":"undefined",
+			"two":"undefined",
+			"three":"undefined",
+			"four":"undefined",
+			"five":"undefined",
+			"afk":"undefined"
 		},
-		"rdrRole":"Raider",
-		"ntrRole":"Nitro Booster",
-		"sppRole":"Supreme Priest",
-		"arlRole":"testers",
-		"rlRole":"testers",
-		"vrlRole":"testers",
-		"hrlRole":"testers"
+		"rdrRole":"undefined",
+		"ntrRole":"undefined",
+		"sppRole":"undefined",
+		"arlRole":"undefined",
+		"rlRole":"undefined",
+		"vrlRole":"undefined",
+		"hrlRole":"undefined"
 	},
 	
 	"fungal":{

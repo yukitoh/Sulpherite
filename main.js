@@ -32,10 +32,10 @@ spt.on('ready', () => {
 	spt.user.setActivity(config.status, { type: ``})
 	setInterval(function() {
 		// Handling afk checks update
-        require("./shatters/cmds.js").updAfkObj(spt, true);
+        //require("./shatters/cmds.js").updAfkObj(spt, true);
 		require("./fungal/cmds.js").updAfkObj(spt, true);
 		require("./hispano/cmds.js").updAfkObj(spt, true);
-		require("./shatters/cmds.js").ckDeaf(spt);
+		//require("./shatters/cmds.js").ckDeaf(spt);
 		require("./fungal/cmds.js").ckDeaf(spt);
 		require("./hispano/cmds.js").ckDeaf(spt);
     }, 5000);
@@ -46,28 +46,28 @@ spt.on('ready', () => {
 spt.on('message', async (data) => {
 	if (data.author.bot) return;
 	switch (data.guild.id){
-		case config.shatters.id:
-			if (data.channel.type === 'dm') {
+//		case config.shatters.id:
+//			if (data.channel.type === 'dm') {
 				// DM Commands (Unhandled for now)
-			} else {
+//			} else {
 			// Server Commands
 				// obligated to skip promise because annoying
-				await isRL(spt, 'shatters', data.author.id).then(async function(value){
-					await skpPro.push(value);
-				})
-				if (data.channel.id == config.shatters.rlChan && skpPro[0]){
+//				await isRL(spt, 'shatters', data.author.id).then(async function(value){
+//					await skpPro.push(value);
+//				})
+//				if (data.channel.id == config.shatters.rlChan && skpPro[0]){
 					// clear skpPro array for next message
-					skpPro.length = 0;
+//					skpPro.length = 0;
 					// check if bot is alive (highest priority)
-					if (data.content == '*slurp'){
-						data.channel.send('Slurpie Slurp Slurp')
-					}
-					require("./shatters/cmds.js").main(spt, data);
-				}
+//					if (data.content == '*slurp'){
+//						data.channel.send('Slurpie Slurp Slurp')
+//					}
+//					require("./shatters/cmds.js").main(spt, data);
+//				}
 				// clear skpPro array for next message
-				skpPro.length = 0;
-			}
-			break;
+//				skpPro.length = 0;
+//			}
+//			break;
 		case config.fungal.id:
 			if (data.channel.type === 'dm') {
 				// DM Commands (Unhandled for now)
@@ -132,9 +132,9 @@ spt.on('messageReactionAdd', (reaction, user) => {
 	if (reaction.message.channel.type == 'dm') return;
 	
 	switch(reaction.message.guild.id){
-		case config.shatters.id:
-			require('./shatters/helpers/handleReaction.js')(spt, reaction, user);
-			break;
+//		case config.shatters.id:
+//			require('./shatters/helpers/handleReaction.js')(spt, reaction, user);
+//			break;
 		case config.fungal.id:
 			require('./fungal/helpers/handleReaction.js')(spt, reaction, user);
 			break;
@@ -149,9 +149,9 @@ spt.on('messageReactionRemove', (reaction, user) => {
 	if (reaction.message.channel.type == 'dm') return;
 	
 	switch(reaction.message.guild.id){
-		case config.shatters.id:
-			require('./shatters/helpers/handleDelReaction.js')(spt, reaction, user);
-			break;
+//		case config.shatters.id:
+//			require('./shatters/helpers/handleDelReaction.js')(spt, reaction, user);
+//			break;
 		case config.fungal.id:
 			require('./fungal/helpers/handleDelReaction.js')(spt, reaction, user);
 			break;
