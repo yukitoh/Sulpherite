@@ -64,7 +64,7 @@ async function handleReacts(spt, reaction, user){
 								})
 								spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 									.then(async function (afkmsg) {
-										const reactPortal = afkmsg.reactions.get('fungal:680172932382720007');
+										const reactPortal = afkmsg.reactions.get('fungal:686223695827828774');
 										try {
 											for (const user of reactPortal.users.values()) {
 												reactedPortal.push(user.id);
