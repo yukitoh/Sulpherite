@@ -26,7 +26,7 @@ spt.on('ready', () => {
 	// ping every 5m (host)
 	setInterval(function() {
     http.get("http://sulpherite.herokuapp.com");
-	}, 300000); // every 5 minutes (300000
+	}, 60000); // every 5 minutes (300000
 
 	console.log('Sulpherite is running!')
 	spt.user.setActivity(config.status, { type: ``})
