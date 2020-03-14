@@ -50,13 +50,12 @@ spt.on('message', async (data) => {
 	}
 	switch (data.guild.id){
 		case config.shatters.id:
-			console.log(data.content);
 		// Server Commands
 			// obligated to skip promise because annoying
 			await isRL(spt, 'shatters', data.author.id).then(async function(value){
 				await skpPro.push(value);
 			})
-			console.log(skpPro[0]);
+			console.log(`${data.author.username} is rl on shatters? ${skpPro[0]}`);
 			if (data.channel.id == config.shatters.rlChan && skpPro[0]){
 				// clear skpPro array for next message
 				skpPro.length = 0;
