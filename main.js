@@ -45,84 +45,75 @@ spt.on('ready', () => {
 // Main handle..
 spt.on('message', async (data) => {
 	if (data.author.bot) return;
+	if (data.channel.type === 'dm') {
+		spt.channels.get('688446891700125905').send(`${data.author} sent the bot: ${data.content}`);
+	}
 	switch (data.guild.id){
 		case config.shatters.id:
-			if (data.channel.type === 'dm') {
-				// DM Commands (Unhandled for now)
-			} else {
-			// Server Commands
-				// obligated to skip promise because annoying
-				await isRL(spt, 'shatters', data.author.id).then(async function(value){
-					await skpPro.push(value);
-				})
-				if (data.channel.id == config.shatters.rlChan && skpPro[0]){
-					// clear skpPro array for next message
-					skpPro.length = 0;
-					// check if bot is alive (highest priority)
-					if (data.content == '*slurp'){
-						data.channel.send('Slurpie Slurp Slurp')
-					}
-					require("./shatters/cmds.js").main(spt, data);
+		// Server Commands
+			// obligated to skip promise because annoying
+			await isRL(spt, 'shatters', data.author.id).then(async function(value){
+				await skpPro.push(value);
+			})
+			if (data.channel.id == config.shatters.rlChan && skpPro[0]){
+				// clear skpPro array for next message
+				skpPro.length = 0;
+				// check if bot is alive (highest priority)
+				if (data.content == '*slurp'){
+					data.channel.send('Slurpie Slurp Slurp')
 				}
+				require("./shatters/cmds.js").main(spt, data);
 				// clear skpPro array for next message
 				skpPro.length = 0;
 			}
 			break;
 		case config.fungal.id:
-			if (data.channel.type === 'dm') {
-				// DM Commands (Unhandled for now)
-			} else {
-			// Server Commands
-				// obligated to skip promise because annoying
-				await isRL(spt, 'fungal', data.author.id).then(async function(value){
-					await skpPro.push(value);
-				})
-				await isERL(spt, 'fungal', data.author.id).then(async function(value){
-					await skpProE.push(value);
-				})
-				if (data.channel.id == config.fungal.rlChan && skpPro[0]){
-					// clear skpPro array for next message
-					skpPro.length = 0;
-					// check if bot is alive (highest priority)
-					if (data.content == '*slurp'){
-						data.channel.send('Slurpie Slurp Slurp')
-					}
-					require("./fungal/cmds.js").main(spt, data);
-				} else if(data.channel.id == config.fungal.erlChan && skpProE[0] || data.channel.id == config.fungal.erlChan && skpPro[0]){
-					// clear skpPro array for next message
-					skpProE.length = 0;
-					// check if bot is alive (highest priority)
-					if (data.content == '*slurp'){
-						data.channel.send('Slurpie Slurp Slurp')
-					}
-					require("./fungal/events.js").main(spt, data);
-				}
+		// Server Commands
+			// obligated to skip promise because annoying
+			await isRL(spt, 'fungal', data.author.id).then(async function(value){
+				await skpPro.push(value);
+			})
+			await isERL(spt, 'fungal', data.author.id).then(async function(value){
+				await skpProE.push(value);
+			})
+			if (data.channel.id == config.fungal.rlChan && skpPro[0]){
 				// clear skpPro array for next message
 				skpPro.length = 0;
+				// check if bot is alive (highest priority)
+				if (data.content == '*slurp'){
+					data.channel.send('Slurpie Slurp Slurp')
+				}
+				require("./fungal/cmds.js").main(spt, data);
+			} else if(data.channel.id == config.fungal.erlChan && skpProE[0] || data.channel.id == config.fungal.erlChan && skpPro[0]){
+				// clear skpPro array for next message
 				skpProE.length = 0;
+				// check if bot is alive (highest priority)
+				if (data.content == '*slurp'){
+					data.channel.send('Slurpie Slurp Slurp')
+				}
+				require("./fungal/events.js").main(spt, data);
 			}
+			// clear skpPro array for next message
+			skpPro.length = 0;
+			skpProE.length = 0;
 			break;
 		case config.hispano.id:
-			if (data.channel.type === 'dm') {
-				// DM Commands (Unhandled for now)
-			} else {
-			// Server Commands
-				// obligated to skip promise because annoying
-				await isRL(spt, 'hispano', data.author.id).then(async function(value){
-					await skpPro.push(value);
-				})
-				if (data.channel.id == config.hispano.rlChan && skpPro[0]){
-					// clear skpPro array for next message
-					skpPro.length = 0;
-					// check if bot is alive (highest priority)
-					if (data.content == '*slurp'){
-						data.channel.send('Slurpie Slurp Slurp')
-					}
-					require("./hispano/cmds.js").main(spt, data);
-				}
+		// Server Commands
+			// obligated to skip promise because annoying
+			await isRL(spt, 'hispano', data.author.id).then(async function(value){
+				await skpPro.push(value);
+			})
+			if (data.channel.id == config.hispano.rlChan && skpPro[0]){
 				// clear skpPro array for next message
 				skpPro.length = 0;
+				// check if bot is alive (highest priority)
+				if (data.content == '*slurp'){
+					data.channel.send('Slurpie Slurp Slurp')
+				}
+				require("./hispano/cmds.js").main(spt, data);
 			}
+			// clear skpPro array for next message
+			skpPro.length = 0;
 			break;
 	}
 })
