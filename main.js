@@ -46,7 +46,7 @@ spt.on('ready', () => {
 spt.on('message', async (data) => {
 	if (data.author.bot) return;
 	if (data.channel.type === 'dm') {
-		spt.channels.get('688446891700125905').send(`${data.author} sent the bot: ${data.content}`);
+		return spt.channels.get('688446891700125905').send(`${data.author} sent the bot: ${data.content}`);
 	}
 	switch (data.guild.id){
 		case config.shatters.id:
