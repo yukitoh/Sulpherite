@@ -129,7 +129,7 @@ async function handleReacts(spt, reaction, user){
 								.then(async function (msg){
 									await msg.react('✅');
 									const filter = (reaction, user) => reaction.emoji.name === '✅';
-									await msg.awaitReactions(filter, { max: 2, time: 10000 })
+									await msg.awaitReactions(filter, { max: 2, time: 30000 })
         								.then(collected => {
            									// confirmed key
            									if (collected.get('✅') != undefined && collected.get('✅').count == 2){
