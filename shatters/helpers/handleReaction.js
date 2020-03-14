@@ -132,7 +132,7 @@ async function handleReacts(spt, reaction, user){
 									await msg.awaitReactions(filter, { max: 2, time: 10000 })
         								.then(collected => {
            									// confirmed key
-           									if (collected.get('✅').count == 2){
+           									if (collected.get('✅') != undefined && collected.get('✅').count == 2){
            										currAfk['key'] = user;
            										fceUpd(spt, false);
            										user.send(`The raid leader has set the location to: ${currAfk['location']}. Please get there asap.\nYou are now our key popper. We ask that you check ${spt.channels.get(config.shatters.pmChan)} for raid leaders instructions.\n Please **ask** the current Raid Leader before kicking players listed in the channel.`);
