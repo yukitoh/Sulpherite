@@ -25,7 +25,7 @@ app.listen(process.env.PORT, function () {
 spt.on('ready', () => {
 	// ping every 5m (host)
 	setInterval(function() {
-    http.get("http://sulpherite.herokuapp.com");
+    	http.get("http://sulpherite.herokuapp.com");
 	}, 60000); // every 5 minutes (300000
 
 	console.log('Sulpherite is running!')
@@ -50,6 +50,7 @@ spt.on('message', async (data) => {
 	}
 	switch (data.guild.id){
 		case config.shatters.id:
+			console.log(data.content);
 		// Server Commands
 			// obligated to skip promise because annoying
 			await isRL(spt, 'shatters', data.author.id).then(async function(value){

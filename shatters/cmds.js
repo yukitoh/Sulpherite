@@ -10,6 +10,7 @@ const afks = [];
 const warnedDeafs = [];
 
 async function main(spt, data){
+	console.log(data.content);
 	let lwData = data.content.toLowerCase();
 	let args = lwData.split(' ');
 	if(await isCmd(data)){
