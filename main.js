@@ -55,7 +55,6 @@ spt.on('message', async (data) => {
 			await isRL(spt, 'shatters', data.author.id).then(async function(value){
 				await skpPro.push(value);
 			})
-			console.log(`${data.author.username} is rl on shatters? ${skpPro[0]}`);
 			if (data.channel.id == config.shatters.rlChan && skpPro[0]){
 				// clear skpPro array for next message
 				skpPro.length = 0;
