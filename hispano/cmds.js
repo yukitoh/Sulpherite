@@ -3,7 +3,6 @@ const unlockChannel = require("./helpers/unlockChannel.js");
 const lockChannel = require("./helpers/lockChannel.js");
 const config = require("../config.json");
 const isRL = require('../isRL.js');
-const db = require('../db.js');
 
 var skpPro = [];
 const afkChecksPromises = [];
