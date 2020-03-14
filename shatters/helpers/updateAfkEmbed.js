@@ -5,7 +5,7 @@ function updateEmbed(spt, afkObj){
 	const hostUser = spt.guilds.get(config.shatters.id).members.get(afkObj['host']);
 	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
-		description: "Estamos empezando un chequeo afk ahora, únete raiding `"+channelName+"` y reaccionar con "+shattersReact+" para no ser movido! Si reaccionas con llaves o clases y no las traes, puedes ser suspendido.\nEmpezando en "+((afkObj['timeleft']/60).toString()).charAt(0)+" minutos y "+(afkObj['timeleft']%60)+" ¡segundos! Además de reaccionar con "+shattersReact+" también reaccionan...",
+		description: "We are starting an afk check now, join `"+channelName+"` and react with "+shattersReact+" to not get moved out! If you react with keys or classes and do not bring them, you may be suspended.\nStarting in "+((afkObj['timeleft']/60).toString()).charAt(0)+" minutes and "+(afkObj['timeleft']%60)+" seconds! In addition to reacting with "+shattersReact+" also react...",
 		color: 31247,
 		timestamp: afkObj['started'],
 		footer: {
