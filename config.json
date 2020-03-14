@@ -3,26 +3,26 @@
 	"pfx":"*",
 	
 	"shatters":{
-		"id":"undefined",
-		"rlChan":"undefined",
-		"afkChan":"undefined",
-		"pmChan":"undefined",
+		"id":"451171819672698920",
+		"rlChan":"451188304566681600",
+		"afkChan":"451181425115398184",
+		"pmChan":"565561903066251284",
 		"vc":{
-			"lnge":"undefined",
-			"one":"undefined",
-			"two":"undefined",
-			"three":"undefined",
-			"four":"undefined",
-			"five":"undefined",
-			"afk":"undefined"
+			"lnge":"451177775706013697",
+			"one":"451177612581273604",
+			"two":"451177572294721568",
+			"three":"474834598577176608",
+			"four":"474872526019887114",
+			"five":"474872560815833089",
+			"afk":"451177659918188548"
 		},
-		"rdrRole":"undefined",
-		"ntrRole":"undefined",
-		"sppRole":"undefined",
-		"arlRole":"undefined",
-		"rlRole":"undefined",
-		"vrlRole":"undefined",
-		"hrlRole":"undefined"
+		"rdrRole":"Raider",
+		"ntrRole":"Nitro Booster",
+		"sppRole":"Supreme Priest",
+		"arlRole":"Almost Raid Leader",
+		"rlRole":"Raid Leader",
+		"vrlRole":"Veteran Raid Leader",
+		"hrlRole":"Head Raid Leader"
 	},
 	
 	"fungal":{
