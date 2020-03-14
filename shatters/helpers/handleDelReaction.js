@@ -60,6 +60,7 @@ async function handleReacts(spt, reaction, user){
 						if (index > -1) {
 							currAfk['mystics'].splice(index, 1);
 						}
+						spt.channels.get(config.shatters.rlChan).send(`${user} unreacted from ${spt.emojis.find(emoji => emoji.name === "mystic")}.`);
 						break;
 					case 'priest':
 						if (currAfk['supremepriest'].includes(user)){

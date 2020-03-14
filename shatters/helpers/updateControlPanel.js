@@ -6,6 +6,11 @@ function updateControlPanel(spt, afkObj){
 	} else {
 		var supremePriestMessage = afkObj['supremepriest'].join(', ');
 	}
+	if (afkObj['mystics'].length == 0){
+		var mysticMessage = 'None';
+	} else {
+		var mysticMessage = afkObj['mystics'].join(', ');
+	}
 	if (afkObj['nitro'].length == 0){
 		var ntrMsg = 'None';
 	} else {
@@ -32,6 +37,10 @@ function updateControlPanel(spt, afkObj){
 		{
 			name: "Our supreme priests are:",
 			value: `${spt.emojis.find(emoji => emoji.name === "priest")} ${supremePriestMessage}`
+		},
+		{
+			name: "Our mystics are:",
+			value: `${spt.emojis.find(emoji => emoji.name === "mystic")} ${mysticMessage}`
 		},
 		{
 			name: "Nitro boosters with location:",
