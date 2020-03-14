@@ -132,9 +132,9 @@ spt.on('messageReactionAdd', (reaction, user) => {
 	if (reaction.message.channel.type == 'dm') return;
 	
 	switch(reaction.message.guild.id){
-//		case config.shatters.id:
-//			require('./shatters/helpers/handleReaction.js')(spt, reaction, user);
-//			break;
+		case config.shatters.id:
+			require('./shatters/helpers/handleReaction.js')(spt, reaction, user);
+			break;
 		case config.fungal.id:
 			require('./fungal/helpers/handleReaction.js')(spt, reaction, user);
 			break;
@@ -149,9 +149,9 @@ spt.on('messageReactionRemove', (reaction, user) => {
 	if (reaction.message.channel.type == 'dm') return;
 	
 	switch(reaction.message.guild.id){
-//		case config.shatters.id:
-//			require('./shatters/helpers/handleDelReaction.js')(spt, reaction, user);
-//			break;
+		case config.shatters.id:
+			require('./shatters/helpers/handleDelReaction.js')(spt, reaction, user);
+			break;
 		case config.fungal.id:
 			require('./fungal/helpers/handleDelReaction.js')(spt, reaction, user);
 			break;
