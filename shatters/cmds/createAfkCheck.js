@@ -6,6 +6,7 @@ const afks = require('../cmds.js').afks;
 const config = require("../../config.json");
 
 async function main(spt, data, args){
+	console.log('tried to create afkcheck for shatters');
 	switch(args[1]){
 		case '1':
 			var rdgChan = '1';

@@ -26,7 +26,7 @@ spt.on('ready', () => {
 	// ping every 5m (host)
 	setInterval(function() {
     	http.get("http://sulpherite.herokuapp.com");
-	}, 60000); // every 5 minutes (300000
+	}, 300000); // every 5 minutes (300000
 
 	console.log('Sulpherite is running!')
 	spt.user.setActivity(config.status, { type: ``})
@@ -56,6 +56,7 @@ spt.on('message', async (data) => {
 			await isRL(spt, 'shatters', data.author.id).then(async function(value){
 				await skpPro.push(value);
 			})
+			console.log(skpPro[0]);
 			if (data.channel.id == config.shatters.rlChan && skpPro[0]){
 				// clear skpPro array for next message
 				skpPro.length = 0;
@@ -65,8 +66,8 @@ spt.on('message', async (data) => {
 				}
 				require("./shatters/cmds.js").main(spt, data);
 				// clear skpPro array for next message
-				skpPro.length = 0;
 			}
+			skpPro.length = 0;
 			break;
 		case config.fungal.id:
 		// Server Commands
