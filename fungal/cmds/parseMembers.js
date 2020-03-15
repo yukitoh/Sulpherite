@@ -80,7 +80,7 @@ async function main(spt, databot, args){
 								break;
 						}
 						rdgChanObj.members.forEach(async function(raiders){
-							await vcRaiders.push(((raiders.nickname).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, '').replace(';', ''));
+							await vcRaiders.push(((raiders.displayName).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, '').replace(';', ''));
 						})
 
 						var crashers = [];
@@ -104,7 +104,7 @@ async function main(spt, databot, args){
 						databot.channel.send(`**These people are in voice channel #raiding`+rdgChan+` but not in game, possible alts:**`);
 						if (possibleAlts.length > 0){
 							possibleAlts.forEach(async function(raiderPossibleAlt){
-								parsePossibleAlts.push(`<@!`+raiderPossibleAlt.nickname+`>`)
+								parsePossibleAlts.push(`<@!`+raiderPossibleAlt.displayName+`>`)
 							})
 							databot.channel.send(parsePossibleAlts.join(', '));
 						}
