@@ -35,7 +35,7 @@ async function main(spt, databot, args){
 
 			if (ingamescreen){
 				databot.channel.send(`Starting to find members now...`);
-				var apiUrl = `https://api.ocr.space/parse/imageurl?apikey=4c09473bec88957&url=${ingamescreen}&filetype=PNG&scale=true`;
+				var apiUrl = `https://api.ocr.space/parse/imageurl?apikey=4c09473bec88957&url=${ingamescreen}&filetype=PNG&scale=true&OCREngine=2`;
 				console.log(apiUrl);
 
 				https.get(apiUrl, (resp) => {
@@ -80,7 +80,7 @@ async function main(spt, databot, args){
 								break;
 						}
 						rdgChanObj.members.forEach(async function(raiders){
-							await vcRaiders.push(((raiders.displayName).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, ''));
+							await vcRaiders.push(((raiders.nickname).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, '').replace(';', ''));
 						})
 
 						var crashers = [];
@@ -104,7 +104,7 @@ async function main(spt, databot, args){
 						databot.channel.send(`**These people are in voice channel #raiding`+rdgChan+` but not in game, possible alts:**`);
 						if (possibleAlts.length > 0){
 							possibleAlts.forEach(async function(raiderPossibleAlt){
-								parsePossibleAlts.push(`<@!`+raiderPossibleAlt.displayName+`>`)
+								parsePossibleAlts.push(`<@!`+raiderPossibleAlt.nickname+`>`)
 							})
 							databot.channel.send(parsePossibleAlts.join(', '));
 						}
