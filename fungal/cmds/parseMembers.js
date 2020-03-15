@@ -59,19 +59,19 @@ async function main(spt, data, args){
 						var vcRaiders = [];
 						switch(rdgChan){
 							case '1':
-								var rdgChanObj = spt.channels.get(config.shatters.vc.one);
+								var rdgChanObj = spt.channels.get(config.fungal.vc.one);
 								break;
 							case '2':
-								var rdgChanObj = spt.channels.get(config.shatters.vc.two);
+								var rdgChanObj = spt.channels.get(config.fungal.vc.two);
 								break;
 							case '3':
-								var rdgChanObj = spt.channels.get(config.shatters.vc.three);
+								var rdgChanObj = spt.channels.get(config.fungal.vc.three);
 								break;
 							case '4':
-								var rdgChanObj = spt.channels.get(config.shatters.vc.four);
+								var rdgChanObj = spt.channels.get(config.fungal.vc.four);
 								break;
 							case '5':
-								var rdgChanObj = spt.channels.get(config.shatters.vc.five);
+								var rdgChanObj = spt.channels.get(config.fungal.vc.five);
 								break;
 						}
 						rdgChanObj.members.forEach(async function(raiders){

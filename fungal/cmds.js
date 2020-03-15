@@ -31,8 +31,8 @@ async function main(spt, data){
 				require("./cmds/location.js")(spt, data, args);
 				break;
 			case 'parsemembers': case 'pmChan': case 'pm':
-				//require("./cmds/pm.js")(spt, data, args);
-				data.channel.send(`Deactivated, takes too much memory, looking for an alternative.`);
+				require("./cmds/pm.js")(spt, data, args);
+				//data.channel.send(`Deactivated, takes too much memory, looking for an alternative.`);
 				break;
 			case 'afk':
 			// CREATES AFK CHECK
