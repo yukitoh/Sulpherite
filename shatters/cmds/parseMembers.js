@@ -1,9 +1,9 @@
 const config = require("../../config.json");
 const https = require('https');
 
-async function main(spt, data, args){
+async function main(spt, databot, args){
 	if (args[1] == undefined){
-		data.channel.send(`Invalid channel number (available: 1-5).`);
+		databot.channel.send(`Invalid channel number (available: 1-5).`);
 	} else {
 		switch(args[1]){
 			case '1':
@@ -22,19 +22,19 @@ async function main(spt, data, args){
 				var rdgChan = '5';
 				break;
 			default:
-				data.channel.send(`Invalid channel number (available: 1-5).`);
+				databot.channel.send(`Invalid channel number (available: 1-5).`);
 				break;
 		}
 
 		if (rdgChan != undefined){
 			// Check if there's image
 			var ingamescreen;
-			if (data.attachments.size > 0) ingamescreen = data.attachments.first().url;
+			if (databot.attachments.size > 0) ingamescreen = databot.attachments.first().url;
 			if(!ingamescreen) ingamescreen = args[2];
-			if (!args[2] || !ingamescreen) data.channel.send(`No image was input.`);
+			if (!args[2] || !ingamescreen) databot.channel.send(`No image was input.`);
 
 			if (ingamescreen){
-				data.channel.send(`Starting to find members now...`);
+				databot.channel.send(`Starting to find members now...`);
 				var apiUrl = `https://api.ocr.space/parse/imageurl?apikey=4c09473bec88957&url=${ingamescreen}&filetype=PNG&scale=true`;
 				console.log(apiUrl);
 
@@ -42,14 +42,14 @@ async function main(spt, data, args){
 					let data = '';
 
 					resp.on('data', (chunk) => {
-    					data += chunk;
+    					databot += chunk;
 					});
 
 					resp.on('end', () => {
 						console.dir(JSON.parse(data));
 
-						if (JSON.parse(data).ParsedResults == undefined){
-							return data.channel.send(`Error while parsing with ocr.`);
+						if (JSON.parse(data).ParsedResults == undefined && JSON.parse(data).ErrorMessage){
+							return databot.channel.send(`Error while parsing with ocr: ${JSON.parse(data).ErrorMessage}`);
 						}
 						var endtext = JSON.parse(data).ParsedResults[0].ParsedText;
 						var firstParse = endtext.split(':')[1].split(' ').join('');
@@ -103,22 +103,22 @@ async function main(spt, data, args){
 						})
 
 						var parsePossibleAlts = [];
-						data.channel.send(`**These people are in voice channel #raiding`+rdgChan+` but not in game, possible alts:**`);
+						databot.channel.send(`**These people are in voice channel #raiding`+rdgChan+` but not in game, possible alts:**`);
 						if (possibleAlts.length > 0){
 							possibleAlts.forEach(async function(raiderPossibleAlt){
 								parsePossibleAlts.push(`<@!`+raiderPossibleAlt.displayName+`>`)
 							})
-							data.channel.send(parsePossibleAlts.join(', '));
+							databot.channel.send(parsePossibleAlts.join(', '));
 						}
 
 						if (crashers.length > 0){
-							data.channel.send(`**These people are not in voice channel #raiding`+rdgChan+`, they are crashers:**`);
-							data.channel.send(crashers.join(', '));
-							data.channel.send("```/kick "+crashers.join('\n/kick ')+"```");
+							databot.channel.send(`**These people are not in voice channel #raiding`+rdgChan+`, they are crashers:**`);
+							databot.channel.send(crashers.join(', '));
+							databot.channel.send("```/kick "+crashers.join('\n/kick ')+"```");
 						}
 					});
 				}).on("error", (err) => {
-					data.channel.send("Error while parsing: " + err.message);
+					databot.channel.send("Error while parsing: " + err.message);
 				});
 			}
 		}
