@@ -42,7 +42,7 @@ async function main(spt, databot, args){
 					let data = '';
 
 					resp.on('data', (chunk) => {
-    					databot += chunk;
+    					data += chunk;
 					});
 
 					resp.on('end', () => {
