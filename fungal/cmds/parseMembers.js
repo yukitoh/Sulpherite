@@ -42,14 +42,12 @@ async function main(spt, databot, args){
 					let data = '';
 
 					resp.on('data', (chunk) => {
-    					databot += chunk;
+    					data += chunk;
 					});
 
 					resp.on('end', () => {
-						console.dir(JSON.parse(data));
-
-						if (JSON.parse(data).ParsedResults == undefined && JSON.parse(data).ErrorMessage){
-							return databot.channel.send(`Error while parsing with ocr: ${JSON.parse(data).ErrorMessage}`);
+						if (JSON.parse(data).ErrorMessage){
+							return databot.channel.send(`Error while parsing, api response: \`${JSON.parse(data).ErrorMessage}\``);
 						}
 						var endtext = JSON.parse(data).ParsedResults[0].ParsedText;
 						var firstParse = endtext.split(':')[1].split(' ').join('');
@@ -82,7 +80,7 @@ async function main(spt, databot, args){
 								break;
 						}
 						rdgChanObj.members.forEach(async function(raiders){
-							await vcRaiders.push(((raiders.nickname).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, ''));
+							await vcRaiders.push(((raiders.displayName).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, ''));
 						})
 
 						var crashers = [];
