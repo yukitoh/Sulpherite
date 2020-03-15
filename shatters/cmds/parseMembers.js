@@ -36,6 +36,7 @@ async function main(spt, data, args){
 			if (ingamescreen){
 				data.channel.send(`Starting to find members now...`);
 				var apiUrl = `https://api.ocr.space/parse/imageurl?apikey=4c09473bec88957&url=${ingamescreen}&scale=true`;
+				console.log(apiUrl);
 				
 				https.get(apiUrl, (resp) => {
 					let data = '';
@@ -45,6 +46,7 @@ async function main(spt, data, args){
 					});
 
 					resp.on('end', () => {
+						console.dir(JSON.parse(data));
 						var endtext = JSON.parse(data).ParsedResults[0].ParsedText;
 						var firstParse = endtext.split(':')[1].split(' ').join('');
 						var fixedParse = firstParse.replace(/\n|\r/g, "");
