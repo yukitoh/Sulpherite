@@ -4,7 +4,7 @@ const lockChannel = require("./helpers/lockChannel.js");
 const config = require("../config.json");
 const isRL = require('../isRL.js');
 
-var skpPro = [];
+var isRLPro = [];
 const afkChecksPromises = [];
 const afks = [];
 const warnedDeafs = [];
@@ -93,6 +93,7 @@ async function resolveAfks(afkChecksPromises){
 }
 
 async function updAfkObj(spt, log){
+	isRLPro.length = 0;
 	// pass promises to objects
 	resolveAfks(afkChecksPromises);
 	// update every afk check object
