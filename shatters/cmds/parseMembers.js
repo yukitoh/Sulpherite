@@ -80,7 +80,7 @@ async function main(spt, databot, args){
 								break;
 						}
 						rdgChanObj.members.forEach(async function(raiders){
-							await vcRaiders.push(((raiders.nickname).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, ''));
+							await vcRaiders.push(((raiders.displayName).replace(/[\(\)\=\+\-\#']/, '')).replace(/[\(\)\=\+\-\#']/, ''));
 						})
 
 						var crashers = [];
