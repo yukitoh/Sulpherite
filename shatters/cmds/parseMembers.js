@@ -35,7 +35,7 @@ async function main(spt, data, args){
 
 			if (ingamescreen){
 				data.channel.send(`Starting to find members now...`);
-				var apiUrl = `https://api.ocr.space/parse/imageurl?apikey=4c09473bec88957&url=${ingamescreen}&filetype=PNG&isOverlayRequired=true&scale=true`;
+				var apiUrl = `https://api.ocr.space/parse/imageurl?apikey=4c09473bec88957&url=${ingamescreen}&filetype=PNG&&scale=true`;
 				console.log(apiUrl);
 
 				https.get(apiUrl, (resp) => {
