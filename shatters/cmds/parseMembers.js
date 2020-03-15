@@ -46,8 +46,6 @@ async function main(spt, databot, args){
 					});
 
 					resp.on('end', () => {
-						console.dir(JSON.parse(data));
-
 						if (JSON.parse(data).ParsedResults == undefined && JSON.parse(data).ErrorMessage){
 							return databot.channel.send(`Error while parsing with ocr: ${JSON.parse(data).ErrorMessage}`);
 						}
