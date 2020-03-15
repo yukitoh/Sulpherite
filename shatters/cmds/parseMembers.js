@@ -47,6 +47,10 @@ async function main(spt, data, args){
 
 					resp.on('end', () => {
 						console.dir(JSON.parse(data));
+
+						if (JSON.parse(data).ParsedResults == undefined){
+							return data.channel.send(`Error while parsing with ocr.`);
+						}
 						var endtext = JSON.parse(data).ParsedResults[0].ParsedText;
 						var firstParse = endtext.split(':')[1].split(' ').join('');
 						var fixedParse = firstParse.replace(/\n|\r/g, "");
