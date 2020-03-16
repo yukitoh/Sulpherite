@@ -14,6 +14,12 @@ async function main(spt, data){
 	let args = lwData.split(' ');
 	if(await isCmd(data)){
 		switch ((args[0].replace('*', ''))){
+			case 'adminrestart':
+				if (afks.length < 1 && require('../fungal/cmds.js').afks.length < 1){
+					data.channel.send('Trying to restart the bot.');
+					process.exit();
+				}
+				break;
 			// Main cmds
 			case 'headcount': case 'hc':
 				require("./cmds/headCount.js")(spt, data);
