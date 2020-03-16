@@ -4,7 +4,7 @@ const lockChannel = require("./helpers/lockChannel.js");
 const config = require("../config.json");
 const isRL = require('../isRL.js');
 
-var skpPro = [];
+var isRLPro = [];
 const afkChecksPromises = [];
 const afks = [];
 const warnedDeafs = [];
