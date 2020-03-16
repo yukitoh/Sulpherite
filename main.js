@@ -152,5 +152,14 @@ spt.on('messageReactionRemove', (reaction, user) => {
 	}
 })
 
+spt.on('error', (error) => {
+	spt.destroy()
+	.then(() => {
+		spt.login(process.env.TOKEN);
+		spt.channels.get(config.shatters.rlChan).send(`Discord API crashed, restarted.`);
+		spt.channels.get(config.fungal.rlChan).send(`Discord API crashed, restarted.`);
+	});
+})
+
 // Login with token
 spt.login(process.env.TOKEN);
