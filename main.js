@@ -121,8 +121,8 @@ spt.on('message', async (data) => {
 				var args = data.content.split(' ');
 				if (args[0] == '*resp'){
 					if (args[1] != undefined && args[2] != undefined){
-						spt.users.get(args[1]).send(data.content.substring(18));
-						data.channel.send(`succesfuly sent to ${spt.users.get(args[1])}, message: ${data.content.substring(18)}`);
+						spt.users.get(args[1]).send(data.content.substring(25));
+						data.channel.send(`succesfuly sent to ${spt.users.get(args[1])}, message: ${data.content.substring(25)}`);
 					} else {
 						data.channel.send('please specify a user id and a message');
 					}
