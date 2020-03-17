@@ -244,6 +244,7 @@ async function handleReacts(spt, reaction, user){
 								reaction.remove(user);
 							} catch (error) {/*user reaction not found*/}
 							spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
+							user.send(`Sorry there's already someone on this switch buddy`);
 						} else {
 							if (currAfk['rushers']['second'] != [] && currAfk['rushers']['second'].includes(user.id) || currAfk['rushers']['secret'] != [] && currAfk['rushers']['secret'].includes(user.id)){
 								try {
@@ -263,6 +264,7 @@ async function handleReacts(spt, reaction, user){
 								reaction.remove(user);
 							} catch (error) {/*user reaction not found*/}
 							spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
+							user.send(`Sorry there's already someone on this switch buddy`);
 						} else {
 							if (currAfk['rushers']['first'] != [] && currAfk['rushers']['first'].includes(user.id) || currAfk['rushers']['secret'] != [] && currAfk['rushers']['secret'].includes(user.id)){
 								try {
@@ -282,6 +284,7 @@ async function handleReacts(spt, reaction, user){
 								reaction.remove(user);
 							} catch (error) {/*user reaction not found*/}
 							spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
+							user.send(`Sorry there's already someone on this switch buddy`);
 						} else {
 							if (currAfk['rushers']['first'] != [] && currAfk['rushers']['first'].includes(user.id) || currAfk['rushers']['second'] != [] && currAfk['rushers']['second'].includes(user.id)){
 								try {
