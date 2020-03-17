@@ -118,8 +118,9 @@ spt.on('message', async (data) => {
 		// modmail server
 		case '679160544066011156':
 			if (data.channel.id == '688446891700125905'){
-				if (data.content.split(' ')[0] == '*resp'){
-					if (data.content.split(' ')[1] != undefined && data.content.split(' ')[2] != undefined){
+				var args = data.content.split(' ');
+				if (args[0] == '*resp'){
+					if (args[1] != undefined && args[2] != undefined){
 						spt.users.get(args[1]).send(data.content.substring(data.content.split(' ')[2].length+7));
 						data.channel.send(`succesfuly sent to ${spt.users.get(args[1])}, message: ${data.content.substring(data.content.split(' ')[2].length+7)}`);
 					} else {
