@@ -150,6 +150,7 @@ async function handleReacts(spt, reaction, user){
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								user.send(`stop reacting with multiple classes buddy`);
 							}
 						})
 						break;
@@ -164,6 +165,7 @@ async function handleReacts(spt, reaction, user){
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								user.send(`stop reacting with multiple classes buddy`);
 							}
 						})
 						break;
@@ -178,6 +180,7 @@ async function handleReacts(spt, reaction, user){
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								user.send(`stop reacting with multiple classes buddy`);
 							}
 						})
 						break;
@@ -192,6 +195,7 @@ async function handleReacts(spt, reaction, user){
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								user.send(`stop reacting with multiple classes buddy`);
 							}
 						})
 						break;
@@ -206,6 +210,7 @@ async function handleReacts(spt, reaction, user){
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								spt.channels.get(config.fungal.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
+								user.send(`stop reacting with multiple classes buddy`);
 							}
 						})
 						break;
