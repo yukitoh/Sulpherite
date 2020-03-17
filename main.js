@@ -115,6 +115,19 @@ spt.on('message', async (data) => {
 			// clear skpPro array for next message
 			skpPro.length = 0;
 			break;
+		// modmail server
+		case '679160544066011156':
+			if (data.channel.id == '688446891700125905'){
+				if (data.content.split(' ')[0] == '*resp'){
+					if (data.content.split(' ')[1] != undefined && data.content.split(' ')[2] != undefined){
+						spt.users.get(args[1]).send(data.content.substring(data.content.split(' ')[2].length+7));
+						data.channel.send(`succesfuly sent to ${spt.users.get(args[1])}, message: ${data.content.substring(data.content.split(' ')[2].length+7)}`);
+					} else {
+						data.channel.send('please specify a user id and a message');
+					}
+				}
+			}
+			break;
 	}
 })
 
