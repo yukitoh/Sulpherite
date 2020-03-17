@@ -14,6 +14,14 @@ async function main(spt, data){
 	let args = lwData.split(' ');
 	if(await isCmd(data)){
 		switch ((args[0].replace('*', ''))){
+			// fake moderation
+			case 'suspend':
+				if (args[1] != undefined && args[2] != undefined && args[3] != undefined){
+					data.channel.send(`${args[1]} was successfuly failed to suspend for ${args[2]}${args[3]}, ${spt.emojis.find(emoji => emoji.name === "rare")}`);
+				} else {
+					data.channel.send(`missing arguments!`);
+				}
+				break;
 			// Main cmds
 			case 'headcount': case 'hc':
 				require("./cmds/headCount.js")(spt, data);
