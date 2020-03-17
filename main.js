@@ -29,7 +29,7 @@ spt.on('ready', () => {
 	}, 300000); // every 5 minutes (300000
 
 	console.log('Sulpherite is running!')
-	spt.user.setActivity(config.status.replace('$user', client.users.length), { type: ``})
+	spt.user.setActivity(config.status.replace('$user', spt.users.length), { type: ``})
 	setInterval(function() {
 		// Handling afk checks update
         require("./shatters/cmds.js").updAfkObj(spt, true);
