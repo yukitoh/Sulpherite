@@ -9,7 +9,10 @@ async function handleReacts(spt, reaction, user){
 	// locate afk check
 	var currAfk;
 	for (x in afks) {
-		if (reaction.message.id == afks[x]['controlpanel'] || reaction.message.id == afks[x]['afkcheck']) currAfk = afks[x];
+		console.dir(afks[x]);
+		if (afks[x] != undefined){
+			if (reaction.message.id == afks[x]['controlpanel'] || reaction.message.id == afks[x]['afkcheck']) currAfk = afks[x];
+		}
 	}
 
 	if (currAfk != undefined){
