@@ -9,10 +9,7 @@ async function handleReacts(spt, reaction, user){
 	// locate afk check
 	var currAfk;
 	for (x in afks) {
-		console.dir(afks[x]);
-		if (afks[x] != undefined){
-			if (reaction.message.id == afks[x]['controlpanel'] || reaction.message.id == afks[x]['afkcheck']) currAfk = afks[x];
-		}
+		if (afks[x]['controlpanel'] != undefined && reaction.message.id == afks[x]['controlpanel'] || afks[x]['afkcheck'] != undefined && reaction.message.id == afks[x]['afkcheck']) currAfk = afks[x];
 	}
 
 	if (currAfk != undefined){
@@ -81,6 +78,7 @@ async function handleReacts(spt, reaction, user){
 											if (!reactedPortal.includes(vcr.user.id) && !isRLPro[0]){
 												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vc.afk));
 											}
+											isRLPro.length = 0;
 										})
 									})
 							} else {
