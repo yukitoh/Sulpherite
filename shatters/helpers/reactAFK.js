@@ -5,8 +5,8 @@ async function reactAFKCHECK(spt, afk){
 	await afk.react(spt.emojis.find(emoji => emoji.name === "shatterskey"));
 	await afk.react(spt.emojis.find(emoji => emoji.name === "warrior"));
 	await afk.react(spt.emojis.find(emoji => emoji.name === "paladin"));
-	await afk.react(spt.emojis.find(emoji => emoji.name === "knight"));
 	await afk.react(spt.emojis.find(emoji => emoji.name === "priest"));
+	await afk.react(spt.emojis.find(emoji => emoji.name === "knight"));
 	await afk.react(spt.emojis.find(emoji => emoji.name === "armorbreak"));
 	await afk.react(spt.emojis.find(emoji => emoji.name === "mystic"));
 	await afk.react(spt.emojis.find(emoji => emoji.name === "aether"));
