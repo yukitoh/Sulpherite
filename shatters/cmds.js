@@ -142,6 +142,7 @@ async function updAfkObj(spt, log){
 									if (!reactedPortal.includes(vcr.user.id) && !isRLPro[0]){
 										await vcr.setVoiceChannel(spt.channels.get(config.shatters.vc.afk));
 									}
+									isRLPro.length = 0;
 								})
 							})
 					} else {

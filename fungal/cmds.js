@@ -93,6 +93,7 @@ async function resolveAfks(afkChecksPromises){
 }
 
 async function updAfkObj(spt, log){
+	isRLPro.length = 0;
 	// pass promises to objects
 	resolveAfks(afkChecksPromises);
 	// update every afk check object
@@ -133,6 +134,7 @@ async function updAfkObj(spt, log){
 									if (!reactedPortal.includes(vcr.user.id) && !isRLPro[0]){
 										await vcr.setVoiceChannel(spt.channels.get(config.fungal.vc.afk));
 									}
+									isRLPro.length = 0;
 								})
 							})
 					} else {
