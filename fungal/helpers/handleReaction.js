@@ -74,13 +74,11 @@ async function handleReacts(spt, reaction, user){
 										} catch (error) {/*no users reaction left*/}
 										vcRaiders.forEach(async function(vcr){
 											// if rl, do not move out
-											await isRL(spt, 'fungal', vcr.user.id).then(async function(value){
-												await isRLPro.push(value);
+											await isRL(spt, 'fungal', vcr.user.id).then(async function(isrlval){
+												if (!reactedPortal.includes(vcr.user.id) && !isrlval){
+													await vcr.setVoiceChannel(spt.channels.get(config.fungal.vc.afk));
+												}
 											})
-											if (!reactedPortal.includes(vcr.user.id) && !isRLPro[0]){
-												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vc.afk));
-											}
-											isRLPro.length = 0;
 										})
 									})
 							} else {
