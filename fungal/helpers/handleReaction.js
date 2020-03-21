@@ -70,11 +70,14 @@ async function handleReacts(spt, reaction, user){
 												reactedPortal.push(user.id);
 											}
 										} catch (error) {/*no users reaction left*/}
+										console.log('tried to move out people with natural ending');
+										console.dir(reactedPortal);
 										vcRaiders.forEach(async function(vcr){
 											// if rl, do not move out
 											await isRL(spt, 'fungal', vcr.user.id).then(async function(value){
 												await isRLPro.push(value);
 											})
+											console.log(`${vcr.user.displayName} is rl? ${isRLPro[0]}`);
 											if (!reactedPortal.includes(vcr.user.id) && !isRLPro[0]){
 												await vcr.setVoiceChannel(spt.channels.get(config.fungal.vc.afk));
 											}
