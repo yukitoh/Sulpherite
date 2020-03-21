@@ -132,7 +132,7 @@ async function updAfkObj(spt, log){
 								try {
 									reactPortal.fetchUsers().then(users => {
         								for (u of users){
-        									await reactedPortal.push(u[0]);
+        									reactedPortal.push(u[0]);
         								}
 									});
 								} catch (error) {/*no users reaction left*/}
