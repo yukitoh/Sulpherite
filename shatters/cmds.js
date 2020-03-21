@@ -134,17 +134,18 @@ async function updAfkObj(spt, log){
         								for (u of users){
         									reactedPortal.push(u[0]);
         								}
+        								vcRaiders.forEach(async function(vcr){
+											// if rl, do not move out
+											await isRL(spt, 'shatters', vcr.user.id).then(async function(isrlval){
+												if (!reactedPortal.includes(vcr.user.id) && !isrlval){
+													await vcr.setVoiceChannel(spt.channels.get(config.shatters.vc.afk));
+												}
+											})
+										})
 									});
 								} catch (error) {/*no users reaction left*/}
-								vcRaiders.forEach(async function(vcr){
-									// if rl, do not move out
-									await isRL(spt, 'shatters', vcr.user.id).then(async function(isrlval){
-										if (!reactedPortal.includes(vcr.user.id) && !isrlval){
-											await vcr.setVoiceChannel(spt.channels.get(config.shatters.vc.afk));
-										}
-									})
-								})
 							})
+						//
 					} else {
 						afks[x]['ended'] = true;
 					}

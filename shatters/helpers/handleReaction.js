@@ -59,7 +59,6 @@ async function handleReacts(spt, reaction, user){
 									if (user.bot) return;
 									await reactX.remove(user);
 								} catch (error) {/*user reaction not found*/}
-
 								// move to lnge people who didn't react with portal
 								var vcRaiders = [];
 								var reactedPortal = [];
@@ -74,17 +73,18 @@ async function handleReacts(spt, reaction, user){
         										for (u of users){
         											reactedPortal.push(u[0]);
         										}
+        										vcRaiders.forEach(async function(vcr){
+													// if rl, do not move out
+													await isRL(spt, 'shatters', vcr.user.id).then(async function(isrlval){
+														if (!reactedPortal.includes(vcr.user.id) && !isrlval){
+															await vcr.setVoiceChannel(spt.channels.get(config.shatters.vc.afk));
+														}
+													})
+												})
 											});
 										} catch (error) {/*no users reaction left*/}
-										vcRaiders.forEach(async function(vcr){
-											// if rl, do not move out
-											await isRL(spt, 'shatters', vcr.user.id).then(async function(isrlval){
-												if (!reactedPortal.includes(vcr.user.id) && !isrlval){
-													await vcr.setVoiceChannel(spt.channels.get(config.shatters.vc.afk));
-												}
-											})
-										})
 									})
+								//
 							} else {
 								// afk check react (x) -> end
 								currAfk['ended'] = true;
