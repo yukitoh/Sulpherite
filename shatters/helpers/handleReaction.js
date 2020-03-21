@@ -70,9 +70,11 @@ async function handleReacts(spt, reaction, user){
 									.then(async function (afkmsg) {
 										const reactPortal = afkmsg.reactions.get('shatters:679186863264628736');
 										try {
-											for (const user of reactPortal.users.values()) {
-												reactedPortal.push(user.id);
-											}
+											reactPortal.fetchUsers().then(users => {
+        										for (u of users){
+        											await reactedPortal.push(u[0]);
+        										}
+											});
 										} catch (error) {/*no users reaction left*/}
 										vcRaiders.forEach(async function(vcr){
 											// if rl, do not move out
