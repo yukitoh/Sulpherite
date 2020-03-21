@@ -142,10 +142,10 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'warrior':
-						var multipleClass = multipleClasses(spt, user, 'warrior', currAfk)
+						var multipleClass = multipleClasses(spt, user.id, 'warrior', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['warriors'].push(user);
+								currAfk['warriors'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -157,10 +157,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'paladin':
-						var multipleClass = multipleClasses(spt, user, 'paladin', currAfk)
+						var multipleClass = multipleClasses(spt, user.id, 'paladin', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['paladins'].push(user);
+								currAfk['paladins'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -172,10 +172,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'knight':
-						var multipleClass = multipleClasses(spt, user, 'knight', currAfk)
+						var multipleClass = multipleClasses(spt, user.id, 'knight', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['knights'].push(user);
+								currAfk['knights'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -187,10 +187,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'priest':
-						var multipleClass = multipleClasses(spt, user, 'priest', currAfk)
+						var multipleClass = multipleClasses(spt, user.id, 'priest', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['priests'].push(user);
+								currAfk['priests'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -202,10 +202,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'trickster':
-						var multipleClass = multipleClasses(spt, user, 'trickster', currAfk)
+						var multipleClass = multipleClasses(spt, user.id, 'trickster', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['tricksters'].push(user);
+								currAfk['tricksters'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;

@@ -145,10 +145,10 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'warrior':
-						multipleClasses(spt, user, 'warrior', currAfk)
+						multipleClasses(spt, user.id, 'warrior', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['warriors'].push(user);
+								currAfk['warriors'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -160,10 +160,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'paladin':
-						multipleClasses(spt, user, 'paladin', currAfk)
+						multipleClasses(spt, user.id, 'paladin', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['paladins'].push(user);
+								currAfk['paladins'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -175,10 +175,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'knight':
-						multipleClasses(spt, user, 'knight', currAfk)
+						multipleClasses(spt, user.id, 'knight', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['knights'].push(user);
+								currAfk['knights'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -190,10 +190,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'priest':
-						multipleClasses(spt, user, 'priest', currAfk)
+						multipleClasses(spt, user.id, 'priest', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['priests'].push(user);
+								currAfk['priests'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -209,10 +209,10 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'mystic':
-						multipleClasses(spt, user, 'mystic', currAfk)
+						multipleClasses(spt, user.id, 'mystic', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['mystics'].push(user);
+								currAfk['mystics'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -224,10 +224,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'assassin':
-						multipleClasses(spt, user, 'assassin', currAfk)
+						multipleClasses(spt, user.id, 'assassin', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['assassins'].push(user);
+								currAfk['assassins'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
