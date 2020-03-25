@@ -6,10 +6,10 @@ function updateEndedCP(spt, afkObj){
 	} else {
 		var supremePriestMessage = afkObj['supremepriest'].join(', ');
 	}
-		if (afkObj['mystics'].length == 0){
+	if (afkObj['mystics'].length == 0){
 		var mysticMessage = 'None';
 	} else {
-		var mysticMessage = afkObj['mystics'].join(', ');
+		var mysticMessage = (('<@!' + afkObj['mystics'].join(', ').replace(/,/gi, '>, <@!').split(' ').join('') + '>').split(',').join(', '));
 	}
 	if (afkObj['nitro'].length == 0){
 		var ntrMsg = 'None';
