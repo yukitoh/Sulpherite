@@ -15,8 +15,8 @@ async function handleReacts(spt, reaction, user){
 				// afk check unreact
 				switch (reaction.emoji.name){
 					case 'fungal':
-						if(afks[x]['raiders'].includes(user)){
-							var index = afks[x]['raiders'].indexOf(user);
+						if(afks[x]['raiders'].includes(user.id)){
+							var index = afks[x]['raiders'].indexOf(user.id);
 							if (index > -1) {
 								afks[x]['raiders'].splice(index, 1);
 							}
@@ -32,31 +32,31 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'warrior':
-						var index = currAfk['warriors'].indexOf(user);
+						var index = currAfk['warriors'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['warriors'].splice(index, 1);
 						}
 						break;
 					case 'paladin':
-						var index = currAfk['paladins'].indexOf(user);
+						var index = currAfk['paladins'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['paladins'].splice(index, 1);
 						}
 						break;
 					case 'knight':
-						var index = currAfk['knights'].indexOf(user);
+						var index = currAfk['knights'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['knights'].splice(index, 1);
 						}
 						break;
 					case 'priest':
-						var index = currAfk['priests'].indexOf(user);
+						var index = currAfk['priests'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['priests'].splice(index, 1);
 						}
 						break;
 					case 'trickster':
-						var index = currAfk['tricksters'].indexOf(user);
+						var index = currAfk['tricksters'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['tricksters'].splice(index, 1);
 						}

@@ -32,31 +32,31 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'warrior':
-						var index = currAfk['warriors'].indexOf(user);
+						var index = currAfk['warriors'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['warriors'].splice(index, 1);
 						}
 						break;
 					case 'paladin':
-						var index = currAfk['paladins'].indexOf(user);
+						var index = currAfk['paladins'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['paladins'].splice(index, 1);
 						}
 						break;
 					case 'knight':
-						var index = currAfk['knights'].indexOf(user);
+						var index = currAfk['knights'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['knights'].splice(index, 1);
 						}
 						break;
 					case 'trickster':
-						var index = currAfk['tricksters'].indexOf(user);
+						var index = currAfk['tricksters'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['tricksters'].splice(index, 1);
 						}
 						break;
 					case 'mystic':
-						var index = currAfk['mystics'].indexOf(user);
+						var index = currAfk['mystics'].indexOf(user.id);
 						if (index > -1) {
 							currAfk['mystics'].splice(index, 1);
 						}
@@ -65,44 +65,44 @@ async function handleReacts(spt, reaction, user){
 					case 'priest':
 						if (currAfk['supremepriest'].includes(user)){
            					spt.channels.get(config.shatters.rlChan).send(`${user} unreacted from supreme ${spt.emojis.find(emoji => emoji.name === "priest")}.`);
-           					var index = currAfk['supremepriest'].indexOf(user);
+           					var index = currAfk['supremepriest'].indexOf(user.id);
 							if (index > -1) {
 								currAfk['supremepriest'].splice(index, 1);
 							}
            					fceUpd(spt, false);
            				}
-           				var index = currAfk['priests'].indexOf(user);
+           				var index = currAfk['priests'].indexOf(user.id);
 							if (index > -1) {
 								currAfk['priests'].splice(index, 1);
 						}
 						break;
 					case 'nitro':
 						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.ntrRole)) {
-							var index = currAfk['nitro'].indexOf(user);
+							var index = currAfk['nitro'].indexOf(user.id);
 							if (index > -1) {
 								currAfk['nitro'].splice(index, 1);
 							}
 						}
 						break;
 					case 'first':
-						if (currAfk['rushers']['first'].includes(user)){
-							var index = currAfk['rushers']['first'].indexOf(user);
+						if (currAfk['rushers']['first'].includes(user.id)){
+							var index = currAfk['rushers']['first'].indexOf(user.id);
 							if (index > -1) {
 								await currAfk['rushers']['first'].splice(index, 1);
 							}
 						}
 						break;
 					case 'second':
-						if (currAfk['rushers']['second'].includes(user)){
-							var index = currAfk['rushers']['second'].indexOf(user);
+						if (currAfk['rushers']['second'].includes(user.id)){
+							var index = currAfk['rushers']['second'].indexOf(user.id);
 							if (index > -1) {
 								await currAfk['rushers']['second'].splice(index, 1);
 							}
 						}
 						break;
 					case 'secret':
-						if (currAfk['rushers']['secret'].includes(user)){
-							var index = currAfk['rushers']['secret'].indexOf(user);
+						if (currAfk['rushers']['secret'].includes(user.id)){
+							var index = currAfk['rushers']['secret'].indexOf(user.id);
 							if (index > -1) {
 								await currAfk['rushers']['secret'].splice(index, 1);
 							}

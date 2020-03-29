@@ -145,10 +145,10 @@ async function handleReacts(spt, reaction, user){
 						}
 						break;
 					case 'warrior':
-						multipleClasses(spt, user, 'warrior', currAfk)
+						multipleClasses(spt, user.id, 'warrior', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['warriors'].push(user);
+								currAfk['warriors'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -160,10 +160,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'paladin':
-						multipleClasses(spt, user, 'paladin', currAfk)
+						multipleClasses(spt, user.id, 'paladin', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['paladins'].push(user);
+								currAfk['paladins'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -175,10 +175,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'knight':
-						multipleClasses(spt, user, 'knight', currAfk)
+						multipleClasses(spt, user.id, 'knight', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['knights'].push(user);
+								currAfk['knights'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -190,10 +190,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'priest':
-						multipleClasses(spt, user, 'priest', currAfk)
+						multipleClasses(spt, user.id, 'priest', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['priests'].push(user);
+								currAfk['priests'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -204,15 +204,15 @@ async function handleReacts(spt, reaction, user){
 							}
 						})
 						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.sppRole)) {
-							currAfk['supremepriest'].push(user);
+							currAfk['supremepriest'].push(user.id);
 							fceUpd(spt, false);
 						}
 						break;
 					case 'mystic':
-						multipleClasses(spt, user, 'mystic', currAfk)
+						multipleClasses(spt, user.id, 'mystic', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['mystics'].push(user);
+								currAfk['mystics'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -224,10 +224,10 @@ async function handleReacts(spt, reaction, user){
 						})
 						break;
 					case 'assassin':
-						multipleClasses(spt, user, 'assassin', currAfk)
+						multipleClasses(spt, user.id, 'assassin', currAfk)
 						.then(async function(multipleClass){
 							if (multipleClass == undefined) {
-								currAfk['assassins'].push(user);
+								currAfk['assassins'].push(user.id);
 							} else {
 								try {
 									if (user.bot) return;
@@ -247,14 +247,14 @@ async function handleReacts(spt, reaction, user){
 							spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
 							user.send(`Sorry there's already someone on this switch buddy`);
 						} else {
-							if (currAfk['rushers']['second'] != [] && currAfk['rushers']['second'].includes(user) || currAfk['rushers']['secret'] != [] && currAfk['rushers']['secret'].includes(user)){
+							if (currAfk['rushers']['second'] != [] && currAfk['rushers']['second'].includes(user.id) || currAfk['rushers']['secret'] != [] && currAfk['rushers']['secret'].includes(user.id)){
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
-							} else if (!currAfk['rushers']['second'].includes(user) && !currAfk['rushers']['secret'].includes(user)) {
-								await currAfk['rushers']['first'].push(user);
+							} else if (!currAfk['rushers']['second'].includes(user.id) && !currAfk['rushers']['secret'].includes(user.id)) {
+								await currAfk['rushers']['first'].push(user.id);
 							}
 						}
 						break;
@@ -267,14 +267,14 @@ async function handleReacts(spt, reaction, user){
 							spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
 							user.send(`Sorry there's already someone on this switch buddy`);
 						} else {
-							if (currAfk['rushers']['first'] != [] && currAfk['rushers']['first'].includes(user) || currAfk['rushers']['secret'] != [] && currAfk['rushers']['secret'].includes(user)){
+							if (currAfk['rushers']['first'] != [] && currAfk['rushers']['first'].includes(user.id) || currAfk['rushers']['secret'] != [] && currAfk['rushers']['secret'].includes(user.id)){
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
-							} else if (!currAfk['rushers']['first'].includes(user) && !currAfk['rushers']['secret'].includes(user)) {
-								await currAfk['rushers']['second'].push(user);
+							} else if (!currAfk['rushers']['first'].includes(user.id) && !currAfk['rushers']['secret'].includes(user.id)) {
+								await currAfk['rushers']['second'].push(user.id);
 							}
 						}
 						break;
@@ -287,14 +287,14 @@ async function handleReacts(spt, reaction, user){
 							spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with ${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)} but there is already someone.`);
 							user.send(`Sorry there's already someone on this switch buddy`);
 						} else {
-							if (currAfk['rushers']['first'] != [] && currAfk['rushers']['first'].includes(user) || currAfk['rushers']['second'] != [] && currAfk['rushers']['second'].includes(user)){
+							if (currAfk['rushers']['first'] != [] && currAfk['rushers']['first'].includes(user.id) || currAfk['rushers']['second'] != [] && currAfk['rushers']['second'].includes(user.id)){
 								try {
 									if (user.bot) return;
 									reaction.remove(user);
 								} catch (error) {/*user reaction not found*/}
 								user.send(`You can't react with more than one switch at a time. However, if no other rusher shows up, you can ask to Raid Leader to rush multiple switches.`);
-							} else if (!currAfk['rushers']['first'].includes(user) && !currAfk['rushers']['second'].includes(user)) {
-								await currAfk['rushers']['secret'].push(user);
+							} else if (!currAfk['rushers']['first'].includes(user.id) && !currAfk['rushers']['second'].includes(user.id)) {
+								await currAfk['rushers']['secret'].push(user.id);
 							}
 						}
 						break;
