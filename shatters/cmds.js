@@ -161,7 +161,7 @@ async function updAfkObj(spt, log){
                                 try {
                                     reactX.fetchUsers().then(users => {
                                         for (u of users){
-                                            await reactX.remove(users[u]);
+                                        	reactX.remove(users[u]);
                                         }
                                     })
 								} catch (error) {/*no users reaction left*/}
@@ -202,7 +202,7 @@ async function updAfkObj(spt, log){
 						try {
 							reactX.fetchUsers().then(users => {
 								for (u of users){
-									await reactX.remove(users[u]);
+									reactX.remove(users[u]);
 								}
 							})
 						} catch (error) {/*no users reaction left*/}
