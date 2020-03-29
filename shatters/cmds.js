@@ -158,10 +158,12 @@ async function updAfkObj(spt, log){
 								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afks[x]);
 								await cpmsg.edit({ embed: embed });
 								const reactX = cpmsg.reactions.get('❌');
-								try {
-									for (const user of reactX.users.values()) {
-									await reactX.remove(user);
-									}
+                                try {
+                                    reactX.fetchUsers().then(users => {
+                                        for (u of users){
+                                            await reactX.remove(users[u]);
+                                        }
+                                    })
 								} catch (error) {/*no users reaction left*/}
 							})
 						spt.channels.get(config.shatters.afkChan).fetchMessage(afks[x]['afkcheck'])
@@ -198,9 +200,11 @@ async function updAfkObj(spt, log){
 						await afkmsg.edit({ embed: embed });
 						const reactX = afkmsg.reactions.get('❌');
 						try {
-							for (const user of reactX.users.values()) {
-							await reactX.remove(user);
-							}
+							reactX.fetchUsers().then(users => {
+								for (u of users){
+									await reactX.remove(users[u]);
+								}
+							})
 						} catch (error) {/*no users reaction left*/}
 						// remove afkObj from array
 						const index = afks.indexOf(afks[x]);

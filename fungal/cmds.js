@@ -151,9 +151,11 @@ async function updAfkObj(spt, log){
 								await cpmsg.edit({ embed: embed });
 								const reactX = cpmsg.reactions.get('❌');
 								try {
-									for (const user of reactX.users.values()) {
-									reactX.remove(user);
-									}
+                                    reactX.fetchUsers().then(users => {
+                                        for (u of users){
+                                            await reactX.remove(users[u]);
+                                        }
+                                    })
 								} catch (error) {/*no users reaction left*/}
 							})
 						spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
@@ -188,11 +190,12 @@ async function updAfkObj(spt, log){
 						// safety
 						lockChannel(spt, afkmsg, afks[x]['channelNumber'], false);
 						await afkmsg.edit({ embed: embed });
-						const reactX = afkmsg.reactions.get('❌');
 						try {
-							for (const user of reactX.users.values()) {
-							reactX.remove(user);
-							}
+							reactX.fetchUsers().then(users => {
+								for (u of users){
+									await reactX.remove(users[u]);
+								}
+							})
 						} catch (error) {/*no users reaction left*/}
 						// remove afkObj from array
 						const index = afks.indexOf(afks[x]);
