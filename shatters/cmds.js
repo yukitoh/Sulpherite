@@ -57,7 +57,7 @@ async function main(spt, data){
 						await data.channel.send(`Checking..`)
 							.then(async function(msg){
 								var end = new Date() - start;
-								msg.edit(`Bot Latency: ${end}ms, API Latency: ${time}ms`);
+								msg.edit(`Bot Latency: ${end}ms, Host Latency: ${time}ms`);
 							})
 					})
 				break;
