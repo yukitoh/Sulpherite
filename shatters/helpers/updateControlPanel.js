@@ -4,7 +4,7 @@ function updateControlPanel(spt, afkObj){
 	if (afkObj['supremepriest'].length == 0){
 		var supremePriestMessage = 'None';
 	} else {
-		var supremePriestMessage = afkObj['supremepriest'].join(', ');
+		var supremePriestMessage = (('<@!' + afkObj['supremepriest'].join(', ').replace(/,/gi, '>, <@!').split(' ').join('') + '>').split(',').join(', '));
 	}
 	if (afkObj['mystics'].length == 0){
 		var mysticMessage = 'None';
