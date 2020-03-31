@@ -30,9 +30,9 @@ async function main(spt, data, args){
 
 		data.channel.send(`Clearing raiding`+args[1]+`.`)
 		.then((msg)=> {
-			rdgChan.members.forEach(async function(raiders){
+			rdgChan.members.each(async function(raiders){
 				await isRL(spt, 'shatters', raiders.id).then(async function(value){
-					if (!value) await raiders.setVoiceChannel(lnge);
+					if (value === false) await raiders.setVoiceChannel(lnge);
 				})
 			})
 			msg.delete();

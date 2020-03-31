@@ -26,7 +26,7 @@ async function main(spt, data, args){
 		.then((msg)=> {
 			rdgChan.members.forEach(async function(raiders){
 				await isRL(spt, 'fungal', raiders.id).then(async function(value){
-					if (!value) await raiders.setVoiceChannel(lnge);
+					if (value === false) await raiders.setVoiceChannel(lnge);
 				})
 			})
 			msg.delete();
