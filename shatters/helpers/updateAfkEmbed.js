@@ -5,74 +5,74 @@ function updateEmbed(spt, afkObj){
 	const hostUser = spt.guilds.get(config.shatters.id).members.get(afkObj['host']);
 	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
-		description: "We are starting an afk check now, join `"+channelName+"` and react with "+shattersReact+" to not get moved out! If you react with keys or classes and do not bring them, you may be suspended.\nStarting in "+((afkObj['timeleft']/60).toString()).charAt(0)+" minutes and "+(afkObj['timeleft']%60)+" seconds! In addition to reacting with "+shattersReact+" also react...",
+		description: "nioj ,won kcehc kfa na gnitrats era eW `"+channelName+"` htiw tcaer dna "+shattersReact+" dednepsus eb yam uoy ,meht gnirb ton od dna sessalc ro syek htiw tcaer uoy fI !tuo devom teg ton ot.\nni gnitratS "+((afkObj['timeleft']/60).toString()).charAt(0)+" dna setunim "+(afkObj['timeleft']%60)+" htiw gnitcaer ot noitidda nI !sdnoces "+shattersReact+" tcaer osla...",
 		color: 31247,
 		timestamp: afkObj['started'],
 		footer: {
-		text: "Raiders accounted for: "+afkObj['raiders'].length
+		text: "rof detnuocca srediaR: "+afkObj['raiders'].length
 		},
 		author: {
-		name: "Shatters started by "+hostUser.displayName+" in "+channelName,
+		name: "yb detrats srettahS "+hostUser.displayName+" in "+channelName,
 		icon_url: spt.users.get(afkObj['host']).avatarURL
 		},
 		fields: [
 		{
-			name: "If you are bringing a key, react with:",
+			name: "htiw tcaer ,yek a gnignirb era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "shatterskey")}`,
 			inline: true
 		},
 		{
-			name: "If you are bringing a warrior, react with:",
+			name: "htiw tcaer ,roirraw a gnignirb era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "warrior")}`,
 			inline: true
 		},
 		{
-			name: "If you are bringing a paladin, react with:",
+			name: "htiw tcaer ,nidalap a gnignirb era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "paladin")}`,
 			inline: true
 		},
 		{
-			name: "If you are bringing a knight, react with:",
+			name: "htiw tcaer ,thgink a gnignirb era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "knight")}`,
 			inline: true
 		},
 		{
-			name: "If you are bringing a priest, react with:",
+			name: "htiw tcaer ,tseirp a gnignirb era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "priest")}`,
 			inline: true
 		},
 		{
-			name: "If your ability is armor break, react with:",
+			name: "htiw tcaer ,kaerb romra si ytiliba ruoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "armorbreak")}`,
 			inline: true
 		},
 		{
-			name: "If you are bringing a mystic, react with:",
+			name: "htiw tcaer ,citsym a gnignirb era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "mystic")}`,
 			inline: true
 		},
 		{
-			name: "If your mystic has an aether orb, react with:",
+			name: "htiw tcaer ,bro rehtea na sah citsym ruoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "aether")}`,
 			inline: true
 		},
 		{
-			name: "If you are bringing an assassin, react with:",
+			name: "htiw tcaer ,nissassa na gnignirb era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "assassin")}`,
 			inline: true
 		},
 		{
-			name: "If you are rushing 1st, react with:",
+			name: "htiw tcaer ,ts1 gnihsur era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "first")}`,
 			inline: true
 		},
 		{
-			name: "If you are rushing 2nd, react with:",
+			name: "htiw tcaer ,dn2 gnihsur era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "second")}`,
 			inline: true
 		},
 		{
-			name: "If you are rushing secret, react with:",
+			name: "htiw tcaer ,terces gnihsur era uoy fI:",
 			value: `${spt.emojis.find(emoji => emoji.name === "secret")}`,
 			inline: true
 		}

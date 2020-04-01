@@ -20,30 +20,30 @@ function updateEndedCP(spt, afkObj){
 	const embed = {
 		color: 31247,
 		footer: {
-		text: "The afk check has been aborted by "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName
+		text: "yb detroba neeb sah kcehc kfa ehT "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName
 		},
 		author: {
-		name: `AFK Check control panel for `+channelName
+		name: `rof lenap lortnoc kcehC KFA `+channelName
 		},
 		fields: [
 		{
-			name: "Our current keys are...",
+			name: "era syek tnerruc ruO...",
 			value: `${spt.emojis.find(emoji => emoji.name === "shatterskey")} ${afkObj['key']}`
 		},
 		{
-			name: "Location of the run:",
+			name: "nur eht fo noitacoL:",
 			value: `${afkObj['location']}`
 		},
 		{
-			name: "Our supreme priests are:",
+			name: "era stseirp emerpus ruO:",
 			value: `${spt.emojis.find(emoji => emoji.name === "priest")} ${supremePriestMessage}`
 		},
 		{
-			name: "Our mystics are:",
+			name: "era scitsym ruO:",
 			value: `${spt.emojis.find(emoji => emoji.name === "mystic")} ${mysticMessage}`
 		},
 		{
-			name: "Nitro boosters with location:",
+			name: "noitacol htiw sretsoob ortiN:",
 			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${ntrMsg}`
 		}
 		]

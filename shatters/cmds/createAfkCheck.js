@@ -79,9 +79,9 @@ async function main(spt, data, args){
 					ended: false,
 					aborted: false
 				};
-				afkChan.send("@here Shatters ("+shattersReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`").then(async function (sent) {
+				afkChan.send("@here srettahS ("+shattersReact+") yb detrats <@!"+afkObj['host']+"> ni `"+rdgChanObj.name+"`").then(async function (sent) {
 					afkObj['afkcheck'] = sent.id;
-					sent.edit("@here Shatters ("+shattersReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`", { embed: (updateEmbedAFK(spt, afkObj)) });
+					sent.edit("@here srettahS ("+shattersReact+") yb detrats <@!"+afkObj['host']+"> ni `"+rdgChanObj.name+"`", { embed: (updateEmbedAFK(spt, afkObj)) });
 					await reactAFK(spt, sent);
 					});	
 				rlChan.send(`AFK Check control panel for `+rdgChanObj.name).then(async function (sent) {

@@ -12,11 +12,11 @@ function updateEndedAFK(spt, afkObj){
 		color: 31247,
 		timestamp: afkObj['started'],
 		footer: {
-		text: "The afk check has been aborted by "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName
+		text: "yb detroba neeb sah kcehc kfa ehT "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName
 		},
-		description: `The afk check is now aborted.`,
+		description: `detroba won si kcehc kfa ehT.`,
 		author: {
-		name: "Shatters started by "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName+" in "+channelName,
+		name: "yb detrats srettahS "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName+" ni "+channelName,
 		icon_url: spt.users.get(afkObj['host']).avatarURL
 		}
 	};

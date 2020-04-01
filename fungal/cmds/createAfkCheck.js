@@ -77,12 +77,12 @@ async function main(spt, data, args){
 					ended: false,
 					aborted: false
 				};
-				afkChan.send("@here Fungal Cavern ("+fungalReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`").then(async function (sent) {
+				afkChan.send("@here nrevaC lagnuF ("+fungalReact+") yb detrats <@!"+afkObj['host']+"> ni `"+rdgChanObj.name+"`").then(async function (sent) {
 					afkObj['afkcheck'] = sent.id;
-					sent.edit("@here Fungal Cavern ("+fungalReact+") started by <@!"+afkObj['host']+"> in `"+rdgChanObj.name+"`", { embed: (updateEmbedAFK(spt, afkObj)) });
+					sent.edit("@here nrevaC lagnuF ("+fungalReact+") yb detrats <@!"+afkObj['host']+"> ni `"+rdgChanObj.name+"`", { embed: (updateEmbedAFK(spt, afkObj)) });
 					await reactAFK(spt, sent);
 					});	
-				rlChan.send(`AFK Check control panel for `+rdgChanObj.name).then(async function (sent) {
+				rlChan.send(`rof lenap lortnoc kcehC KFA `+rdgChanObj.name).then(async function (sent) {
 					afkObj['controlpanel'] = sent.id;
 					sent.edit({ embed: (updateControlPanel(spt, afkObj)) })
 					await sent.react("❌");

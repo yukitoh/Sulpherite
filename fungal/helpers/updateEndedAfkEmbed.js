@@ -12,11 +12,11 @@ function updateEndedAFK(spt, afkObj){
 		color: 1122214,
 		timestamp: afkObj['started'],
 		footer: {
-		text: "The afk check has been ended by "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName
+		text: "yb dedne neeb sah kcehc kfa ehT "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName
 		},
-		description: `The AFK Check is now finished.\nWe are currently running with ${rlAmount} Raid leaders and ${afkObj['raiders'].length} Raiders.`,
+		description: `Tdehsinif won si kcehC KFA eh.\nhtiw gninnur yltnerruc era eW ${rlAmount} dna sredael diaR ${afkObj['raiders'].length} srediaR.`,
 		author: {
-		name: "Fungal Cavern started by "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName+" in "+channelName,
+		name: "yb detrats nrevaC lagnuF "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName+" ni "+channelName,
 		icon_url: spt.users.get(afkObj['host']).avatarURL
 		}
 	};
