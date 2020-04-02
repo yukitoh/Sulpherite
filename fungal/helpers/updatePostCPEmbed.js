@@ -10,26 +10,26 @@ function updateEndedCP(spt, afkObj){
 	const embed = {
 		color: 1122214,
 		footer: {
-		text: "yb dedne neeb sah kcehc kfa ehT "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName
+		text: "The afk check has been ended by "+spt.guilds.get(config.fungal.id).members.get(afkObj['host']).displayName
 		},
 		author: {
-		name: `rof lenap lortnoc kcehC KFA `+channelName
+		name: `AFK Check control panel for `+channelName
 		},
 		fields: [
 		{
-			name: "era syek tnerruc ruO...",
+			name: "Our current keys are...",
 			value: `${spt.emojis.find(emoji => emoji.name === "fungalkey")} ${afkObj['key']}`
 		},
 		{
-			name: "nur eht fo noitacoL:",
+			name: "Location of the run:",
 			value: `${afkObj['location']}`
 		},
 		{
-			name: "era srehsur tnerruc ruO:",
+			name: "Our current rushers are:",
 			value: `${spt.emojis.find(emoji => emoji.name === "rusher")} ${afkObj['rusher']}`
 		},
 		{
-			name: "noitacoL htiW srotanoD / reppoP yeK yldoG dna retsooB ortiN:",
+			name: "Nitro Booster and Godly Key Popper / Donators With Location:",
 			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${ntrMsg}`
 		}
 		]

@@ -20,30 +20,30 @@ function updateControlPanel(spt, afkObj){
 	const embed = {
 		color: 31247,
 		footer: {
-		text: "woleb ❌ htiw tcaer ,kcehc kfa eht troba oT."
+		text: "To abort the afk check, react with ❌ below."
 		},
 		author: {
-		name: `rof lenap lortnoc kcehC KFA `+channelName
+		name: `AFK Check control panel for `+channelName
 		},
 		fields: [
 		{
-			name: "era syek tnerruc ruO...",
+			name: "Our current keys are...",
 			value: `${spt.emojis.find(emoji => emoji.name === "shatterskey")} ${afkObj['key']}`
 		},
 		{
-			name: "nur eht fo noitacoL:",
+			name: "Location of the run:",
 			value: `${afkObj['location']}`
 		},
 		{
-			name: "era stseirp emerpus ruO:",
+			name: "Our supreme priests are:",
 			value: `${spt.emojis.find(emoji => emoji.name === "priest")} ${supremePriestMessage}`
 		},
 		{
-			name: "era scitsym ruO:",
+			name: "Our mystics are:",
 			value: `${spt.emojis.find(emoji => emoji.name === "mystic")} ${mysticMessage}`
 		},
 		{
-			name: "noitacol htiw sretsoob ortiN:",
+			name: "Nitro boosters with location:",
 			value: `${spt.emojis.find(emoji => emoji.name === "nitro")} ${ntrMsg}`
 		}
 		]

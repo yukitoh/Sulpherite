@@ -12,11 +12,11 @@ function updateEndedAFK(spt, afkObj){
 		color: 31247,
 		timestamp: afkObj['started'],
 		footer: {
-		text: "yb dedne neeb sah kcehc kfa ehT "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName
+		text: "The afk check has been ended by "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName
 		},
-		description: `dehsinif won si kcehC KFA ehT.\nhtiw gninnur yltnerruc era eW ${rlAmount} dna sredael diaR ${afkObj['raiders'].length} srediaR.`,
+		description: `The AFK Check is now finished.\nWe are currently running with ${rlAmount} Raid leaders and ${afkObj['raiders'].length} Raiders.`,
 		author: {
-		name: "yb detrats srettahS "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName+" ni "+channelName,
+		name: "Shatters started by "+spt.guilds.get(config.shatters.id).members.get(afkObj['host']).displayName+" in "+channelName,
 		icon_url: spt.users.get(afkObj['host']).avatarURL
 		}
 	};
