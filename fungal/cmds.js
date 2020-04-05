@@ -149,13 +149,14 @@ async function updAfkObj(spt, log){
 							.then(async function (cpmsg) {
 								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afks[x]);
 								await cpmsg.edit({ embed: embed });
-								const reactX = cpmsg.reactions.get('❌');
+								const reactX = afkmsg.reactions.get('❌');
 								try {
-                                    reactX.fetchUsers().then(users => {
-                                        for (u of users){
-                                        	reactX.remove(users[u]);
-                                        }
-                                    })
+									reactX.fetchUsers().then(users => {
+										for (u of users){
+											if (u.bot) return;
+											reactX.remove(u[0]);
+										}
+									})
 								} catch (error) {/*no users reaction left*/}
 							})
 						spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
@@ -190,10 +191,11 @@ async function updAfkObj(spt, log){
 						// safety
 						lockChannel(spt, afkmsg, afks[x]['channelNumber'], false);
 						await afkmsg.edit({ embed: embed });
+						const reactX = afkmsg.reactions.get('❌');
 						try {
 							reactX.fetchUsers().then(users => {
 								for (u of users){
-									reactX.remove(users[u]);
+									reactX.remove(u[0]);
 								}
 							})
 						} catch (error) {/*no users reaction left*/}
@@ -210,13 +212,15 @@ async function updAfkObj(spt, log){
 				.then(async function (cpmsg) {
 					let embed = require("./helpers/updateAbortedCPEmbed.js")(spt, afks[x]);
 					await cpmsg.edit({ embed: embed });
-					const reactX = cpmsg.reactions.get('❌');
+					const reactX = afkmsg.reactions.get('❌');
 					try {
-						for (const user of reactX.users.values()) {
-						reactX.remove(user);
-						}
+						reactX.fetchUsers().then(users => {
+							for (u of users){
+								reactX.remove(u[0]);
+							}
+						})
 					} catch (error) {/*no users reaction left*/}
-				})
+					})
 			spt.channels.get(config.fungal.afkChan).fetchMessage(afks[x]['afkcheck'])
 				.then(async function (afkmsg) {
 					let embed = require("./helpers/updateAbortedAfkEmbed.js")(spt, afks[x]);
@@ -224,9 +228,11 @@ async function updAfkObj(spt, log){
 					await afkmsg.edit({ embed: embed });
 					const reactX = afkmsg.reactions.get('❌');
 					try {
-						for (const user of reactX.users.values()) {
-						reactX.remove(user);
-						}
+						reactX.fetchUsers().then(users => {
+							for (u of users){
+								reactX.remove(u[0]);
+							}
+						})
 					} catch (error) {/*no users reaction left*/}
 					// remove afkObj from array
 					const index = afks.indexOf(afks[x]);

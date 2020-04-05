@@ -147,7 +147,7 @@ async function handleReacts(spt, reaction, user){
 					case 'warrior':
 						multipleClasses(spt, user.id, 'warrior', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['warriors'].includes(user.id)) {
 								currAfk['warriors'].push(user.id);
 							} else {
 								try {
@@ -162,7 +162,7 @@ async function handleReacts(spt, reaction, user){
 					case 'paladin':
 						multipleClasses(spt, user.id, 'paladin', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['paladins'].includes(user.id)) {
 								currAfk['paladins'].push(user.id);
 							} else {
 								try {
@@ -177,7 +177,7 @@ async function handleReacts(spt, reaction, user){
 					case 'knight':
 						multipleClasses(spt, user.id, 'knight', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['knights'].includes(user.id)) {
 								currAfk['knights'].push(user.id);
 							} else {
 								try {
@@ -192,7 +192,7 @@ async function handleReacts(spt, reaction, user){
 					case 'priest':
 						multipleClasses(spt, user.id, 'priest', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['priests'].includes(user.id)) {
 								currAfk['priests'].push(user.id);
 							} else {
 								try {
@@ -211,7 +211,7 @@ async function handleReacts(spt, reaction, user){
 					case 'mystic':
 						multipleClasses(spt, user.id, 'mystic', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['mystics'].includes(user.id)) {
 								currAfk['mystics'].push(user.id);
 							} else {
 								try {
@@ -226,7 +226,7 @@ async function handleReacts(spt, reaction, user){
 					case 'assassin':
 						multipleClasses(spt, user.id, 'assassin', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['assassins'].includes(user.id)) {
 								currAfk['assassins'].push(user.id);
 							} else {
 								try {

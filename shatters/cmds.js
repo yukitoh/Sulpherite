@@ -157,13 +157,14 @@ async function updAfkObj(spt, log){
 							.then(async function (cpmsg) {
 								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afks[x]);
 								await cpmsg.edit({ embed: embed });
-								const reactX = cpmsg.reactions.get('❌');
-                                try {
-                                    reactX.fetchUsers().then(users => {
-                                        for (u of users){
-                                        	reactX.remove(users[u]);
-                                        }
-                                    })
+								const reactX = afkmsg.reactions.get('❌');
+								try {
+									reactX.fetchUsers().then(users => {
+										for (u of users){
+											if (u.bot) return;
+											reactX.remove(u[0]);
+										}
+									})
 								} catch (error) {/*no users reaction left*/}
 							})
 						spt.channels.get(config.shatters.afkChan).fetchMessage(afks[x]['afkcheck'])
@@ -202,7 +203,7 @@ async function updAfkObj(spt, log){
 						try {
 							reactX.fetchUsers().then(users => {
 								for (u of users){
-									reactX.remove(users[u]);
+									reactX.remove(u[0]);
 								}
 							})
 						} catch (error) {/*no users reaction left*/}
@@ -221,9 +222,11 @@ async function updAfkObj(spt, log){
 					await cpmsg.edit({ embed: embed });
 					const reactX = cpmsg.reactions.get('❌');
 					try {
-						for (const user of reactX.users.values()) {
-						await reactX.remove(user);
-						}
+						reactX.fetchUsers().then(users => {
+							for (u of users){
+								reactX.remove(u[0]);
+							}
+						})
 					} catch (error) {/*no users reaction left*/}
 				})
 			spt.channels.get(config.shatters.afkChan).fetchMessage(afks[x]['afkcheck'])
@@ -233,9 +236,11 @@ async function updAfkObj(spt, log){
 					await afkmsg.edit({ embed: embed });
 					const reactX = afkmsg.reactions.get('❌');
 					try {
-						for (const user of reactX.users.values()) {
-						await reactX.remove(user);
-						}
+						reactX.fetchUsers().then(users => {
+							for (u of users){
+								reactX.remove(u[0]);
+							}
+						})
 					} catch (error) {/*no users reaction left*/}
 					// remove afkObj from array
 					const index = afks.indexOf(afks[x]);

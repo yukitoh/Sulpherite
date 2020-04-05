@@ -144,7 +144,7 @@ async function handleReacts(spt, reaction, user){
 					case 'warrior':
 						var multipleClass = multipleClasses(spt, user.id, 'warrior', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['warriors'].includes(user.id)) {
 								currAfk['warriors'].push(user.id);
 							} else {
 								try {
@@ -159,7 +159,7 @@ async function handleReacts(spt, reaction, user){
 					case 'paladin':
 						var multipleClass = multipleClasses(spt, user.id, 'paladin', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['paladins'].includes(user.id)) {
 								currAfk['paladins'].push(user.id);
 							} else {
 								try {
@@ -174,7 +174,7 @@ async function handleReacts(spt, reaction, user){
 					case 'knight':
 						var multipleClass = multipleClasses(spt, user.id, 'knight', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['knights'].includes(user.id)) {
 								currAfk['knights'].push(user.id);
 							} else {
 								try {
@@ -189,7 +189,7 @@ async function handleReacts(spt, reaction, user){
 					case 'priest':
 						var multipleClass = multipleClasses(spt, user.id, 'priest', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['priests'].includes(user.id)) {
 								currAfk['priests'].push(user.id);
 							} else {
 								try {
@@ -204,7 +204,7 @@ async function handleReacts(spt, reaction, user){
 					case 'trickster':
 						var multipleClass = multipleClasses(spt, user.id, 'trickster', currAfk)
 						.then(async function(multipleClass){
-							if (multipleClass == undefined) {
+							if (multipleClass == undefined && !currAfk['tricksters'].includes(user.id)) {
 								currAfk['tricksters'].push(user.id);
 							} else {
 								try {
