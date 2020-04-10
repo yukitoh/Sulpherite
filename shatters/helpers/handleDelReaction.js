@@ -6,6 +6,7 @@ async function handleReacts(spt, reaction, user){
 	// locate afk check
 	var currAfk;
 	for (x in afks) {
+		if (afks[x] == undefined) return;
 		if (afks[x]['controlpanel'] != undefined && reaction.message.id == afks[x]['controlpanel'] || afks[x]['afkcheck'] != undefined && reaction.message.id == afks[x]['afkcheck']) currAfk = afks[x];
 	}
 

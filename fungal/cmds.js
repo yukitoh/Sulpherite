@@ -149,7 +149,7 @@ async function updAfkObj(spt, log){
 							.then(async function (cpmsg) {
 								let embed = require("./helpers/updatePostCPEmbed.js")(spt, afks[x]);
 								await cpmsg.edit({ embed: embed });
-								const reactX = afkmsg.reactions.get('❌');
+								const reactX = cpmsg.reactions.get('❌');
 								try {
 									reactX.fetchUsers().then(users => {
 										for (u of users){
