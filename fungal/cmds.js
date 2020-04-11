@@ -31,8 +31,8 @@ async function main(spt, data){
 				require("./cmds/location.js")(spt, data, args);
 				break;
 			case 'parsemembers': case 'pmChan': case 'pm':
-				//require("./cmds/parseMembers.js")(spt, data, args);
-				data.channel.send(`Deactivated, takes too much memory, looking for an alternative.`);
+				require("./cmds/parseMembers.js")(spt, data, args);
+				//data.channel.send(`Deactivated, takes too much memory, looking for an alternative.`);
 				break;
 			case 'afk':
 			// CREATES AFK CHECK
@@ -93,10 +93,9 @@ async function resolveAfks(afkChecksPromises){
 }
 
 async function updAfkObj(spt, log){
-	console.log('asked for fungal update afk')
 	isRLPro.length = 0;
 	// pass promises to objects
-	if (afkChecksPromises.size > 0) resolveAfks(afkChecksPromises);
+	resolveAfks(afkChecksPromises);
 	// update every afk check object
 	for (x in afks) {
 		if (afks[x] == undefined) return;
