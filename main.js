@@ -34,10 +34,8 @@ spt.on('ready', () => {
 		// Handling afk checks update
         require("./shatters/cmds.js").updAfkObj(spt, true);
 		require("./fungal/cmds.js").updAfkObj(spt, true);
-		require("./hispano/cmds.js").updAfkObj(spt, true);
-		require("./shatters/cmds.js").ckDeaf(spt);
-		require("./fungal/cmds.js").ckDeaf(spt);
-		require("./hispano/cmds.js").ckDeaf(spt);
+//		require("./shatters/cmds.js").ckDeaf(spt);
+//		require("./fungal/cmds.js").ckDeaf(spt);
     }, 5000);
 })
 

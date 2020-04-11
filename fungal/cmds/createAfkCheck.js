@@ -22,6 +22,9 @@ async function main(spt, data, args){
 		case '5':
 			var rdgChan = '5';
 			break;
+		case '6':
+			var rdgChan = '6';
+			break;
 		default:
 			data.channel.send(`Invalid channel number (available: 1-5).`);
 			break;
@@ -42,6 +45,12 @@ async function main(spt, data, args){
 			break;
 		case '5':
 			var rdgChanObj = spt.channels.get(config.fungal.vc.five);
+			break;
+		case '6':
+			var rdgChanObj = spt.channels.get(config.fungal.vc.six);
+			break;
+		case '7':
+			var rdgChanObj = spt.channels.get(config.fungal.vc.seven);
 			break;
 	}
 

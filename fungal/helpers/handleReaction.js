@@ -101,26 +101,26 @@ async function handleReacts(spt, reaction, user){
 						break;
 					case 'fungal':
 						// update raiders and move to channel if lnge
-						switch (currAfk['channelNumber']){
-							case '1':
-								var channelID = config.fungal.vc.one;
-								break;
-							case '2':
-								var channelID = config.fungal.vc.two;
-								break;
-							case '3':
-								var channelID = config.fungal.vc.three;
-								break;
-							case '4':
-								var channelID = config.fungal.vc.four;
-								break;
-							case '5':
-								var channelID = config.fungal.vc.five;
-								break;
-						}
-						if (spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel.id == config.fungal.vc.lnge) spt.guilds.get(config.fungal.id).members.get(user.id).setVoiceChannel(channelID);
+//						switch (currAfk['channelNumber']){
+//							case '1':
+//								var channelID = config.fungal.vc.one;
+//								break;
+//							case '2':
+//								var channelID = config.fungal.vc.two;
+//								break;
+//							case '3':
+//								var channelID = config.fungal.vc.three;
+//								break;
+//							case '4':
+//								var channelID = config.fungal.vc.four;
+//								break;
+//							case '5':
+//								var channelID = config.fungal.vc.five;
+//								break;
+//						}
+//						if (spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel.id == config.fungal.vc.lnge) spt.guilds.get(config.fungal.id).members.get(user.id).setVoiceChannel(channelID);
 						currAfk['raiders'].push(user.id);
-						fceUpd(spt, false);
+//						fceUpd(spt, false);
 						break;
 					case 'fungalkey':
 						if (currAfk['key'] == 'None'){
@@ -273,37 +273,33 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'paladin':
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'knight':
 			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'priest':
 			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
 			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			if (currAfk['tricksters'] != [] && currAfk['tricksters'].includes(user)) isMultipleClass = 'trickster';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'trickster':
 			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
 			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
-			return Promise.resolve(isMultipleClass);
 			break;
 	}
+	return Promise.resolve(undefined);
 }
 
 module.exports = handleReacts;

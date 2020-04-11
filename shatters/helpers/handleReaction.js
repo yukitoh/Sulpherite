@@ -315,7 +315,6 @@ async function handleReacts(spt, reaction, user){
 }
 
 async function multipleClasses(spt, user, currentClass, currAfk){
-	console.dir(currAfk);
 	var isMultipleClass = undefined;
 	switch (currentClass){
 		case 'warrior':
@@ -324,7 +323,6 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'paladin':
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
@@ -332,7 +330,6 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'knight':
 			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -340,7 +337,6 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'priest':
 			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -348,7 +344,6 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'mystic':
 			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -356,7 +351,6 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			return Promise.resolve(isMultipleClass);
 			break;
 		case 'assassin':
 			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
@@ -364,9 +358,10 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
 			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
-			return Promise.resolve(isMultipleClass);
 			break;
 	}
+	isMultipleClass = undefined;
+	return isMultipleClass;
 }
 
 module.exports = handleReacts;

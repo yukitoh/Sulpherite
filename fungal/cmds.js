@@ -93,9 +93,10 @@ async function resolveAfks(afkChecksPromises){
 }
 
 async function updAfkObj(spt, log){
+	console.log('asked for fungal update afk')
 	isRLPro.length = 0;
 	// pass promises to objects
-	resolveAfks(afkChecksPromises);
+	if (afkChecksPromises.size > 0) resolveAfks(afkChecksPromises);
 	// update every afk check object
 	for (x in afks) {
 		if (afks[x] == undefined) return;
