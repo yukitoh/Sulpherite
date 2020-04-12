@@ -161,7 +161,6 @@ async function updAfkObj(spt, log){
 								try {
 									reactX.fetchUsers().then(users => {
 										for (u of users){
-											if (u.bot) return;
 											reactX.remove(u[0]);
 										}
 									})
