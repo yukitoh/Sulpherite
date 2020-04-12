@@ -34,8 +34,8 @@ spt.on('ready', () => {
 		// Handling afk checks update
         require("./shatters/cmds.js").updAfkObj(spt, true);
 		require("./fungal/cmds.js").updAfkObj(spt, true);
-//		require("./shatters/cmds.js").ckDeaf(spt);
-//		require("./fungal/cmds.js").ckDeaf(spt);
+		require("./shatters/cmds.js").ckDeaf(spt);
+		require("./fungal/cmds.js").ckDeaf(spt);
     }, 5000);
 })
 
@@ -95,38 +95,6 @@ spt.on('message', async (data) => {
 			skpPro.length = 0;
 			skpProE.length = 0;
 			break;
-		case config.hispano.id:
-		// Server Commands
-			// obligated to skip promise because annoying
-			await isRL(spt, 'hispano', data.author.id).then(async function(value){
-				await skpPro.push(value);
-			})
-			if (data.channel.id == config.hispano.rlChan && skpPro[0]){
-				// clear skpPro array for next message
-				skpPro.length = 0;
-				// check if bot is alive (highest priority)
-				if (data.content == '*slurp'){
-					data.channel.send('Slurpie Slurp Slurp')
-				}
-				require("./hispano/cmds.js").main(spt, data);
-			}
-			// clear skpPro array for next message
-			skpPro.length = 0;
-			break;
-		// modmail server
-		case '679160544066011156':
-			if (data.channel.id == '688446891700125905'){
-				var args = data.content.split(' ');
-				if (args[0] == '*resp'){
-					if (args[1] != undefined && args[2] != undefined){
-						spt.users.get(args[1]).send(data.content.substring(25));
-						data.channel.send(`succesfuly sent to ${spt.users.get(args[1])}, message: ${data.content.substring(25)}`);
-					} else {
-						data.channel.send('please specify a user id and a message');
-					}
-				}
-			}
-			break;
 	}
 })
 
@@ -140,9 +108,6 @@ spt.on('messageReactionAdd', (reaction, user) => {
 			break;
 		case config.fungal.id:
 			require('./fungal/helpers/handleReaction.js')(spt, reaction, user);
-			break;
-		case config.hispano.id:
-			require('./hispano/helpers/handleReaction.js')(spt, reaction, user);
 			break;
 	}
 })
@@ -158,19 +123,7 @@ spt.on('messageReactionRemove', (reaction, user) => {
 		case config.fungal.id:
 			require('./fungal/helpers/handleDelReaction.js')(spt, reaction, user);
 			break;
-		case config.hispano.id:
-			require('./hispano/helpers/handleDelReaction.js')(spt, reaction, user);
-			break;
 	}
-})
-
-spt.on('error', (error) => {
-	spt.destroy()
-	.then(() => {
-		spt.login(process.env.TOKEN);
-		spt.channels.get(config.shatters.rlChan).send(`Discord API crashed, restarted.`);
-		spt.channels.get(config.fungal.rlChan).send(`Discord API crashed, restarted.`);
-	});
 })
 
 // Login with token

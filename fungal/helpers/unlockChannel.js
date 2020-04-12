@@ -24,7 +24,7 @@ async function main(spt, data, raiding, log){
 				var rdgChan = spt.channels.get(config.fungal.vc.six);
 				break;
 			case '7':
-				var rdgChanObj = spt.channels.get(config.fungal.vc.seven);
+				var rdgChan = spt.channels.get(config.fungal.vc.seven);
 				break;
 			default:
 				data.channel.send(`Invalid channel number (available: 1-5).`);

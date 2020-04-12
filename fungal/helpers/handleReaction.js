@@ -101,24 +101,7 @@ async function handleReacts(spt, reaction, user){
 						break;
 					case 'fungal':
 						// update raiders and move to channel if lnge
-//						switch (currAfk['channelNumber']){
-//							case '1':
-//								var channelID = config.fungal.vc.one;
-//								break;
-//							case '2':
-//								var channelID = config.fungal.vc.two;
-//								break;
-//							case '3':
-//								var channelID = config.fungal.vc.three;
-//								break;
-//							case '4':
-//								var channelID = config.fungal.vc.four;
-//								break;
-//							case '5':
-//								var channelID = config.fungal.vc.five;
-//								break;
-//						}
-//						if (spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel.id == config.fungal.vc.lnge) spt.guilds.get(config.fungal.id).members.get(user.id).setVoiceChannel(channelID);
+//						if (spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.fungal.id).members.get(user.id).voiceChannel.id == config.fungal.vc.lnge) spt.guilds.get(config.fungal.id).members.get(user.id).setVoiceChannel(afks[x]['channel']);
 						currAfk['raiders'].push(user.id);
 //						fceUpd(spt, false);
 						break;
@@ -299,7 +282,7 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			break;
 	}
-	return Promise.resolve(undefined);
+	return undefined;
 }
 
 module.exports = handleReacts;

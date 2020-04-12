@@ -104,24 +104,7 @@ async function handleReacts(spt, reaction, user){
 						break;
 					case 'shatters':
 						// update raiders and move to channel if lnge
-						switch (currAfk['channelNumber']){
-							case '1':
-								var channelID = config.shatters.vc.one;
-								break;
-							case '2':
-								var channelID = config.shatters.vc.two;
-								break;
-							case '3':
-								var channelID = config.shatters.vc.three;
-								break;
-							case '4':
-								var channelID = config.shatters.vc.four;
-								break;
-							case '5':
-								var channelID = config.shatters.vc.five;
-								break;
-						}
-						if (spt.guilds.get(config.shatters.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.shatters.id).members.get(user.id).voiceChannel.id == config.shatters.vc.lnge) spt.guilds.get(config.shatters.id).members.get(user.id).setVoiceChannel(channelID);
+						if (spt.guilds.get(config.shatters.id).members.get(user.id).voiceChannel != undefined && spt.guilds.get(config.shatters.id).members.get(user.id).voiceChannel.id == config.shatters.vc.lnge) spt.guilds.get(config.shatters.id).members.get(user.id).setVoiceChannel(afks[x]['channel']);
 						currAfk['raiders'].push(user.id);
 						fceUpd(spt, false);
 						break;
@@ -360,8 +343,7 @@ async function multipleClasses(spt, user, currentClass, currAfk){
 			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
 			break;
 	}
-	isMultipleClass = undefined;
-	return isMultipleClass;
+	return undefined;
 }
 
 module.exports = handleReacts;

@@ -18,15 +18,7 @@ async function main(spt, server, user){
 				return false;
 			}
 			break;
-		case 'hispano':
-			var guildmb = spt.guilds.get(config.hispano.id).members.get(user);
-			if (guildmb.roles.some(r => [config.hispano.rlRole].includes(r.name))){
-				return true;
-			} else {
-				return false;
-			}
-			break;
-		}
+	}
 }
 
 module.exports = main;

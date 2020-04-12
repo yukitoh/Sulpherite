@@ -23,20 +23,24 @@ async function main(spt, data, args){
 			case '5':
 				var rdgChan = spt.channels.get(config.fungal.vc.five);
 				break;
+			case '6':
+				var rdgChan = spt.channels.get(config.fungal.vc.six);
+				break;
+			case '7':
+				var rdgChan = spt.channels.get(config.fungal.vc.seven);
+				break;
 			default:
-				data.channel.send(`Invalid channel number (available: 1-5).`);
+				data.channel.send(`Invalid channel number (available: 1-7).`);
 				break;
 		}
 
-		data.channel.send(`Clearing raiding`+args[1]+`.`)
-		.then((msg)=> {
-			rdgChan.members.forEach(async function(raiders){
-				await isRL(spt, 'fungal', raiders.id).then(async function(value){
-					if (value === false) await raiders.setVoiceChannel(lnge);
-				})
+		const msg = await data.channel.send(`Clearing raiding`+args[1]+`.`)
+		await rdgChan.members.forEach(async function(raiders){
+			await isRL(spt, 'fungal', raiders.id).then(async function(value){
+				if (value === false) await raiders.setVoiceChannel(lnge);
 			})
-			msg.delete();
 		})
+		msg.delete();
 		data.channel.send(`Finished clearing raiding`+args[1]+`.`);
 	}
 }

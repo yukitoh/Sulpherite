@@ -25,8 +25,12 @@ async function main(spt, data, args){
 		case '6':
 			var rdgChan = '6';
 			break;
+		case '7':
+			var rdgChan = '7';
+			break;
+
 		default:
-			data.channel.send(`Invalid channel number (available: 1-5).`);
+			data.channel.send(`Invalid channel number (available: 1-7).`);
 			break;
 	}
 
