@@ -6,7 +6,7 @@ function updateControlPanel(spt, afkObj){
 	} else {
 		var ntrMsg = afkObj['nitro'].join(', ');
 	}
-	if (afkObj['backupkey'].length > 0){
+	if (afkObj['backupkey'] != undefined){
 		var backupKeysMsg = `\nBackups: ${afkObj['backupkey'].join(', ')}`;
 	} else {
 		backupKeysMsg = '';

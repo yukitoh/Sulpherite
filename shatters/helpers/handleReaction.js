@@ -126,7 +126,7 @@ async function handleReacts(spt, reaction, user){
 								})
 						} else {
 							user.send(`You have reacted to ${spt.emojis.find(emoji => emoji.name === "shatterskey")}, but we already have enough keys. The raid leaders may want more than the afk check is programmed to accept. Listen to the raid leaders for further instructions.`)
-							if (currAfk['backupkey'].length < 4){
+							if (currAfk['backupkey'] == undefined || currAfk['backupkey'].length < 4){
 								return currAfk['backupkey'].push(user);
 							}
 						}
@@ -216,7 +216,7 @@ async function handleReacts(spt, reaction, user){
 					case 'nitro':
 						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.ntrRole)) {
 							if (currAfk['nitro'].length > 9){
-								return data.channel.send(`Sorry but the limit to nitro reacts have been set to 10!`);
+								return user.send(`Sorry but the limit to nitro reacts have been set to 10!`);
 							}
 							currAfk['nitro'].push(user);
 							user.send(`As a nitro booster, you have access to location: ${currAfk['location']}.`);
