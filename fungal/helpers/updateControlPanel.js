@@ -6,6 +6,11 @@ function updateControlPanel(spt, afkObj){
 	} else {
 		var ntrMsg = afkObj['nitro'].join(', ');
 	}
+	if (afkObj['backupkey'].length > 0){
+		var backupKeysMsg = `\n${afkObj['backupkey'].join(', ')}`;
+	} else {
+		backupKeysMsg = '';
+	}
 	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
 		color: 1122214,
@@ -18,7 +23,7 @@ function updateControlPanel(spt, afkObj){
 		fields: [
 		{
 			name: "Our current keys are...",
-			value: `${spt.emojis.find(emoji => emoji.name === "fungalkey")} ${afkObj['key']}`
+			value: `${spt.emojis.find(emoji => emoji.name === "fungalkey")} ${afkObj['key']} ${backupKeysMsg}`
 		},
 		{
 			name: "Location of the run:",
