@@ -126,101 +126,32 @@ async function handleReacts(spt, reaction, user){
 								})
 						} else {
 							user.send(`You have reacted to ${spt.emojis.find(emoji => emoji.name === "shatterskey")}, but we already have enough keys. The raid leaders may want more than the afk check is programmed to accept. Listen to the raid leaders for further instructions.`)
+							if (currAfk['backupkey'].length < 4){
+								return currAfk['backupkey'].push(user);
+							}
 						}
 						break;
 					case 'warrior':
-						multipleClasses(spt, user.id, 'warrior', currAfk)
-						.then(async function(multipleClass){
-							if (multipleClass == undefined && !currAfk['warriors'].includes(user.id)) {
-								currAfk['warriors'].push(user.id);
-							} else {
-								try {
-									if (user.bot) return;
-									reaction.remove(user);
-								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
-								user.send(`stop reacting with multiple classes buddy`);
-							}
-						})
+						currAfk['warriors'].push(user.id);
 						break;
 					case 'paladin':
-						multipleClasses(spt, user.id, 'paladin', currAfk)
-						.then(async function(multipleClass){
-							if (multipleClass == undefined && !currAfk['paladins'].includes(user.id)) {
-								currAfk['paladins'].push(user.id);
-							} else {
-								try {
-									if (user.bot) return;
-									reaction.remove(user);
-								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
-								user.send(`stop reacting with multiple classes buddy`);
-							}
-						})
+						currAfk['paladins'].push(user.id);
 						break;
 					case 'knight':
-						multipleClasses(spt, user.id, 'knight', currAfk)
-						.then(async function(multipleClass){
-							if (multipleClass == undefined && !currAfk['knights'].includes(user.id)) {
-								currAfk['knights'].push(user.id);
-							} else {
-								try {
-									if (user.bot) return;
-									reaction.remove(user);
-								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
-								user.send(`stop reacting with multiple classes buddy`);
-							}
-						})
+						currAfk['knights'].push(user.id);
 						break;
 					case 'priest':
-						multipleClasses(spt, user.id, 'priest', currAfk)
-						.then(async function(multipleClass){
-							if (multipleClass == undefined && !currAfk['priests'].includes(user.id)) {
-								currAfk['priests'].push(user.id);
-							} else {
-								try {
-									if (user.bot) return;
-									reaction.remove(user);
-								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
-								user.send(`stop reacting with multiple classes buddy`);
-							}
-						})
+						currAfk['priests'].push(user.id);
 						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.sppRole)) {
 							currAfk['supremepriest'].push(user.id);
 							fceUpd(spt, false);
 						}
 						break;
 					case 'mystic':
-						multipleClasses(spt, user.id, 'mystic', currAfk)
-						.then(async function(multipleClass){
-							if (multipleClass == undefined && !currAfk['mystics'].includes(user.id)) {
-								currAfk['mystics'].push(user.id);
-							} else {
-								try {
-									if (user.bot) return;
-									reaction.remove(user);
-								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
-								user.send(`stop reacting with multiple classes buddy`);
-							}
-						})
+						currAfk['mystics'].push(user.id);
 						break;
 					case 'assassin':
-						multipleClasses(spt, user.id, 'assassin', currAfk)
-						.then(async function(multipleClass){
-							if (multipleClass == undefined && !currAfk['assassins'].includes(user.id)) {
-								currAfk['assassins'].push(user.id);
-							} else {
-								try {
-									if (user.bot) return;
-									reaction.remove(user);
-								} catch (error) {/*user reaction not found*/}
-								spt.channels.get(config.shatters.rlChan).send(`${user} tried to react with multiple classes (${spt.emojis.find(emoji => emoji.name === reaction.emoji.name)}${spt.emojis.find(emoji => emoji.name === multipleClass)}).`);
-								user.send(`stop reacting with multiple classes buddy`);
-							}
-						})
+						currAfk['assassins'].push(user.id);
 						break;
 					case 'first':
 						if (reaction.count == 3){
@@ -284,6 +215,9 @@ async function handleReacts(spt, reaction, user){
 						break;
 					case 'nitro':
 						if(spt.guilds.get(config.shatters.id).members.get(user.id).roles.find(x => x.name === config.shatters.ntrRole)) {
+							if (currAfk['nitro'].length > 9){
+								return data.channel.send(`Sorry but the limit to nitro reacts have been set to 10!`);
+							}
 							currAfk['nitro'].push(user);
 							user.send(`As a nitro booster, you have access to location: ${currAfk['location']}.`);
 						}
@@ -295,55 +229,6 @@ async function handleReacts(spt, reaction, user){
 				break;
 		}
 	}
-}
-
-async function multipleClasses(spt, user, currentClass, currAfk){
-	var isMultipleClass = undefined;
-	switch (currentClass){
-		case 'warrior':
-			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
-			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			break;
-		case 'paladin':
-			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
-			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
-			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			break;
-		case 'knight':
-			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
-			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
-			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			break;
-		case 'priest':
-			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
-			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
-			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			break;
-		case 'mystic':
-			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
-			if (currAfk['assassins'] != [] && currAfk['assassins'].includes(user)) isMultipleClass = 'assassin';
-			break;
-		case 'assassin':
-			if (currAfk['paladins'] != [] && currAfk['paladins'].includes(user)) isMultipleClass = 'paladin';
-			if (currAfk['knights'] != [] && currAfk['knights'].includes(user)) isMultipleClass = 'knight';
-			if (currAfk['priests'] != [] && currAfk['priests'].includes(user)) isMultipleClass = 'priest';
-			if (currAfk['mystics'] != [] && currAfk['mystics'].includes(user)) isMultipleClass = 'mystic';
-			if (currAfk['warriors'] != [] && currAfk['warriors'].includes(user)) isMultipleClass = 'warrior';
-			break;
-	}
-	return undefined;
 }
 
 module.exports = handleReacts;

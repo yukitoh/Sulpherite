@@ -77,6 +77,7 @@ async function main(spt, data, args){
 					raiders: [],
 					started: new Date(data.createdTimestamp).toISOString(),
 					key: 'None',
+					backupkey: undefined,
 					nitro: [],
 					rusher: 'None',
 					warriors: [],
