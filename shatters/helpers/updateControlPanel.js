@@ -16,6 +16,11 @@ function updateControlPanel(spt, afkObj){
 	} else {
 		var ntrMsg = afkObj['nitro'].join(', ');
 	}
+	if (afkObj['backupkey'].length > 0){
+		var backupKeysMsg = `\nBackups: ${afkObj['backupkey'].join(', ')}`;
+	} else {
+		backupKeysMsg = '';
+	}
 	const channelName = spt.channels.get(afkObj['channel']).name;
 	const embed = {
 		color: 31247,
