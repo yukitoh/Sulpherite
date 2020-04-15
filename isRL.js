@@ -4,7 +4,7 @@ async function main(spt, server, user){
 	switch(server){
 		case 'fungal':
 			var guildmb = spt.guilds.get(config.fungal.id).members.get(user);
-			if (guildmb.roles.some(r => [config.fungal.arlRole, config.fungal.rlRole, config.fungal.vrlRole, config.fungal.hrlRole].includes(r.name))){
+			if (guildmb.roles.some(r => [config.fungal.arlRole, config.fungal.rlRole, config.fungal.vrlRole, config.fungal.hrlRole, config.fungal.securityRole, config.fungal.officerRole, config.fungal.modRole, config.fungal.devRole, config.fungal.admRole].includes(r.name))){
 				return true;
 			} else {
 				return false;
